@@ -574,18 +574,20 @@ async function fetchHomeJobs() {
     // job count removed
     document.getElementById('home-results-label').textContent = data.results.length + ' latest listings';
     document.getElementById('home-loading').style.display = 'none';
-    const jobs = data.results.map((j, i) => ({
-      title: j.title,
-      company: j.company?.display_name || 'Employer',
-      emoji: getEmoji(j.category?.label),
-      type: getType(j.contract_time),
-      salary: getSalary(j.salary_min, j.salary_max),
-      location: j.location?.display_name || 'Essex',
-      description: j.description ? j.description.substring(0, 160) + '...' : '',
-      posted: getPostedTime(j.created),
-      isNew: (Date.now() - new Date(j.created)) < 86400000 * 2,
-      redirect: j.redirect_url
-    }));
+    const jobs = data.results
+      .sort((a, b) => new Date(b.created) - new Date(a.created))
+      .map(j => ({
+        title: j.title,
+        company: j.company?.display_name || 'Employer',
+        emoji: getEmoji(j.category?.label),
+        type: getType(j.contract_time),
+        salary: getSalary(j.salary_min, j.salary_max),
+        location: j.location?.display_name || 'Essex',
+        description: j.description ? j.description.substring(0, 160) + '...' : '',
+        posted: getPostedTime(j.created),
+        isNew: (Date.now() - new Date(j.created)) < 86400000 * 2,
+        redirect: j.redirect_url
+      }));
     const homeList = document.getElementById('job-list-home');
     homeList.innerHTML = '';
     jobs.forEach((j,i) => homeList.appendChild(makeJobCard(j,i,false)));

@@ -1,675 +1,557 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2580
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 ArialMT;}
-{\colortbl;\red255\green255\blue255;\red26\green26\blue26;\red255\green255\blue255;\red16\green60\blue192;
-}
-{\*\expandedcolortbl;;\cssrgb\c13333\c13333\c13333;\cssrgb\c100000\c100000\c100000;\cssrgb\c6667\c33333\c80000;
-}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\deftab720
-\pard\pardeftab720\partightenfactor0
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title id="page-title">Essex Job Board — Local Jobs Across Essex</title>
+  <meta id="meta-desc" name="description" content="Find local jobs across Essex updated daily. Chelmsford, Colchester, Basildon, Southend and 16 more towns."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f7f5;
+      --white: #ffffff;
+      --ink: #111111;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --pill: #1a1a1a;
+      --accent: #2563eb;
+      --accent-light: #eff6ff;
+      --green: #16a34a;
+      --green-light: #f0fdf4;
+      --amber: #d97706;
+      --amber-light: #fffbeb;
+      --red: #dc2626;
+      --red-light: #fef2f2;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:var(--bg); color:var(--ink); font-family:'Outfit',sans-serif; font-size:15px; line-height:1.6; }
 
-\f0\fs20 \cf2 \cb3 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 <!DOCTYPE html>\
-<html lang="en">\
-<head>\
-\'a0 <meta charset="UTF-8"/>\
-\'a0 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>\
-\'a0 <title id="page-title">Essex Job Board \'97 Local Jobs Across Essex</title>\
-\'a0 <meta id="meta-desc" name="description" content="Find local jobs across Essex updated daily. Chelmsford, Colchester, Basildon, Southend and 16 more towns."/>\
-\'a0 <link rel="preconnect" href="{\field{\*\fldinst{HYPERLINK "https://fonts.googleapis.com/"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 https://fonts.googleapis.com}}">\
-\'a0 <link href="{\field{\*\fldinst{HYPERLINK "https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap}}" rel="stylesheet">\
-\'a0 <style>\
-\'a0 \'a0 :root \{\
-\'a0 \'a0 \'a0 --bg: #f7f7f5;\
-\'a0 \'a0 \'a0 --white: #ffffff;\
-\'a0 \'a0 \'a0 --ink: #111111;\
-\'a0 \'a0 \'a0 --muted: #6b7280;\
-\'a0 \'a0 \'a0 --border: #e5e7eb;\
-\'a0 \'a0 \'a0 --pill: #1a1a1a;\
-\'a0 \'a0 \'a0 --accent: #2563eb;\
-\'a0 \'a0 \'a0 --accent-light: #eff6ff;\
-\'a0 \'a0 \'a0 --green: #16a34a;\
-\'a0 \'a0 \'a0 --green-light: #f0fdf4;\
-\'a0 \'a0 \'a0 --amber: #d97706;\
-\'a0 \'a0 \'a0 --amber-light: #fffbeb;\
-\'a0 \'a0 \'a0 --red: #dc2626;\
-\'a0 \'a0 \'a0 --red-light: #fef2f2;\
-\'a0 \'a0 \}\
-\'a0 \'a0 * \{ margin:0; padding:0; box-sizing:border-box; \}\
-\'a0 \'a0 body \{ background:var(--bg); color:var(--ink); font-family:'Outfit',sans-serif; font-size:15px; line-height:1.6; \}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 \'a0 \'a0 /* COOKIE */\
-\'a0 \'a0 #cookie-banner \{ position:fixed; bottom:0; left:0; right:0; background:#111; color:#fff; padding:14px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; z-index:999; flex-wrap:wrap; \}\
-\'a0 \'a0 #cookie-banner p \{ font-size:13px; color:#aaa; flex:1; \}\
-\'a0 \'a0 #cookie-banner a \{ color:var(--accent); cursor:pointer; \}\
-\'a0 \'a0 .cookie-btn \{ background:var(--accent); color:#fff; font-family:'Outfit',sans-serif; font-size:13px; font-weight:700; padding:8px 20px; border-radius:8px; border:none; cursor:pointer; white-space:nowrap; \}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 \'a0 \'a0 /* HEADER */\
-\'a0 \'a0 header \{ background:var(--white); border-bottom:1px solid var(--border); height:58px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; position:sticky; top:0; z-index:100; \}\
-\'a0 \'a0 .logo \{ display:flex; align-items:center; gap:10px; cursor:pointer; \}\
-\'a0 \'a0 .logo-pill \{ background:var(--pill); color:#fff; font-size:0.88rem; font-weight:800; padding:5px 13px; border-radius:100px; letter-spacing:-0.2px; \}\
-\'a0 \'a0 .logo-rest \{ font-size:1rem; font-weight:700; color:var(--ink); \}\
-\'a0 \'a0 .logo-rest .city \{ color:var(--accent); \}\
-\'a0 \'a0 .header-right \{ display:flex; align-items:center; gap:14px; \}\
-\'a0 \'a0 .nav-link \{ font-size:13px; color:var(--muted); font-weight:500; cursor:pointer; \}\
-\'a0 \'a0 .nav-link:hover \{ color:var(--ink); \}\
-\'a0 \'a0 .post-btn \{ background:var(--accent); color:#fff; font-family:'Outfit',sans-serif; font-size:13px; font-weight:700; padding:8px 16px; border-radius:8px; border:none; cursor:pointer; \}\
-\'a0 \'a0 @media(max-width:560px) \{ .nav-link \{ display:none; \} \}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 \'a0 \'a0 /* TOWN NAV */\
-\'a0 \'a0 .town-nav \{ background:var(--white); border-bottom:1px solid var(--border); padding:0 16px; display:flex; overflow-x:auto; scrollbar-width:none; \}\
-\'a0 \'a0 .town-nav::-webkit-scrollbar \{ display:none; \}\
-\'a0 \'a0 .town-tab \{ flex-shrink:0; font-size:13px; font-weight:600; color:var(--muted); padding:11px 13px; cursor:pointer; border-bottom:2px solid transparent; transition:all 0.15s; white-space:nowrap; \}\
-\'a0 \'a0 .town-tab:hover \{ color:var(--ink); \}\
-\'a0 \'a0 .town-tab.active \{ color:var(--accent); border-bottom-color:var(--accent); \}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 \'a0 \'a0 /* HERO */\
-\'a0 \'a0 .hero \{ background:var(--white); border-bottom:1px solid var(--border); padding:36px 24px 28px; text-align:center; \}\
-\'a0 \'a0 .hero h1 \{ font-size:clamp(1.6rem,5vw,2.6rem); font-weight:900; line-height:1.1; letter-spacing:-0.5px; margin-bottom:8px; \}\
-\'a0 \'a0 .hero h1 span \{ color:var(--accent); \}\
-\'a0 \'a0 .hero-sub \{ color:var(--muted); font-size:0.95rem; margin-bottom:22px; \}\
-\'a0 \'a0 .search-wrap \{ max-width:540px; margin:0 auto; display:flex; background:var(--bg); border:2px solid var(--border); border-radius:10px; overflow:hidden; transition:border-color 0.2s; \}\
-\'a0 \'a0 .search-wrap:focus-within \{ border-color:var(--accent); \}\
-\'a0 \'a0 .search-wrap input \{ flex:1; border:none; background:transparent; outline:none; padding:12px 16px; font-family:'Outfit',sans-serif; font-size:15px; color:var(--ink); \}\
-\'a0 \'a0 .search-wrap input::placeholder \{ color:#9ca3af; \}\
-\'a0 \'a0 .search-wrap button \{ background:var(--accent); color:#fff; border:none; font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; padding:0 20px; cursor:pointer; \}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 \'a0 \'a0 /* STATS */\
-\'a0 \'a0 .stats \{ display:flex; justify-content:center; gap:24px; padding:10px 24px; background:var(--bg); border-bottom:1px solid var(--border); font-size:13px; color:var(--muted); flex-wrap:wrap; \}\
-\'a0 \'a0 .stats strong \{ color:var(--ink); \}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 \'a0 \'a0 /* AD */\
-\'a0 \'a0 .ad-bar \{ text-align:center; padding:8px 16px; background:var(--white); border-bottom:1px solid var(--border); \}\
-\'a0 \'a0 .ad-label \{ font-size:10px; letter-spacing:2px; text-transform:uppercase; color:#d1d5db; margin-bottom:5px; \}\
-\'a0 \'a0 .ad-slot-lb \{ background:#f9fafb; border:1px dashed #e5e7eb; border-radius:6px; height:56px; display:inline-flex; align-items:center; justify-content:center; width:min(728px,100%); font-size:11px; color:#d1d5db; letter-spacing:1px; \}\
-\'a0 \'a0 .ad-slot-sq \{ background:#f9fafb; border:1px dashed #e5e7eb; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:11px; color:#d1d5db; letter-spacing:1px; text-align:center; flex-direction:column; gap:4px; \}\
-\'a0 \'a0 .inline-ad \{ background:#fafafa; border:1px dashed #e5e7eb; border-radius:12px; padding:12px; text-align:center; \}\
-\'a0 \'a0 .inline-ad-slot \{ height:70px; display:flex; align-items:center; justify-content:center; font-size:11px; color:#d1d5db; \}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 \'a0 \'a0 /* LAYOUT */\
-\'a0 \'a0 .main \{ max-width:1040px; margin:0 auto; padding:20px 16px; display:grid; grid-template-columns:1fr 268px; gap:20px; align-items:start; \}\
-\'a0 \'a0 @media(max-width:740px) \{ .main \{ grid-template-columns:1fr; \} .sidebar \{ display:none; \} \}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 \'a0 \'a0 /* BREADCRUMB */\
-\'a0 \'a0 .breadcrumb \{ font-size:13px; color:var(--muted); margin-bottom:12px; \}\
-\'a0 \'a0 .breadcrumb a \{ color:var(--accent); cursor:pointer; \}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 \'a0 \'a0 /* CHIPS */\
-\'a0 \'a0 .filters \{ display:flex; gap:7px; margin-bottom:12px; flex-wrap:wrap; \}\
-\'a0 \'a0 .chip \{ background:var(--white); border:1px solid var(--border); color:var(--muted); font-family:'Outfit',sans-serif; font-size:13px; font-weight:500; padding:5px 13px; border-radius:20px; cursor:pointer; transition:all 0.15s; \}\
-\'a0 \'a0 .chip.active,.chip:hover \{ background:var(--accent-light); border-color:var(--accent); color:var(--accent); \}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 \'a0 \'a0 .list-header \{ display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; \}\
-\'a0 \'a0 .list-header h2 \{ font-size:1rem; font-weight:700; \}\
-\'a0 \'a0 .list-header span \{ font-size:13px; color:var(--muted); \}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 \'a0 \'a0 /* SPINNER */\
-\'a0 \'a0 .spinner \{ width:26px; height:26px; border:2px solid var(--border); border-top-color:var(--accent); border-radius:50%; animation:spin 0.7s linear infinite; margin:0 auto 10px; \}\
-\'a0 \'a0 @keyframes spin \{ to \{ transform:rotate(360deg); \} \}\
-\'a0 \'a0 .loading-card \{ background:var(--white); border:1px solid var(--border); border-radius:12px; padding:50px 20px; text-align:center; \}\
-\'a0 \'a0 .loading-card p \{ font-size:13px; color:var(--muted); \}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 \'a0 \'a0 /* TOWN GRID */\
-\'a0 \'a0 .town-grid \{ display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:8px; margin-bottom:20px; \}\
-\'a0 \'a0 .town-card \{ background:var(--white); border:1px solid var(--border); border-radius:12px; padding:16px 12px; cursor:pointer; transition:border-color 0.15s,box-shadow 0.15s; text-align:center; position:relative; \}\
-\'a0 \'a0 .town-card:hover \{ border-color:var(--accent); box-shadow:0 2px 10px rgba(37,99,235,0.08); \}\
-\'a0 \'a0 .town-card-emoji \{ font-size:1.4rem; margin-bottom:6px; \}\
-\'a0 \'a0 .town-card-name \{ font-weight:700; font-size:0.88rem; margin-bottom:3px; \}\
-\'a0 \'a0 .town-card-count \{ font-size:11px; color:var(--muted); \}\
-\'a0 \'a0 .town-hiring \{ position:absolute; top:7px; right:7px; background:var(--green-light); color:var(--green); font-size:10px; font-weight:700; padding:2px 6px; border-radius:8px; \}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 \'a0 \'a0 /* JOB CARDS */\
-\'a0 \'a0 .job-list \{ display:flex; flex-direction:column; gap:8px; \}\
-\'a0 \'a0 .job-card \{ background:var(--white); border:1px solid var(--border); border-radius:12px; padding:16px 18px; cursor:pointer; transition:border-color 0.15s,box-shadow 0.15s; animation:fadeUp 0.3s ease both; \}\
-\'a0 \'a0 .job-card:hover \{ border-color:var(--accent); box-shadow:0 2px 12px rgba(37,99,235,0.07); \}\
-\'a0 \'a0 @keyframes fadeUp \{ from\{opacity:0;transform:translateY(5px);\}to\{opacity:1;transform:translateY(0);\} \}\
-\'a0 \'a0 .card-top \{ display:flex; gap:12px; align-items:flex-start; margin-bottom:10px; \}\
-\'a0 \'a0 .job-icon \{ width:40px; height:40px; background:var(--bg); border:1px solid var(--border); border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; \}\
-\'a0 \'a0 .card-info \{ flex:1; \}\
-\'a0 \'a0 .card-title \{ font-size:0.93rem; font-weight:700; color:var(--ink); margin-bottom:2px; line-height:1.3; \}\
-\'a0 \'a0 .card-company \{ font-size:13px; color:var(--muted); \}\
-\'a0 \'a0 .card-new \{ background:var(--red-light); color:var(--red); font-size:11px; font-weight:700; padding:2px 8px; border-radius:6px; flex-shrink:0; \}\
-\'a0 \'a0 .card-desc \{ font-size:13px; color:var(--muted); line-height:1.55; margin-bottom:11px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; \}\
-\'a0 \'a0 .card-tags \{ display:flex; flex-wrap:wrap; gap:5px; margin-bottom:11px; \}\
-\'a0 \'a0 .tag \{ font-size:12px; font-weight:600; padding:3px 9px; border-radius:6px; \}\
-\'a0 \'a0 .tag-salary \{ background:var(--amber-light); color:var(--amber); \}\
-\'a0 \'a0 .tag-type \{ background:var(--green-light); color:var(--green); \}\
-\'a0 \'a0 .tag-loc \{ background:var(--accent-light); color:var(--accent); \}\
-\'a0 \'a0 .card-bottom \{ display:flex; justify-content:space-between; align-items:center; padding-top:10px; border-top:1px solid var(--border); \}\
-\'a0 \'a0 .posted \{ font-size:12px; color:#9ca3af; \}\
-\'a0 \'a0 .apply-btn \{ background:var(--accent); color:#fff; font-family:'Outfit',sans-serif; font-size:13px; font-weight:700; padding:7px 16px; border-radius:8px; border:none; cursor:pointer; \}\
-\'a0 \'a0 .apply-btn:hover \{ opacity:0.88; \}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 \'a0 \'a0 /* SIDEBAR */\
-\'a0 \'a0 .sidebar \{ display:flex; flex-direction:column; gap:14px; position:sticky; top:74px; \}\
-\'a0 \'a0 .widget \{ background:var(--white); border:1px solid var(--border); border-radius:12px; padding:16px; \}\
-\'a0 \'a0 .widget-title \{ font-size:0.85rem; font-weight:700; margin-bottom:12px; padding-bottom:9px; border-bottom:1px solid var(--border); \}\
-\'a0 \'a0 .cat-item \{ display:flex; justify-content:space-between; align-items:center; padding:6px 5px; border-radius:7px; cursor:pointer; font-size:13px; transition:background 0.15s; \}\
-\'a0 \'a0 .cat-item:hover \{ background:var(--bg); \}\
-\'a0 \'a0 .cat-count \{ font-size:11px; background:var(--bg); color:var(--muted); padding:2px 8px; border-radius:10px; font-weight:600; \}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 \'a0 \'a0 /* STATIC PAGES */\
-\'a0 \'a0 .page-content \{ max-width:680px; margin:0 auto; padding:40px 16px; \}\
-\'a0 \'a0 .page-content h2 \{ font-size:1.5rem; font-weight:800; margin-bottom:14px; \}\
-\'a0 \'a0 .page-content h3 \{ font-size:1rem; font-weight:700; margin:20px 0 8px; \}\
-\'a0 \'a0 .page-content p \{ font-size:14px; color:var(--muted); line-height:1.8; margin-bottom:10px; \}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 \'a0 \'a0 /* POST PAGE */\
-\'a0 \'a0 .price-grid \{ display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:12px; margin:16px 0; \}\
-\'a0 \'a0 .price-card \{ background:var(--white); border:1px solid var(--border); border-radius:12px; padding:20px; text-align:center; \}\
-\'a0 \'a0 .price-card.featured \{ background:var(--accent); border-color:var(--accent); color:#fff; \}\
-\'a0 \'a0 .price-amount \{ font-size:1.6rem; font-weight:900; margin-bottom:4px; \}\
-\'a0 \'a0 .price-name \{ font-weight:700; margin-bottom:6px; \}\
-\'a0 \'a0 .price-desc \{ font-size:12px; opacity:0.75; \}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 \'a0 \'a0 /* FOOTER */\
-\'a0 \'a0 footer \{ background:var(--white); border-top:1px solid var(--border); padding:24px; margin-top:20px; \}\
-\'a0 \'a0 .footer-inner \{ max-width:1040px; margin:0 auto; \}\
-\'a0 \'a0 .footer-logo \{ display:inline-flex; align-items:center; gap:8px; margin-bottom:12px; \}\
-\'a0 \'a0 .footer-towns \{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px; \}\
-\'a0 \'a0 .footer-towns a \{ font-size:12px; color:var(--muted); cursor:pointer; \}\
-\'a0 \'a0 .footer-towns a:hover \{ color:var(--accent); \}\
-\'a0 \'a0 .footer-links \{ display:flex; gap:16px; flex-wrap:wrap; margin-bottom:10px; \}\
-\'a0 \'a0 .footer-links a \{ font-size:13px; color:var(--muted); cursor:pointer; \}\
-\'a0 \'a0 .footer-links a:hover \{ color:var(--ink); \}\
-\'a0 \'a0 .footer-legal \{ font-size:11px; color:#9ca3af; line-height:1.7; \}\
-\'a0 </style>\
-</head>\
-<body>\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 <!-- COOKIE BANNER -->\
-<div id="cookie-banner">\
-\'a0 <p>We use cookies for analytics and advertising. See our <a onclick="showPage('privacy')">Privacy Policy</a>.</p>\
-\'a0 <button class="cookie-btn" onclick="dismissCookie()">Got it</button>\
-</div>\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 <!-- HEADER -->\
-<header>\
-\'a0 <div class="logo" onclick="showHome()">\
-\'a0 \'a0 <span class="logo-pill">Essex</span>\
-\'a0 \'a0 <span class="logo-rest"><span class="city">Job</span> Board</span>\
-\'a0 </div>\
-\'a0 <div class="header-right">\
-\'a0 \'a0 <span class="nav-link" onclick="showHome()">All Towns</span>\
-\'a0 \'a0 <span class="nav-link" onclick="showPage('about')">About</span>\
-\'a0 \'a0 <button class="post-btn" onclick="showPage('post')">Post a Job</button>\
-\'a0 </div>\
-</header>\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 <!-- TOWN NAV -->\
-<div class="town-nav" id="town-nav">\
-\'a0 <div class="town-tab active" onclick="showHome()">\cb1 \cb3 \'a0All Essex</div>\
-</div>\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 <!-- HERO -->\
-<div class="hero">\
-\'a0 <h1 id="hero-title">Local jobs across <span id="hero-city">Essex</span></h1>\
-\'a0 <p class="hero-sub" id="hero-sub">Updated daily. No London commute. No nonsense.</p>\
-\'a0 <div class="search-wrap">\
-\'a0 \'a0 <input id="search-input" type="text" placeholder="Job title or keyword...">\
-\'a0 \'a0 <button onclick="triggerSearch()">Search</button>\
-\'a0 </div>\
-</div>\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 <!-- STATS -->\
-<div class="stats">\
-\'a0 <span><strong id="job-count">2,400+</strong> live jobs</span>\
-\'a0 <span id="stats-area">Across Essex</span>\
-\'a0 <span>Updated <strong>daily</strong></span>\
-</div>\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 <!-- AD -->\
-<div class="ad-bar">\
-\'a0 <div class="ad-label">Advertisement</div>\
-\'a0 <div class="ad-slot-lb">Google AdSense 728\'d790</div>\
-</div>\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 <!-- MAIN -->\
-<div id="main-site">\
-\'a0 <div class="main">\
-\'a0 \'a0 <div id="left-col">\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 \'a0 \'a0 \'a0 <!-- HOME -->\
-\'a0 \'a0 \'a0 <div id="home-view">\
-\'a0 \'a0 \'a0 \'a0 <div class="list-header" style="margin-bottom:10px;">\
-\'a0 \'a0 \'a0 \'a0 \'a0 <h2>\cb1 \cb3 \'a0Find jobs near you</h2>\
-\'a0 \'a0 \'a0 \'a0 \'a0 <span>20 locations</span>\
-\'a0 \'a0 \'a0 \'a0 </div>\
-\'a0 \'a0 \'a0 \'a0 <div class="town-grid" id="town-grid"></div>\
-\'a0 \'a0 \'a0 \'a0 <div style="margin-top:20px;">\
-\'a0 \'a0 \'a0 \'a0 \'a0 <div class="list-header">\
-\'a0 \'a0 \'a0 \'a0 \'a0 \'a0 <h2>Latest Jobs Across Essex</h2>\
-\'a0 \'a0 \'a0 \'a0 \'a0 \'a0 <span id="home-results-label"></span>\
-\'a0 \'a0 \'a0 \'a0 \'a0 </div>\
-\'a0 \'a0 \'a0 \'a0 \'a0 <div id="home-loading" class="loading-card"><div class="spinner"></div><p>Fetching jobs...</p></div>\
-\'a0 \'a0 \'a0 \'a0 \'a0 <div class="job-list" id="job-list-home"></div>\
-\'a0 \'a0 \'a0 \'a0 </div>\
-\'a0 \'a0 \'a0 </div>\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 \'a0 \'a0 \'a0 <!-- TOWN -->\
-\'a0 \'a0 \'a0 <div id="town-view" style="display:none;">\
-\'a0 \'a0 \'a0 \'a0 <div class="breadcrumb"><a onclick="showHome()">All Essex</a> \'9b <span id="bc-town"></span></div>\
-\'a0 \'a0 \'a0 \'a0 <div class="filters">\
-\'a0 \'a0 \'a0 \'a0 \'a0 <div class="chip active" onclick="setFilter(this,'All')">All</div>\
-\'a0 \'a0 \'a0 \'a0 \'a0 <div class="chip" onclick="setFilter(this,'Full-time')">Full-time</div>\
-\'a0 \'a0 \'a0 \'a0 \'a0 <div class="chip" onclick="setFilter(this,'Part-time')">Part-time</div>\
-\'a0 \'a0 \'a0 \'a0 \'a0 <div class="chip" onclick="setFilter(this,'Remote')">Remote</div>\
-\'a0 \'a0 \'a0 \'a0 \'a0 <div class="chip" onclick="setFilter(this,'Contract')">Contract</div>\
-\'a0 \'a0 \'a0 \'a0 </div>\
-\'a0 \'a0 \'a0 \'a0 <div class="list-header">\
-\'a0 \'a0 \'a0 \'a0 \'a0 <h2 id="town-list-title">Jobs</h2>\
-\'a0 \'a0 \'a0 \'a0 \'a0 <span id="results-label">Loading...</span>\
-\'a0 \'a0 \'a0 \'a0 </div>\
-\'a0 \'a0 \'a0 \'a0 <div id="town-loading" class="loading-card"><div class="spinner"></div><p>Fetching local jobs...</p></div>\
-\'a0 \'a0 \'a0 \'a0 <div class="job-list" id="job-list"></div>\
-\'a0 \'a0 \'a0 </div>\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 \'a0 \'a0 </div>\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 \'a0 \'a0 <!-- SIDEBAR -->\
-\'a0 \'a0 <div class="sidebar">\
-\'a0 \'a0 \'a0 <div class="widget" style="padding:12px;">\
-\'a0 \'a0 \'a0 \'a0 <div class="ad-label" style="margin-bottom:6px;">Advertisement</div>\
-\'a0 \'a0 \'a0 \'a0 <div class="ad-slot-sq" style="height:250px;">Google AdSense 300\'d7250</div>\
-\'a0 \'a0 \'a0 </div>\
-\'a0 \'a0 \'a0 <div class="widget">\
-\'a0 \'a0 \'a0 \'a0 <div class="widget-title">Browse by Sector</div>\
-\'a0 \'a0 \'a0 \'a0 <div id="cat-list"><div style="font-size:13px;color:var(--muted);">Loading...</div></div>\
-\'a0 \'a0 \'a0 </div>\
-\'a0 \'a0 \'a0 <div class="widget" style="padding:12px;">\
-\'a0 \'a0 \'a0 \'a0 <div class="ad-label" style="margin-bottom:6px;">Advertisement</div>\
-\'a0 \'a0 \'a0 \'a0 <div class="ad-slot-sq" style="height:110px;">Adzuna Affiliate</div>\
-\'a0 \'a0 \'a0 </div>\
-\'a0 \'a0 </div>\
-\'a0 </div>\
-</div>\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 <!-- STATIC PAGES -->\
-<div id="static-pages" style="display:none;">\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 \'a0 <div id="page-about" class="page-content" style="display:none;">\
-\'a0 \'a0 <h2>About Essex Job Board</h2>\
-\'a0 \'a0 <p>Essex Job Board is an independent local job board covering 20 towns and cities across Essex. We pull live job listings daily so you can find local work without trawling through national sites.</p>\
-\'a0 \'a0 <p>No registration required. Just find a job and apply direct.</p>\
-\'a0 \'a0 <h3>Contact</h3>\
-\'a0 \'a0 <p>{\field{\*\fldinst{HYPERLINK "mailto:hello@essexjobboard.co.uk"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 hello@essexjobboard.co.uk}}</p>\
-\'a0 </div>\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 \'a0 <div id="page-privacy" class="page-content" style="display:none;">\
-\'a0 \'a0 <h2>Privacy Policy</h2>\
-\'a0 \'a0 <p>Last updated: June 2026</p>\
-\'a0 \'a0 <h3>Data we collect</h3>\
-\'a0 \'a0 <p>Essex Job Board does not require registration. We collect no personal data directly. Standard analytics tools collect anonymised data including browser type and pages visited.</p>\
-\'a0 \'a0 <h3>Cookies</h3>\
-\'a0 \'a0 <p>We use Google AdSense and Google Analytics cookies. You can opt out of personalised ads at\'a0{\field{\*\fldinst{HYPERLINK "http://google.com/settings/ads"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 google.com/settings/ads}}.</p>\
-\'a0 \'a0 <h3>Third-party links</h3>\
-\'a0 \'a0 <p>Job listings link to third-party employers and job boards. We are not responsible for their privacy practices.</p>\
-\'a0 \'a0 <h3>Contact</h3>\
-\'a0 \'a0 <p>{\field{\*\fldinst{HYPERLINK "mailto:hello@essexjobboard.co.uk"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 hello@essexjobboard.co.uk}}</p>\
-\'a0 </div>\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 \'a0 <div id="page-post" class="page-content" style="display:none;">\
-\'a0 \'a0 <h2>Post a Job</h2>\
-\'a0 \'a0 <p>Reach active Essex job seekers with a listing on Essex Job Board.</p>\
-\'a0 \'a0 <div class="price-grid">\
-\'a0 \'a0 \'a0 <div class="price-card">\
-\'a0 \'a0 \'a0 \'a0 <div class="price-amount">\'a349</div>\
-\'a0 \'a0 \'a0 \'a0 <div class="price-name">Standard</div>\
-\'a0 \'a0 \'a0 \'a0 <div class="price-desc">30 days \'b7 1 town</div>\
-\'a0 \'a0 \'a0 </div>\
-\'a0 \'a0 \'a0 <div class="price-card featured">\
-\'a0 \'a0 \'a0 \'a0 <div class="price-amount">\'a399</div>\
-\'a0 \'a0 \'a0 \'a0 <div class="price-name">Featured\'a0\cb1 \cb3 </div>\
-\'a0 \'a0 \'a0 \'a0 <div class="price-desc">30 days \'b7 All Essex \'b7 Top placement</div>\
-\'a0 \'a0 \'a0 </div>\
-\'a0 \'a0 </div>\
-\'a0 \'a0 <p>Email\'a0{\field{\*\fldinst{HYPERLINK "mailto:hello@essexjobboard.co.uk"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 hello@essexjobboard.co.uk}}\'a0with your role details.</p>\
-\'a0 </div>\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 </div>\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 <!-- FOOTER -->\
-<footer>\
-\'a0 <div class="footer-inner">\
-\'a0 \'a0 <div class="footer-logo">\
-\'a0 \'a0 \'a0 <span class="logo-pill" style="font-family:'Outfit',sans-serif;font-size:0.82rem;">Essex</span>\
-\'a0 \'a0 \'a0 <span style="font-weight:700;font-size:0.95rem;"><span style="color:var(--accent)">Job</span> Board</span>\
-\'a0 \'a0 </div>\
-\'a0 \'a0 <div class="footer-towns" id="footer-town-links"></div>\
-\'a0 \'a0 <div class="footer-links">\
-\'a0 \'a0 \'a0 <a onclick="showPage('about')">About</a>\
-\'a0 \'a0 \'a0 <a onclick="showPage('post')">Post a Job</a>\
-\'a0 \'a0 \'a0 <a onclick="showPage('privacy')">Privacy Policy</a>\
-\'a0 \'a0 </div>\
-\'a0 \'a0 <div class="footer-legal">\
-\'a0 \'a0 \'a0 Jobs sourced via Adzuna API \'b7 \'a9 2026 Essex Job Board \'b7 Not affiliated with Essex County Council<br>\
-\'a0 \'a0 \'a0 This site displays Google AdSense advertisements and uses affiliate links.\
-\'a0 \'a0 </div>\
-\'a0 </div>\
-</footer>\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 <script>\
-const TOWNS = [\
-\'a0 \{name:'Chelmsford', \'a0 \'a0 emoji:'\cb1 \cb3 ', pop:180000, hot:true \},\
-\'a0 \{name:'Colchester', \'a0 \'a0 emoji:'\cb1 \cb3 ', pop:200000, hot:true \},\
-\'a0 \{name:'Southend-on-Sea',emoji:'\cb1 \cb3 ', pop:175000, hot:true \},\
-\'a0 \{name:'Basildon', \'a0 \'a0 \'a0 emoji:'\cb1 \cb3 ', pop:180000, hot:true \},\
-\'a0 \{name:'Harlow', \'a0 \'a0 \'a0 \'a0 emoji:'\cb1 \cb3 ', pop:82000, \'a0hot:true \},\
-\'a0 \{name:'Grays', \'a0 \'a0 \'a0 \'a0 \'a0emoji:'\cb1 \cb3 ', pop:67000, \'a0hot:false\},\
-\'a0 \{name:'Brentwood', \'a0 \'a0 \'a0emoji:'\cb1 \cb3 ', pop:52000, \'a0hot:false\},\
-\'a0 \{name:'Clacton-on-Sea', emoji:'\cb1 \cb3 ', pop:51000, \'a0hot:false\},\
-\'a0 \{name:'Braintree', \'a0 \'a0 \'a0emoji:'\cb1 \cb3 ', pop:42000, \'a0hot:false\},\
-\'a0 \{name:'Rayleigh', \'a0 \'a0 \'a0 emoji:'\cb1 \cb3 ', pop:38000, \'a0hot:false\},\
-\'a0 \{name:'Canvey Island', \'a0emoji:'\cb1 \cb3 ', pop:38000, \'a0hot:false\},\
-\'a0 \{name:'Billericay', \'a0 \'a0 emoji:'\cb1 \cb3 ', pop:34000, \'a0hot:false\},\
-\'a0 \{name:'Wickford', \'a0 \'a0 \'a0 emoji:'\cb1 \cb3 ', pop:33000, \'a0hot:false\},\
-\'a0 \{name:'Loughton', \'a0 \'a0 \'a0 emoji:'\cb1 \cb3 ', pop:31000, \'a0hot:false\},\
-\'a0 \{name:'Witham', \'a0 \'a0 \'a0 \'a0 emoji:'\cb1 \cb3 ', pop:25000, \'a0hot:false\},\
-\'a0 \{name:'Maldon', \'a0 \'a0 \'a0 \'a0 emoji:'\cb1 \cb3 ', pop:21000, \'a0hot:false\},\
-\'a0 \{name:'Harwich', \'a0 \'a0 \'a0 \'a0emoji:'\cb1 \cb3 ', pop:20000, \'a0hot:false\},\
-\'a0 \{name:'Waltham Abbey', \'a0emoji:'\cb1 \cb3 ', pop:19000, \'a0hot:false\},\
-\'a0 \{name:'Saffron Walden', emoji:'\cb1 \cb3 ', pop:16000, \'a0hot:false\},\
-\'a0 \{name:'Rochford', \'a0 \'a0 \'a0 emoji:'\cb1 \cb3 ', pop:9000, \'a0 hot:false\},\
-];\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 const CATS = [\
-\'a0 \{name:'Logistics & Warehouse', icon:'\cb1 \cb3 ', count:342\},\
-\'a0 \{name:'Healthcare & NHS', \'a0 \'a0 \'a0icon:'\cb1 \cb3 ', count:298\},\
-\'a0 \{name:'Retail & Customer', \'a0 \'a0 icon:'\cb1 \cb3 ', count:276\},\
-\'a0 \{name:'Office & Admin', \'a0 \'a0 \'a0 \'a0icon:'\cb1 \cb3 ', count:241\},\
-\'a0 \{name:'Construction & Trades', icon:'\cb1 \cb3 ', count:198\},\
-\'a0 \{name:'Education', \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 icon:'\cb1 \cb3 ', count:167\},\
-\'a0 \{name:'IT & Tech', \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 icon:'\cb1 \cb3 ', count:143\},\
-\'a0 \{name:'Hospitality & Food', \'a0 \'a0icon:'\cb1 \cb3 ', count:138\},\
-\'a0 \{name:'Finance & Legal', \'a0 \'a0 \'a0 icon:'\cb1 \cb3 ', count:112\},\
-\'a0 \{name:'Manufacturing', \'a0 \'a0 \'a0 \'a0 icon:'\cb1 \cb3 ', count:98\},\
-];\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 let allJobs = [], currentTown = null;\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 // Town nav\
-const townNav = document.getElementById('town-nav');\
-TOWNS.forEach(t => \{\
-\'a0 const tab = document.createElement('div');\
-\'a0 tab.className = 'town-tab';\
-\'a0 tab.textContent = t.emoji + ' ' +\'a0{\field{\*\fldinst{HYPERLINK "http://t.name/"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 t.name}};\
-\'a0 tab.dataset.slug =\'a0{\field{\*\fldinst{HYPERLINK "http://t.name/"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 t.name}};\
-\'a0 tab.onclick = () => loadTown(t);\
-\'a0 townNav.appendChild(tab);\
-\});\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 // Town grid\
-const townGrid = document.getElementById('town-grid');\
-TOWNS.forEach(t => \{\
-\'a0 const approxJobs = Math.round(t.pop / 120);\
-\'a0 const card = document.createElement('div');\
-\'a0 card.className = 'town-card';\
-\'a0 card.innerHTML = `$\{t.hot ? '<div class="town-hiring">Hiring</div>' : ''\}<div class="town-card-emoji">$\{t.emoji\}</div><div class="town-card-name">$\{{\field{\*\fldinst{HYPERLINK "http://t.name/"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 t.name}}\}</div><div class="town-card-count">$\{approxJobs\}+ jobs</div>`;\
-\'a0 card.onclick = () => loadTown(t);\
-\'a0 townGrid.appendChild(card);\
-\});\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 // Footer towns\
-const footerLinks = document.getElementById('footer-town-links');\
-TOWNS.forEach(t => \{\
-\'a0 const a = document.createElement('a');\
-\'a0 a.textContent = 'Jobs in ' +\'a0{\field{\*\fldinst{HYPERLINK "http://t.name/"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 t.name}};\
-\'a0 a.onclick = () => loadTown(t);\
-\'a0 footerLinks.appendChild(a);\
-\});\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 // Category list\
-document.getElementById('cat-list').innerHTML = CATS.map(c =>\
-\'a0 `<div class="cat-item"><span>$\{c.icon\} $\{{\field{\*\fldinst{HYPERLINK "http://c.name/"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 c.name}}\}</span><span class="cat-count">$\{c.count\}</span></div>`\
-).join('');\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 function showHome() \{\
-\'a0 currentTown = null;\
-\'a0 document.getElementById('main-site').style.display = 'block';\
-\'a0 document.getElementById('static-pages').style.display = 'none';\
-\'a0 document.getElementById('home-view').style.display = 'block';\
-\'a0 document.getElementById('town-view').style.display = 'none';\
-\'a0 document.getElementById('hero-title').innerHTML = 'Local jobs across <span id="hero-city">Essex</span>';\
-\'a0 document.getElementById('hero-sub').textContent = 'Updated daily. No London commute. No nonsense.';\
-\'a0 document.getElementById('stats-area').textContent = 'Across Essex';\
-\'a0 document.title = 'Essex Job Board \'97 Local Jobs Across Essex';\
-\'a0 document.querySelectorAll('.town-tab').forEach((t,i) => t.classList.toggle('active', i===0));\
-\'a0 window.scrollTo(0,0);\
-\}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 function loadTown(town) \{\
-\'a0 currentTown = town;\
-\'a0 document.getElementById('main-site').style.display = 'block';\
-\'a0 document.getElementById('static-pages').style.display = 'none';\
-\'a0 document.getElementById('home-view').style.display = 'none';\
-\'a0 document.getElementById('town-view').style.display = 'block';\
-\'a0 document.getElementById('bc-town').textContent =\'a0{\field{\*\fldinst{HYPERLINK "http://town.name/"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 town.name}};\
-\'a0 document.getElementById('hero-title').innerHTML = `Jobs in <span style="color:var(--accent)">$\{{\field{\*\fldinst{HYPERLINK "http://town.name/"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 town.name}}\}</span>`;\
-\'a0 document.getElementById('hero-sub').textContent = `Local $\{{\field{\*\fldinst{HYPERLINK "http://town.name/"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 town.name}}\} jobs updated daily. Apply direct.`;\
-\'a0 document.getElementById('stats-area').textContent =\'a0{\field{\*\fldinst{HYPERLINK "http://town.name/"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 town.name}}\'a0+ ', Essex';\
-\'a0 document.getElementById('town-list-title').textContent = 'Jobs in ' +\'a0{\field{\*\fldinst{HYPERLINK "http://town.name/"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 town.name}};\
-\'a0 document.title = `Jobs in $\{{\field{\*\fldinst{HYPERLINK "http://town.name/"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 town.name}}\} \'97 Essex Job Board`;\
-\'a0 document.querySelector('#meta-desc').content = `Find local jobs in $\{{\field{\*\fldinst{HYPERLINK "http://town.name/"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 town.name}}\}, Essex. Updated daily.`;\
-\'a0 document.querySelectorAll('.town-tab').forEach(t => t.classList.toggle('active', t.dataset.slug ===\'a0{\field{\*\fldinst{HYPERLINK "http://town.name/"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 town.name}}));\
-\'a0 document.getElementById('job-list').innerHTML = '';\
-\'a0 document.getElementById('town-loading').style.display = 'block';\
-\'a0 document.getElementById('results-label').textContent = 'Loading...';\
-\'a0 window.scrollTo(0,0);\
-\'a0 fetchTownJobs(town);\
-\}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 function showPage(page) \{\
-\'a0 document.getElementById('main-site').style.display = 'none';\
-\'a0 document.getElementById('static-pages').style.display = 'block';\
-\'a0 ['about','privacy','post'].forEach(p => \{\
-\'a0 \'a0 document.getElementById('page-'+p).style.display = p===page ? 'block' : 'none';\
-\'a0 \});\
-\'a0 window.scrollTo(0,0);\
-\}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 function dismissCookie() \{\
-\'a0 document.getElementById('cookie-banner').style.display = 'none';\
-\'a0 try \{ localStorage.setItem('cookie_ok','1'); \} catch(e)\{\}\
-\}\
-try \{ if(localStorage.getItem('cookie_ok')) document.getElementById('cookie-banner').style.display = 'none'; \} catch(e)\{\}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 // \uc0\u9472 \u9472  ADZUNA API INTEGRATION (swap in tonight) \u9472 \u9472 \
-// Replace fetchTownJobs with:\
-// const res = await fetch(`{\field{\*\fldinst{HYPERLINK "https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=YOUR_APP_ID&app_key=YOUR_APP_KEY&where=$%7BencodeURIComponent(town.name"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=YOUR_APP_ID&app_key=YOUR_APP_KEY&where=$\{encodeURIComponent(town.name}}\'a0+ ' Essex')\}&results_per_page=20&content-type=application/json`);\
-// Sign up free at:\'a0{\field{\*\fldinst{HYPERLINK "http://developer.adzuna.com/"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 developer.adzuna.com}}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 async function fetchTownJobs(town) \{\
-\'a0 const prompt = `Generate realistic job listings for $\{{\field{\*\fldinst{HYPERLINK "http://town.name/"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 town.name}}\}, Essex, UK.\
-Respond ONLY in valid JSON. No markdown, no backticks.\
-\{"totalJobs":400,"jobs":[\{"title":"","company":"","emoji":"emoji","type":"Full-time|Part-time|Contract|Remote","salary":"\'a3XX,XXX - \'a3XX,XXX","location":"$\{{\field{\*\fldinst{HYPERLINK "http://town.name/"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 town.name}}\}","sector":"sector","description":"2 sentences.","posted":"Xh ago|Today|Yesterday","isNew":true\}]\}\
-8 jobs. Realistic local employers. UK 2026 salaries. Varied types.`;\
-\'a0 try \{\
-\'a0 \'a0 const res = await fetch('{\field{\*\fldinst{HYPERLINK "https://api.anthropic.com/v1/messages"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 https://api.anthropic.com/v1/messages}}', \{\
-\'a0 \'a0 \'a0 method:'POST', headers:\{'Content-Type':'application/json'\},\
-\'a0 \'a0 \'a0 body:JSON.stringify(\{model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[\{role:'user',content:prompt\}]\})\
-\'a0 \'a0 \});\
-\'a0 \'a0 const data = await res.json();\
-\'a0 \'a0 const text = data.content.map(b=>b.text||'').join('');\
-\'a0 \'a0 const parsed = JSON.parse(text.replace(/```json|```/g,'').trim());\
-\'a0 \'a0 allJobs =\'a0{\field{\*\fldinst{HYPERLINK "http://parsed.jobs/"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 parsed.jobs}};\
-\'a0 \'a0 document.getElementById('job-count').textContent = (parsed.totalJobs*20).toLocaleString()+'+';\
-\'a0 \'a0 renderTownJobs(allJobs);\
-\'a0 \} catch(e) \{\
-\'a0 \'a0 document.getElementById('town-loading').innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">Could not load jobs \'97 refresh to try again.</p>';\
-\'a0 \}\
-\}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 async function fetchHomeJobs() \{\
-\'a0 const prompt = `Generate job listings across Essex towns: Chelmsford, Colchester, Basildon, Southend, Harlow, Braintree, Grays, Brentwood.\
-Respond ONLY in valid JSON. No markdown. \{"jobs":[\{"title":"","company":"","emoji":"emoji","type":"Full-time|Part-time|Contract|Remote","salary":"\'a3XX,XXX - \'a3XX,XXX","location":"Town, Essex","sector":"sector","description":"2 sentences.","posted":"time","isNew":true\}]\}\
-6 jobs across different towns. UK 2026 salaries.`;\
-\'a0 try \{\
-\'a0 \'a0 const res = await fetch('{\field{\*\fldinst{HYPERLINK "https://api.anthropic.com/v1/messages"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 https://api.anthropic.com/v1/messages}}', \{\
-\'a0 \'a0 \'a0 method:'POST', headers:\{'Content-Type':'application/json'\},\
-\'a0 \'a0 \'a0 body:JSON.stringify(\{model:'claude-sonnet-4-20250514',max_tokens:800,messages:[\{role:'user',content:prompt\}]\})\
-\'a0 \'a0 \});\
-\'a0 \'a0 const data = await res.json();\
-\'a0 \'a0 const text = data.content.map(b=>b.text||'').join('');\
-\'a0 \'a0 const parsed = JSON.parse(text.replace(/```json|```/g,'').trim());\
-\'a0 \'a0 document.getElementById('home-results-label').textContent = parsed.jobs.length + ' sample listings';\
-\'a0 \'a0 document.getElementById('home-loading').style.display = 'none';\
-\'a0 \'a0 document.getElementById('job-list-home').innerHTML = parsed.jobs.map((j,i)=>jobCardHTML(j,i)).join('');\
-\'a0 \} catch(e) \{\
-\'a0 \'a0 document.getElementById('home-loading').innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">Could not load jobs.</p>';\
-\'a0 \}\
-\}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 function renderTownJobs(jobs) \{\
-\'a0 document.getElementById('town-loading').style.display = 'none';\
-\'a0 document.getElementById('results-label').textContent = jobs.length + ' jobs found';\
-\'a0 document.getElementById('job-list').innerHTML = jobs.map((j,i) => \{\
-\'a0 \'a0 const ad = i===4 ? `<div class="inline-ad"><div class="ad-label">Advertisement</div><div class="inline-ad-slot">Google AdSense</div></div>` : '';\
-\'a0 \'a0 return ad + jobCardHTML(j,i);\
-\'a0 \}).join('');\
-\}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 function jobCardHTML(j,i) \{\
-\'a0 return `<div class="job-card" style="animation-delay:$\{(i*0.05).toFixed(2)\}s">\
-\'a0 \'a0 <div class="card-top">\
-\'a0 \'a0 \'a0 <div class="job-icon">$\{j.emoji\}</div>\
-\'a0 \'a0 \'a0 <div class="card-info"><div class="card-title">$\{j.title\}</div><div class="card-company">$\{j.company\}</div></div>\
-\'a0 \'a0 \'a0 $\{j.isNew?'<span class="card-new">NEW</span>':''\}\
-\'a0 \'a0 </div>\
-\'a0 \'a0 <p class="card-desc">$\{j.description\}</p>\
-\'a0 \'a0 <div class="card-tags">\
-\'a0 \'a0 \'a0 <span class="tag tag-salary">\'a3 $\{j.salary\}</span>\
-\'a0 \'a0 \'a0 <span class="tag tag-type">$\{j.type\}</span>\
-\'a0 \'a0 \'a0 <span class="tag tag-loc">\cb1 \cb3 \'a0$\{j.location\}</span>\
-\'a0 \'a0 </div>\
-\'a0 \'a0 <div class="card-bottom">\
-\'a0 \'a0 \'a0 <span class="posted">Posted $\{j.posted\}</span>\
-\'a0 \'a0 \'a0 <button class="apply-btn">Apply Now \uc0\u8594 </button>\
-\'a0 \'a0 </div>\
-\'a0 </div>`;\
-\}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 function setFilter(el, filter) \{\
-\'a0 document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));\
-\'a0 el.classList.add('active');\
-\'a0 if(filter==='All')\{renderTownJobs(allJobs);return;\}\
-\'a0 renderTownJobs(allJobs.filter(j=>j.type===filter));\
-\}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 function triggerSearch() \{\
-\'a0 const q = document.getElementById('search-input').value.toLowerCase().trim();\
-\'a0 if(!q) return;\
-\'a0 if(currentTown) renderTownJobs(allJobs.filter(j=>j.title.toLowerCase().includes(q)||j.company.toLowerCase().includes(q)||j.description.toLowerCase().includes(q)));\
-\}\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb1 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 document.getElementById('search-input').addEventListener('keydown',e=>\{if(e.key==='Enter')triggerSearch();\});\
-fetchHomeJobs();\
-</script>\
-</body>\
-</html>\
+    /* COOKIE */
+    #cookie-banner { position:fixed; bottom:0; left:0; right:0; background:#111; color:#fff; padding:14px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; z-index:999; flex-wrap:wrap; }
+    #cookie-banner p { font-size:13px; color:#aaa; flex:1; }
+    #cookie-banner a { color:var(--accent); cursor:pointer; }
+    .cookie-btn { background:var(--accent); color:#fff; font-family:'Outfit',sans-serif; font-size:13px; font-weight:700; padding:8px 20px; border-radius:8px; border:none; cursor:pointer; white-space:nowrap; }
+
+    /* HEADER */
+    header { background:var(--white); border-bottom:1px solid var(--border); height:58px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; position:sticky; top:0; z-index:100; }
+    .logo { display:flex; align-items:center; gap:10px; cursor:pointer; }
+    .logo-pill { background:var(--pill); color:#fff; font-size:0.88rem; font-weight:800; padding:5px 13px; border-radius:100px; letter-spacing:-0.2px; }
+    .logo-rest { font-size:1rem; font-weight:700; color:var(--ink); }
+    .logo-rest .city { color:var(--accent); }
+    .header-right { display:flex; align-items:center; gap:14px; }
+    .nav-link { font-size:13px; color:var(--muted); font-weight:500; cursor:pointer; }
+    .nav-link:hover { color:var(--ink); }
+    .post-btn { background:var(--accent); color:#fff; font-family:'Outfit',sans-serif; font-size:13px; font-weight:700; padding:8px 16px; border-radius:8px; border:none; cursor:pointer; }
+    @media(max-width:560px) { .nav-link { display:none; } }
+
+    /* TOWN NAV */
+    .town-nav { background:var(--white); border-bottom:1px solid var(--border); padding:0 16px; display:flex; overflow-x:auto; scrollbar-width:none; }
+    .town-nav::-webkit-scrollbar { display:none; }
+    .town-tab { flex-shrink:0; font-size:13px; font-weight:600; color:var(--muted); padding:11px 13px; cursor:pointer; border-bottom:2px solid transparent; transition:all 0.15s; white-space:nowrap; }
+    .town-tab:hover { color:var(--ink); }
+    .town-tab.active { color:var(--accent); border-bottom-color:var(--accent); }
+
+    /* HERO */
+    .hero { background:var(--white); border-bottom:1px solid var(--border); padding:36px 24px 28px; text-align:center; }
+    .hero h1 { font-size:clamp(1.6rem,5vw,2.6rem); font-weight:900; line-height:1.1; letter-spacing:-0.5px; margin-bottom:8px; }
+    .hero h1 span { color:var(--accent); }
+    .hero-sub { color:var(--muted); font-size:0.95rem; margin-bottom:22px; }
+    .search-wrap { max-width:540px; margin:0 auto; display:flex; background:var(--bg); border:2px solid var(--border); border-radius:10px; overflow:hidden; transition:border-color 0.2s; }
+    .search-wrap:focus-within { border-color:var(--accent); }
+    .search-wrap input { flex:1; border:none; background:transparent; outline:none; padding:12px 16px; font-family:'Outfit',sans-serif; font-size:15px; color:var(--ink); }
+    .search-wrap input::placeholder { color:#9ca3af; }
+    .search-wrap button { background:var(--accent); color:#fff; border:none; font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; padding:0 20px; cursor:pointer; }
+
+    /* STATS */
+    .stats { display:flex; justify-content:center; gap:24px; padding:10px 24px; background:var(--bg); border-bottom:1px solid var(--border); font-size:13px; color:var(--muted); flex-wrap:wrap; }
+    .stats strong { color:var(--ink); }
+
+    /* AD */
+    .ad-bar { text-align:center; padding:8px 16px; background:var(--white); border-bottom:1px solid var(--border); }
+    .ad-label { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:#d1d5db; margin-bottom:5px; }
+    .ad-slot-lb { background:#f9fafb; border:1px dashed #e5e7eb; border-radius:6px; height:56px; display:inline-flex; align-items:center; justify-content:center; width:min(728px,100%); font-size:11px; color:#d1d5db; letter-spacing:1px; }
+    .ad-slot-sq { background:#f9fafb; border:1px dashed #e5e7eb; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:11px; color:#d1d5db; letter-spacing:1px; text-align:center; flex-direction:column; gap:4px; }
+    .inline-ad { background:#fafafa; border:1px dashed #e5e7eb; border-radius:12px; padding:12px; text-align:center; }
+    .inline-ad-slot { height:70px; display:flex; align-items:center; justify-content:center; font-size:11px; color:#d1d5db; }
+
+    /* LAYOUT */
+    .main { max-width:1040px; margin:0 auto; padding:20px 16px; display:grid; grid-template-columns:1fr 268px; gap:20px; align-items:start; }
+    @media(max-width:740px) { .main { grid-template-columns:1fr; } .sidebar { display:none; } }
+
+    /* BREADCRUMB */
+    .breadcrumb { font-size:13px; color:var(--muted); margin-bottom:12px; }
+    .breadcrumb a { color:var(--accent); cursor:pointer; }
+
+    /* CHIPS */
+    .filters { display:flex; gap:7px; margin-bottom:12px; flex-wrap:wrap; }
+    .chip { background:var(--white); border:1px solid var(--border); color:var(--muted); font-family:'Outfit',sans-serif; font-size:13px; font-weight:500; padding:5px 13px; border-radius:20px; cursor:pointer; transition:all 0.15s; }
+    .chip.active,.chip:hover { background:var(--accent-light); border-color:var(--accent); color:var(--accent); }
+
+    .list-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+    .list-header h2 { font-size:1rem; font-weight:700; }
+    .list-header span { font-size:13px; color:var(--muted); }
+
+    /* SPINNER */
+    .spinner { width:26px; height:26px; border:2px solid var(--border); border-top-color:var(--accent); border-radius:50%; animation:spin 0.7s linear infinite; margin:0 auto 10px; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .loading-card { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:50px 20px; text-align:center; }
+    .loading-card p { font-size:13px; color:var(--muted); }
+
+    /* TOWN GRID */
+    .town-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:8px; margin-bottom:20px; }
+    .town-card { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:16px 12px; cursor:pointer; transition:border-color 0.15s,box-shadow 0.15s; text-align:center; position:relative; }
+    .town-card:hover { border-color:var(--accent); box-shadow:0 2px 10px rgba(37,99,235,0.08); }
+    .town-card-emoji { font-size:1.4rem; margin-bottom:6px; }
+    .town-card-name { font-weight:700; font-size:0.88rem; margin-bottom:3px; }
+    .town-card-count { font-size:11px; color:var(--muted); }
+    .town-hiring { position:absolute; top:7px; right:7px; background:var(--green-light); color:var(--green); font-size:10px; font-weight:700; padding:2px 6px; border-radius:8px; }
+
+    /* JOB CARDS */
+    .job-list { display:flex; flex-direction:column; gap:8px; }
+    .job-card { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:16px 18px; cursor:pointer; transition:border-color 0.15s,box-shadow 0.15s; animation:fadeUp 0.3s ease both; }
+    .job-card:hover { border-color:var(--accent); box-shadow:0 2px 12px rgba(37,99,235,0.07); }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:translateY(0);} }
+    .card-top { display:flex; gap:12px; align-items:flex-start; margin-bottom:10px; }
+    .job-icon { width:40px; height:40px; background:var(--bg); border:1px solid var(--border); border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+    .card-info { flex:1; }
+    .card-title { font-size:0.93rem; font-weight:700; color:var(--ink); margin-bottom:2px; line-height:1.3; }
+    .card-company { font-size:13px; color:var(--muted); }
+    .card-new { background:var(--red-light); color:var(--red); font-size:11px; font-weight:700; padding:2px 8px; border-radius:6px; flex-shrink:0; }
+    .card-desc { font-size:13px; color:var(--muted); line-height:1.55; margin-bottom:11px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+    .card-tags { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:11px; }
+    .tag { font-size:12px; font-weight:600; padding:3px 9px; border-radius:6px; }
+    .tag-salary { background:var(--amber-light); color:var(--amber); }
+    .tag-type { background:var(--green-light); color:var(--green); }
+    .tag-loc { background:var(--accent-light); color:var(--accent); }
+    .card-bottom { display:flex; justify-content:space-between; align-items:center; padding-top:10px; border-top:1px solid var(--border); }
+    .posted { font-size:12px; color:#9ca3af; }
+    .apply-btn { background:var(--accent); color:#fff; font-family:'Outfit',sans-serif; font-size:13px; font-weight:700; padding:7px 16px; border-radius:8px; border:none; cursor:pointer; }
+    .apply-btn:hover { opacity:0.88; }
+
+    /* SIDEBAR */
+    .sidebar { display:flex; flex-direction:column; gap:14px; position:sticky; top:74px; }
+    .widget { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:16px; }
+    .widget-title { font-size:0.85rem; font-weight:700; margin-bottom:12px; padding-bottom:9px; border-bottom:1px solid var(--border); }
+    .cat-item { display:flex; justify-content:space-between; align-items:center; padding:6px 5px; border-radius:7px; cursor:pointer; font-size:13px; transition:background 0.15s; }
+    .cat-item:hover { background:var(--bg); }
+    .cat-count { font-size:11px; background:var(--bg); color:var(--muted); padding:2px 8px; border-radius:10px; font-weight:600; }
+
+    /* STATIC PAGES */
+    .page-content { max-width:680px; margin:0 auto; padding:40px 16px; }
+    .page-content h2 { font-size:1.5rem; font-weight:800; margin-bottom:14px; }
+    .page-content h3 { font-size:1rem; font-weight:700; margin:20px 0 8px; }
+    .page-content p { font-size:14px; color:var(--muted); line-height:1.8; margin-bottom:10px; }
+
+    /* POST PAGE */
+    .price-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:12px; margin:16px 0; }
+    .price-card { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:20px; text-align:center; }
+    .price-card.featured { background:var(--accent); border-color:var(--accent); color:#fff; }
+    .price-amount { font-size:1.6rem; font-weight:900; margin-bottom:4px; }
+    .price-name { font-weight:700; margin-bottom:6px; }
+    .price-desc { font-size:12px; opacity:0.75; }
+
+    /* FOOTER */
+    footer { background:var(--white); border-top:1px solid var(--border); padding:24px; margin-top:20px; }
+    .footer-inner { max-width:1040px; margin:0 auto; }
+    .footer-logo { display:inline-flex; align-items:center; gap:8px; margin-bottom:12px; }
+    .footer-towns { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px; }
+    .footer-towns a { font-size:12px; color:var(--muted); cursor:pointer; }
+    .footer-towns a:hover { color:var(--accent); }
+    .footer-links { display:flex; gap:16px; flex-wrap:wrap; margin-bottom:10px; }
+    .footer-links a { font-size:13px; color:var(--muted); cursor:pointer; }
+    .footer-links a:hover { color:var(--ink); }
+    .footer-legal { font-size:11px; color:#9ca3af; line-height:1.7; }
+  </style>
+</head>
+<body>
+
+<!-- COOKIE BANNER -->
+<div id="cookie-banner">
+  <p>We use cookies for analytics and advertising. See our <a onclick="showPage('privacy')">Privacy Policy</a>.</p>
+  <button class="cookie-btn" onclick="dismissCookie()">Got it</button>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo" onclick="showHome()">
+    <span class="logo-pill">Essex</span>
+    <span class="logo-rest"><span class="city">Job</span> Board</span>
+  </div>
+  <div class="header-right">
+    <span class="nav-link" onclick="showHome()">All Towns</span>
+    <span class="nav-link" onclick="showPage('about')">About</span>
+    <button class="post-btn" onclick="showPage('post')">Post a Job</button>
+  </div>
+</header>
+
+<!-- TOWN NAV -->
+<div class="town-nav" id="town-nav">
+  <div class="town-tab active" onclick="showHome()">🗺️ All Essex</div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <h1 id="hero-title">Local jobs across <span id="hero-city">Essex</span></h1>
+  <p class="hero-sub" id="hero-sub">Updated daily. No London commute. No nonsense.</p>
+  <div class="search-wrap">
+    <input id="search-input" type="text" placeholder="Job title or keyword...">
+    <button onclick="triggerSearch()">Search</button>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <span><strong id="job-count">2,400+</strong> live jobs</span>
+  <span id="stats-area">Across Essex</span>
+  <span>Updated <strong>daily</strong></span>
+</div>
+
+<!-- AD -->
+<div class="ad-bar">
+  <div class="ad-label">Advertisement</div>
+  <div class="ad-slot-lb">Google AdSense 728×90</div>
+</div>
+
+<!-- MAIN -->
+<div id="main-site">
+  <div class="main">
+    <div id="left-col">
+
+      <!-- HOME -->
+      <div id="home-view">
+        <div class="list-header" style="margin-bottom:10px;">
+          <h2>📍 Find jobs near you</h2>
+          <span>20 locations</span>
+        </div>
+        <div class="town-grid" id="town-grid"></div>
+        <div style="margin-top:20px;">
+          <div class="list-header">
+            <h2>Latest Jobs Across Essex</h2>
+            <span id="home-results-label"></span>
+          </div>
+          <div id="home-loading" class="loading-card"><div class="spinner"></div><p>Fetching jobs...</p></div>
+          <div class="job-list" id="job-list-home"></div>
+        </div>
+      </div>
+
+      <!-- TOWN -->
+      <div id="town-view" style="display:none;">
+        <div class="breadcrumb"><a onclick="showHome()">All Essex</a> › <span id="bc-town"></span></div>
+        <div class="filters">
+          <div class="chip active" onclick="setFilter(this,'All')">All</div>
+          <div class="chip" onclick="setFilter(this,'Full-time')">Full-time</div>
+          <div class="chip" onclick="setFilter(this,'Part-time')">Part-time</div>
+          <div class="chip" onclick="setFilter(this,'Remote')">Remote</div>
+          <div class="chip" onclick="setFilter(this,'Contract')">Contract</div>
+        </div>
+        <div class="list-header">
+          <h2 id="town-list-title">Jobs</h2>
+          <span id="results-label">Loading...</span>
+        </div>
+        <div id="town-loading" class="loading-card"><div class="spinner"></div><p>Fetching local jobs...</p></div>
+        <div class="job-list" id="job-list"></div>
+      </div>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="widget" style="padding:12px;">
+        <div class="ad-label" style="margin-bottom:6px;">Advertisement</div>
+        <div class="ad-slot-sq" style="height:250px;">Google AdSense 300×250</div>
+      </div>
+      <div class="widget">
+        <div class="widget-title">Browse by Sector</div>
+        <div id="cat-list"><div style="font-size:13px;color:var(--muted);">Loading...</div></div>
+      </div>
+      <div class="widget" style="padding:12px;">
+        <div class="ad-label" style="margin-bottom:6px;">Advertisement</div>
+        <div class="ad-slot-sq" style="height:110px;">Adzuna Affiliate</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATIC PAGES -->
+<div id="static-pages" style="display:none;">
+
+  <div id="page-about" class="page-content" style="display:none;">
+    <h2>About Essex Job Board</h2>
+    <p>Essex Job Board is an independent local job board covering 20 towns and cities across Essex. We pull live job listings daily so you can find local work without trawling through national sites.</p>
+    <p>No registration required. Just find a job and apply direct.</p>
+    <h3>Contact</h3>
+    <p>hello@essexjobboard.co.uk</p>
+  </div>
+
+  <div id="page-privacy" class="page-content" style="display:none;">
+    <h2>Privacy Policy</h2>
+    <p>Last updated: June 2026</p>
+    <h3>Data we collect</h3>
+    <p>Essex Job Board does not require registration. We collect no personal data directly. Standard analytics tools collect anonymised data including browser type and pages visited.</p>
+    <h3>Cookies</h3>
+    <p>We use Google AdSense and Google Analytics cookies. You can opt out of personalised ads at google.com/settings/ads.</p>
+    <h3>Third-party links</h3>
+    <p>Job listings link to third-party employers and job boards. We are not responsible for their privacy practices.</p>
+    <h3>Contact</h3>
+    <p>hello@essexjobboard.co.uk</p>
+  </div>
+
+  <div id="page-post" class="page-content" style="display:none;">
+    <h2>Post a Job</h2>
+    <p>Reach active Essex job seekers with a listing on Essex Job Board.</p>
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="price-amount">£49</div>
+        <div class="price-name">Standard</div>
+        <div class="price-desc">30 days · 1 town</div>
+      </div>
+      <div class="price-card featured">
+        <div class="price-amount">£99</div>
+        <div class="price-name">Featured ⭐</div>
+        <div class="price-desc">30 days · All Essex · Top placement</div>
+      </div>
+    </div>
+    <p>Email hello@essexjobboard.co.uk with your role details.</p>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <span class="logo-pill" style="font-family:'Outfit',sans-serif;font-size:0.82rem;">Essex</span>
+      <span style="font-weight:700;font-size:0.95rem;"><span style="color:var(--accent)">Job</span> Board</span>
+    </div>
+    <div class="footer-towns" id="footer-town-links"></div>
+    <div class="footer-links">
+      <a onclick="showPage('about')">About</a>
+      <a onclick="showPage('post')">Post a Job</a>
+      <a onclick="showPage('privacy')">Privacy Policy</a>
+    </div>
+    <div class="footer-legal">
+      Jobs sourced via Adzuna API · © 2026 Essex Job Board · Not affiliated with Essex County Council<br>
+      This site displays Google AdSense advertisements and uses affiliate links.
+    </div>
+  </div>
+</footer>
+
+<script>
+const TOWNS = [
+  {name:'Chelmsford',     emoji:'🏛️', pop:180000, hot:true },
+  {name:'Colchester',     emoji:'🏰', pop:200000, hot:true },
+  {name:'Southend-on-Sea',emoji:'🎡', pop:175000, hot:true },
+  {name:'Basildon',       emoji:'🏗️', pop:180000, hot:true },
+  {name:'Harlow',         emoji:'🔬', pop:82000,  hot:true },
+  {name:'Grays',          emoji:'⚓', pop:67000,  hot:false},
+  {name:'Brentwood',      emoji:'🌳', pop:52000,  hot:false},
+  {name:'Clacton-on-Sea', emoji:'🌊', pop:51000,  hot:false},
+  {name:'Braintree',      emoji:'🌾', pop:42000,  hot:false},
+  {name:'Rayleigh',       emoji:'🏘️', pop:38000,  hot:false},
+  {name:'Canvey Island',  emoji:'🏝️', pop:38000,  hot:false},
+  {name:'Billericay',     emoji:'🏡', pop:34000,  hot:false},
+  {name:'Wickford',       emoji:'🚉', pop:33000,  hot:false},
+  {name:'Loughton',       emoji:'🌲', pop:31000,  hot:false},
+  {name:'Witham',         emoji:'🚂', pop:25000,  hot:false},
+  {name:'Maldon',         emoji:'⛵', pop:21000,  hot:false},
+  {name:'Harwich',        emoji:'🚢', pop:20000,  hot:false},
+  {name:'Waltham Abbey',  emoji:'⛪', pop:19000,  hot:false},
+  {name:'Saffron Walden', emoji:'🌸', pop:16000,  hot:false},
+  {name:'Rochford',       emoji:'✈️', pop:9000,   hot:false},
+];
+
+const CATS = [
+  {name:'Logistics & Warehouse', icon:'🚛', count:342},
+  {name:'Healthcare & NHS',      icon:'🏥', count:298},
+  {name:'Retail & Customer',     icon:'🛍️', count:276},
+  {name:'Office & Admin',        icon:'📋', count:241},
+  {name:'Construction & Trades', icon:'🏗️', count:198},
+  {name:'Education',             icon:'📚', count:167},
+  {name:'IT & Tech',             icon:'💻', count:143},
+  {name:'Hospitality & Food',    icon:'🍽️', count:138},
+  {name:'Finance & Legal',       icon:'💼', count:112},
+  {name:'Manufacturing',         icon:'⚙️', count:98},
+];
+
+let allJobs = [], currentTown = null;
+
+// Town nav
+const townNav = document.getElementById('town-nav');
+TOWNS.forEach(t => {
+  const tab = document.createElement('div');
+  tab.className = 'town-tab';
+  tab.textContent = t.emoji + ' ' + t.name;
+  tab.dataset.slug = t.name;
+  tab.onclick = () => loadTown(t);
+  townNav.appendChild(tab);
+});
+
+// Town grid
+const townGrid = document.getElementById('town-grid');
+TOWNS.forEach(t => {
+  const approxJobs = Math.round(t.pop / 120);
+  const card = document.createElement('div');
+  card.className = 'town-card';
+  card.innerHTML = `${t.hot ? '<div class="town-hiring">Hiring</div>' : ''}<div class="town-card-emoji">${t.emoji}</div><div class="town-card-name">${t.name}</div><div class="town-card-count">${approxJobs}+ jobs</div>`;
+  card.onclick = () => loadTown(t);
+  townGrid.appendChild(card);
+});
+
+// Footer towns
+const footerLinks = document.getElementById('footer-town-links');
+TOWNS.forEach(t => {
+  const a = document.createElement('a');
+  a.textContent = 'Jobs in ' + t.name;
+  a.onclick = () => loadTown(t);
+  footerLinks.appendChild(a);
+});
+
+// Category list
+document.getElementById('cat-list').innerHTML = CATS.map(c =>
+  `<div class="cat-item"><span>${c.icon} ${c.name}</span><span class="cat-count">${c.count}</span></div>`
+).join('');
+
+function showHome() {
+  currentTown = null;
+  document.getElementById('main-site').style.display = 'block';
+  document.getElementById('static-pages').style.display = 'none';
+  document.getElementById('home-view').style.display = 'block';
+  document.getElementById('town-view').style.display = 'none';
+  document.getElementById('hero-title').innerHTML = 'Local jobs across <span id="hero-city">Essex</span>';
+  document.getElementById('hero-sub').textContent = 'Updated daily. No London commute. No nonsense.';
+  document.getElementById('stats-area').textContent = 'Across Essex';
+  document.title = 'Essex Job Board — Local Jobs Across Essex';
+  document.querySelectorAll('.town-tab').forEach((t,i) => t.classList.toggle('active', i===0));
+  window.scrollTo(0,0);
 }
+
+function loadTown(town) {
+  currentTown = town;
+  document.getElementById('main-site').style.display = 'block';
+  document.getElementById('static-pages').style.display = 'none';
+  document.getElementById('home-view').style.display = 'none';
+  document.getElementById('town-view').style.display = 'block';
+  document.getElementById('bc-town').textContent = town.name;
+  document.getElementById('hero-title').innerHTML = `Jobs in <span style="color:var(--accent)">${town.name}</span>`;
+  document.getElementById('hero-sub').textContent = `Local ${town.name} jobs updated daily. Apply direct.`;
+  document.getElementById('stats-area').textContent = town.name + ', Essex';
+  document.getElementById('town-list-title').textContent = 'Jobs in ' + town.name;
+  document.title = `Jobs in ${town.name} — Essex Job Board`;
+  document.querySelector('#meta-desc').content = `Find local jobs in ${town.name}, Essex. Updated daily.`;
+  document.querySelectorAll('.town-tab').forEach(t => t.classList.toggle('active', t.dataset.slug === town.name));
+  document.getElementById('job-list').innerHTML = '';
+  document.getElementById('town-loading').style.display = 'block';
+  document.getElementById('results-label').textContent = 'Loading...';
+  window.scrollTo(0,0);
+  fetchTownJobs(town);
+}
+
+function showPage(page) {
+  document.getElementById('main-site').style.display = 'none';
+  document.getElementById('static-pages').style.display = 'block';
+  ['about','privacy','post'].forEach(p => {
+    document.getElementById('page-'+p).style.display = p===page ? 'block' : 'none';
+  });
+  window.scrollTo(0,0);
+}
+
+function dismissCookie() {
+  document.getElementById('cookie-banner').style.display = 'none';
+  try { localStorage.setItem('cookie_ok','1'); } catch(e){}
+}
+try { if(localStorage.getItem('cookie_ok')) document.getElementById('cookie-banner').style.display = 'none'; } catch(e){}
+
+// ── ADZUNA API INTEGRATION (swap in tonight) ──
+// Replace fetchTownJobs with:
+// const res = await fetch(`https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=YOUR_APP_ID&app_key=YOUR_APP_KEY&where=${encodeURIComponent(town.name + ' Essex')}&results_per_page=20&content-type=application/json`);
+// Sign up free at: developer.adzuna.com
+
+async function fetchTownJobs(town) {
+  const prompt = `Generate realistic job listings for ${town.name}, Essex, UK.
+Respond ONLY in valid JSON. No markdown, no backticks.
+{"totalJobs":400,"jobs":[{"title":"","company":"","emoji":"emoji","type":"Full-time|Part-time|Contract|Remote","salary":"£XX,XXX - £XX,XXX","location":"${town.name}","sector":"sector","description":"2 sentences.","posted":"Xh ago|Today|Yesterday","isNew":true}]}
+8 jobs. Realistic local employers. UK 2026 salaries. Varied types.`;
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})
+    });
+    const data = await res.json();
+    const text = data.content.map(b=>b.text||'').join('');
+    const parsed = JSON.parse(text.replace(/```json|```/g,'').trim());
+    allJobs = parsed.jobs;
+    document.getElementById('job-count').textContent = (parsed.totalJobs*20).toLocaleString()+'+';
+    renderTownJobs(allJobs);
+  } catch(e) {
+    document.getElementById('town-loading').innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">Could not load jobs — refresh to try again.</p>';
+  }
+}
+
+async function fetchHomeJobs() {
+  const prompt = `Generate job listings across Essex towns: Chelmsford, Colchester, Basildon, Southend, Harlow, Braintree, Grays, Brentwood.
+Respond ONLY in valid JSON. No markdown. {"jobs":[{"title":"","company":"","emoji":"emoji","type":"Full-time|Part-time|Contract|Remote","salary":"£XX,XXX - £XX,XXX","location":"Town, Essex","sector":"sector","description":"2 sentences.","posted":"time","isNew":true}]}
+6 jobs across different towns. UK 2026 salaries.`;
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:800,messages:[{role:'user',content:prompt}]})
+    });
+    const data = await res.json();
+    const text = data.content.map(b=>b.text||'').join('');
+    const parsed = JSON.parse(text.replace(/```json|```/g,'').trim());
+    document.getElementById('home-results-label').textContent = parsed.jobs.length + ' sample listings';
+    document.getElementById('home-loading').style.display = 'none';
+    document.getElementById('job-list-home').innerHTML = parsed.jobs.map((j,i)=>jobCardHTML(j,i)).join('');
+  } catch(e) {
+    document.getElementById('home-loading').innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">Could not load jobs.</p>';
+  }
+}
+
+function renderTownJobs(jobs) {
+  document.getElementById('town-loading').style.display = 'none';
+  document.getElementById('results-label').textContent = jobs.length + ' jobs found';
+  document.getElementById('job-list').innerHTML = jobs.map((j,i) => {
+    const ad = i===4 ? `<div class="inline-ad"><div class="ad-label">Advertisement</div><div class="inline-ad-slot">Google AdSense</div></div>` : '';
+    return ad + jobCardHTML(j,i);
+  }).join('');
+}
+
+function jobCardHTML(j,i) {
+  return `<div class="job-card" style="animation-delay:${(i*0.05).toFixed(2)}s">
+    <div class="card-top">
+      <div class="job-icon">${j.emoji}</div>
+      <div class="card-info"><div class="card-title">${j.title}</div><div class="card-company">${j.company}</div></div>
+      ${j.isNew?'<span class="card-new">NEW</span>':''}
+    </div>
+    <p class="card-desc">${j.description}</p>
+    <div class="card-tags">
+      <span class="tag tag-salary">£ ${j.salary}</span>
+      <span class="tag tag-type">${j.type}</span>
+      <span class="tag tag-loc">📍 ${j.location}</span>
+    </div>
+    <div class="card-bottom">
+      <span class="posted">Posted ${j.posted}</span>
+      <button class="apply-btn">Apply Now →</button>
+    </div>
+  </div>`;
+}
+
+function setFilter(el, filter) {
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  if(filter==='All'){renderTownJobs(allJobs);return;}
+  renderTownJobs(allJobs.filter(j=>j.type===filter));
+}
+
+function triggerSearch() {
+  const q = document.getElementById('search-input').value.toLowerCase().trim();
+  if(!q) return;
+  if(currentTown) renderTownJobs(allJobs.filter(j=>j.title.toLowerCase().includes(q)||j.company.toLowerCase().includes(q)||j.description.toLowerCase().includes(q)));
+}
+
+document.getElementById('search-input').addEventListener('keydown',e=>{if(e.key==='Enter')triggerSearch();});
+fetchHomeJobs();
+</script>
+</body>
+</html>

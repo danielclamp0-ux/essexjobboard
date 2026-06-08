@@ -418,9 +418,29 @@ TOWNS.forEach(t => {
 });
 
 // Category list — clickable, filters by sector via Adzuna
-document.getElementById('cat-list').innerHTML = CATS.map(c =>
-  `<div class="cat-item" onclick="loadSector('${c.tag}','${c.name}','${c.icon}')"><span>${c.icon} ${c.name}</span><span class="cat-count">→</span></div>`
-).join('');
+const catList = document.getElementById('cat-list');
+catList.innerHTML = '';
+CATS.forEach(c => {
+  const item = document.createElement('div');
+  item.className = 'cat-item';
+  item.dataset.tag = c.tag;
+  item.dataset.name = c.name;
+  item.dataset.icon = c.icon;
+  const left = document.createElement('span');
+  left.textContent = c.icon + ' ' + c.name;
+  const right = document.createElement('span');
+  right.className = 'cat-count';
+  right.textContent = '→';
+  item.appendChild(left);
+  item.appendChild(right);
+  catList.appendChild(item);
+});
+
+// Event delegation for category clicks
+document.getElementById('cat-list').addEventListener('click', function(e) {
+  const item = e.target.closest('.cat-item');
+  if (item) loadSector(item.dataset.tag, item.dataset.name, item.dataset.icon);
+});
 
 function showHome() {
   currentTown = null;

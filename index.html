@@ -501,7 +501,8 @@ try { if(localStorage.getItem('cookie_ok')) document.getElementById('cookie-bann
 // const res = await fetch(`https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=YOUR_APP_ID&app_key=YOUR_APP_KEY&where=${encodeURIComponent(town.name + ' Essex')}&results_per_page=20&content-type=application/json`);
 // Sign up free at: developer.adzuna.com
 
-// API calls routed through secure serverless function — keys stored in Vercel env vars
+const ADZUNA_ID = 'cbacab63';
+const ADZUNA_KEY = '4a3fdd790fe47dc7679e71b8bdf69b03';
 
 function getPostedTime(created) {
   const diff = Math.floor((Date.now() - new Date(created)) / 60000);
@@ -551,7 +552,7 @@ async function fetchTownJobs(town, page) {
   currentPage = page;
   currentTag = null;
   try {
-    const url = `/api/jobs?where=${encodeURIComponent(town.name + ' Essex')}&page=${page}`;
+    const url = `https://api.adzuna.com/v1/api/jobs/gb/search/${page}?app_id=${ADZUNA_ID}&app_key=${ADZUNA_KEY}&results_per_page=20&content-type=application/json&days_old=90&sort_by=date&where=${encodeURIComponent(town.name + ' Essex')}`;
     console.log('Fetching:', url);
     const res = await fetch(url);
     const data = await res.json();
@@ -590,7 +591,7 @@ async function fetchTownJobs(town, page) {
 
 async function fetchHomeJobs() {
   try {
-    const url = `/api/jobs?where=Essex`;
+    const url = `https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=${ADZUNA_ID}&app_key=${ADZUNA_KEY}&results_per_page=20&content-type=application/json&days_old=90&sort_by=date&where=Essex`;
     const res = await fetch(url);
     const data = await res.json();
     if (!data.results) return;
@@ -733,7 +734,7 @@ async function triggerSearch() {
   document.getElementById('town-list-title').textContent = 'Results for "' + q + '"';
   document.getElementById('results-label').textContent = 'Loading...';
   try {
-    const url = '/api/jobs?where=' + encodeURIComponent(where) + '&what=' + encodeURIComponent(q);
+    const url = `https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=${ADZUNA_ID}&app_key=${ADZUNA_KEY}&results_per_page=20&content-type=application/json&days_old=90&sort_by=date&where=${encodeURIComponent(where)}&what=${encodeURIComponent(q)}`;
     const res = await fetch(url);
     const data = await res.json();
     if (!data.results || data.results.length === 0) {
@@ -777,7 +778,7 @@ async function loadSector(tag, name, icon) {
   document.querySelectorAll('.town-tab').forEach(t => t.classList.remove('active'));
   window.scrollTo(0,0);
   try {
-    const url = `/api/jobs?where=Essex&category=${tag}`;
+    const url = `https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=${ADZUNA_ID}&app_key=${ADZUNA_KEY}&results_per_page=20&content-type=application/json&days_old=90&sort_by=date&where=Essex&category=${tag}`;
     const res = await fetch(url);
     const data = await res.json();
     console.log('API response:', data);

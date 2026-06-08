@@ -590,23 +590,25 @@ function renderTownJobs(jobs, append) {
 }
 
 function jobCardHTML(j,i) {
-  return `<div class="job-card" style="animation-delay:${(i*0.05).toFixed(2)}s">
-    <div class="card-top">
-      <div class="job-icon">${j.emoji}</div>
-      <div class="card-info"><div class="card-title">${j.title}</div><div class="card-company">${j.company}</div></div>
-      ${j.isNew?'<span class="card-new">NEW</span>':''}
-    </div>
-    <p class="card-desc">${j.description}</p>
-    <div class="card-tags">
-      ${j.salary ? `<span class="tag tag-salary">${j.salary}</span>` : ''}
-      <span class="tag tag-type">${j.type}</span>
-      <span class="tag tag-loc">📍 ${j.location}</span>
-    </div>
-    <div class="card-bottom">
-      <span class="posted">Posted ${j.posted}</span>
-      <button class="apply-btn" onclick="window.open('${j.redirect||'#'}','_blank')">Apply Now →</button>
-    </div>
-  </div>`;
+  const idx = allJobs.length - (allJobs.length - i);
+  const safeRedirect = (j.redirect || '').replace(/'/g, '');
+  return '<div class="job-card" style="animation-delay:' + (i*0.05).toFixed(2) + 's">' +
+    '<div class="card-top">' +
+      '<div class="job-icon">' + j.emoji + '</div>' +
+      '<div class="card-info"><div class="card-title">' + j.title + '</div><div class="card-company">' + j.company + '</div></div>' +
+      (j.isNew ? '<span class="card-new">NEW</span>' : '') +
+    '</div>' +
+    '<p class="card-desc">' + j.description + '</p>' +
+    '<div class="card-tags">' +
+      (j.salary ? '<span class="tag tag-salary">' + j.salary + '</span>' : '') +
+      '<span class="tag tag-type">' + j.type + '</span>' +
+      '<span class="tag tag-loc">📍 ' + j.location + '</span>' +
+    '</div>' +
+    '<div class="card-bottom">' +
+      '<span class="posted">Posted ' + j.posted + '</span>' +
+      '<button class="apply-btn" data-url="' + safeRedirect + '">Apply Now →</button>' +
+    '</div>' +
+  '</div>';
 }
 
 function setFilter(el, filter) {
@@ -668,6 +670,16 @@ async function loadSector(tag, name, icon) {
 }
 
 document.getElementById('search-input').addEventListener('keydown',e=>{if(e.key==='Enter')triggerSearch();});
+
+// Event delegation for apply buttons — avoids inline onclick and eval issues
+document.addEventListener('click', function(e) {
+  if (e.target && e.target.classList.contains('apply-btn')) {
+    const url = e.target.getAttribute('data-url');
+    if (url && url !== '') {
+      window.open(url, '_blank');
+    }
+  }
+});
 fetchHomeJobs();
 </script>
 </body>

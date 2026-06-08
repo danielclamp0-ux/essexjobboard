@@ -3,7 +3,7 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', 'https://essexjobboard.co.uk');
   res.setHeader('Access-Control-Allow-Methods', 'GET');
 
-  const { where, category } = req.query;
+  const { where, category, page } = req.query;
 
   const ADZUNA_ID = process.env.ADZUNA_ID;
   const ADZUNA_KEY = process.env.ADZUNA_KEY;
@@ -13,7 +13,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    let url = `https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=${ADZUNA_ID}&app_key=${ADZUNA_KEY}&results_per_page=20&content-type=application/json`;
+    const pageNum = page || 1;
+    let url = `https://api.adzuna.com/v1/api/jobs/gb/search/${pageNum}?app_id=${ADZUNA_ID}&app_key=${ADZUNA_KEY}&results_per_page=20&content-type=application/json`;
     if (where) url += `&where=${encodeURIComponent(where)}`;
     if (category) url += `&category=${encodeURIComponent(category)}`;
 

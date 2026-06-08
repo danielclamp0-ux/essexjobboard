@@ -487,7 +487,12 @@ function getSalary(min, max) {
   const mn = parseFloat(min) || 0;
   const mx = parseFloat(max) || 0;
   if (mn <= 0 && mx <= 0) return null;
-  if (mn > 0 && mx > 0) return '£' + Math.round(mn/1000) + 'k - £' + Math.round(mx/1000) + 'k';
+  // If salary looks like an hourly rate (under £500), show as hourly
+  if (mn > 0 && mn < 500) return '£' + mn.toFixed(2) + '/hr';
+  if (mx > 0 && mx < 500) return '£' + mx.toFixed(2) + '/hr';
+  // Annual salary
+  if (mn > 0 && mx > 0 && mn !== mx) return '£' + Math.round(mn/1000) + 'k - £' + Math.round(mx/1000) + 'k';
+  if (mn > 0 && mx > 0 && mn === mx) return '£' + Math.round(mn/1000) + 'k';
   if (mn > 0) return 'From £' + Math.round(mn/1000) + 'k';
   if (mx > 0) return 'Up to £' + Math.round(mx/1000) + 'k';
   return null;

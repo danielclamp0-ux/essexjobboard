@@ -420,12 +420,10 @@ TOWNS.forEach(t => {
 // Category list — clickable, filters by sector via Adzuna
 const catList = document.getElementById('cat-list');
 catList.innerHTML = '';
-CATS.forEach(c => {
+CATS.forEach((c, idx) => {
   const item = document.createElement('div');
   item.className = 'cat-item';
-  item.dataset.tag = c.tag;
-  item.dataset.name = c.name;
-  item.dataset.icon = c.icon;
+  item.dataset.idx = idx;
   const left = document.createElement('span');
   left.textContent = c.icon + ' ' + c.name;
   const right = document.createElement('span');
@@ -439,7 +437,10 @@ CATS.forEach(c => {
 // Event delegation for category clicks
 document.getElementById('cat-list').addEventListener('click', function(e) {
   const item = e.target.closest('.cat-item');
-  if (item) loadSector(item.dataset.tag, item.dataset.name, item.dataset.icon);
+  if (item) {
+    const c = CATS[parseInt(item.dataset.idx)];
+    if (c) loadSector(c.tag, c.name, c.icon);
+  }
 });
 
 function showHome() {

@@ -113,6 +113,7 @@
     /* JOB CARDS */
     .job-list { display:flex; flex-direction:column; gap:8px; }
     .job-card { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:16px 18px; cursor:pointer; transition:border-color 0.15s,box-shadow 0.15s; animation:fadeUp 0.3s ease both; }
+    @media(min-width:741px) { .job-card { padding:22px 26px; } .card-title { font-size:1.05rem; } .card-desc { font-size:14px; } }
     .job-card:hover { border-color:var(--accent); box-shadow:0 2px 12px rgba(37,99,235,0.07); }
     @keyframes fadeUp { from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:translateY(0);} }
     .card-top { display:flex; gap:12px; align-items:flex-start; margin-bottom:10px; }
@@ -483,11 +484,12 @@ function getPostedTime(created) {
 }
 
 function getSalary(min, max) {
-  if (!min && !max) return null;
-  if (min && max && min === 0 && max === 0) return null;
-  if (min && max && min > 0 && max > 0) return '£' + Math.round(min/1000) + 'k - £' + Math.round(max/1000) + 'k';
-  if (min && min > 0) return 'From £' + Math.round(min/1000) + 'k';
-  if (max && max > 0) return 'Up to £' + Math.round(max/1000) + 'k';
+  const mn = parseFloat(min) || 0;
+  const mx = parseFloat(max) || 0;
+  if (mn <= 0 && mx <= 0) return null;
+  if (mn > 0 && mx > 0) return '£' + Math.round(mn/1000) + 'k - £' + Math.round(mx/1000) + 'k';
+  if (mn > 0) return 'From £' + Math.round(mn/1000) + 'k';
+  if (mx > 0) return 'Up to £' + Math.round(mx/1000) + 'k';
   return null;
 }
 

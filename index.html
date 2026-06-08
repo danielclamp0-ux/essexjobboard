@@ -739,6 +739,17 @@ async function loadSector(tag, name, icon) {
   }
 }
 
+async function loadMoreJobs() {
+  const btn = document.getElementById('load-more-btn');
+  btn.textContent = 'Loading...';
+  btn.disabled = true;
+  if (currentTown) {
+    await fetchTownJobs(currentTown, currentPage + 1);
+  }
+  btn.textContent = 'Load More Jobs';
+  btn.disabled = false;
+}
+
 document.getElementById('search-input').addEventListener('keydown',e=>{if(e.key==='Enter')triggerSearch();});
 
 // Event delegation for apply buttons — avoids inline onclick and eval issues

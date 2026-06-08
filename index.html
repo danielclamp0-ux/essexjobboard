@@ -515,8 +515,10 @@ async function fetchTownJobs(town, page) {
   currentTag = null;
   try {
     const url = `/api/jobs?where=${encodeURIComponent(town.name + ' Essex')}&page=${page}`;
+    console.log('Fetching:', url);
     const res = await fetch(url);
     const data = await res.json();
+    console.log('API response:', data);
     if (!data.results || data.results.length === 0) {
       document.getElementById('town-loading').innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">No jobs found for this area right now — try another location.</p>';
       return;
@@ -564,6 +566,7 @@ async function fetchHomeJobs() {
     }));
     document.getElementById('job-list-home').innerHTML = jobs.map((j,i) => jobCardHTML(j,i)).join('');
   } catch(e) {
+    console.error('Home jobs error:', e);
     document.getElementById('home-loading').innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">Could not load jobs.</p>';
   }
 }
@@ -646,6 +649,7 @@ async function loadSector(tag, name, icon) {
     const url = `/api/jobs?where=Essex&category=${tag}`;
     const res = await fetch(url);
     const data = await res.json();
+    console.log('API response:', data);
     if (!data.results || data.results.length === 0) {
       document.getElementById('town-loading').innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">No jobs found in this sector right now.</p>';
       return;

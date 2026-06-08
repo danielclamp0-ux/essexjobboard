@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://essexjobboard.co.uk/sitemap.xml

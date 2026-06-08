@@ -6,6 +6,10 @@
   <title id="page-title">Essex Job Board — Local Jobs Across Essex</title>
   <meta id="meta-desc" name="description" content="Find local jobs across Essex updated daily. Chelmsford, Colchester, Basildon, Southend and 16 more towns."/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- Google Analytics — replace GA_MEASUREMENT_ID with your ID -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','GA_MEASUREMENT_ID');</script> -->
+  <link rel="canonical" id="canonical-url" href="https://essexjobboard.co.uk"/>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -444,6 +448,7 @@ function loadTown(town) {
   document.getElementById('stats-area').textContent = town.name + ', Essex';
   document.getElementById('town-list-title').textContent = 'Jobs in ' + town.name;
   document.title = `Jobs in ${town.name} — Essex Job Board`;
+  document.getElementById('canonical-url').href = 'https://essexjobboard.co.uk/' + town.name.toLowerCase().replace(/ /g,'-');
   document.querySelector('#meta-desc').content = `Find local jobs in ${town.name}, Essex. Updated daily.`;
   document.querySelectorAll('.town-tab').forEach(t => t.classList.toggle('active', t.dataset.slug === town.name));
   document.getElementById('job-list').innerHTML = '';
@@ -690,10 +695,40 @@ function setFilter(el, filter) {
   renderTownJobs(allJobs.filter(j=>j.type===filter));
 }
 
-function triggerSearch() {
-  const q = document.getElementById('search-input').value.toLowerCase().trim();
-  if(!q) return;
-  if(currentTown) renderTownJobs(allJobs.filter(j=>j.title.toLowerCase().includes(q)||j.company.toLowerCase().includes(q)||j.description.toLowerCase().includes(q)));
+async function triggerSearch() {
+  const q = document.getElementById('search-input').value.trim();
+  if (!q) return;
+  const where = currentTown ? currentTown.name + ' Essex' : 'Essex';
+  document.getElementById('town-view').style.display = 'block';
+  document.getElementById('home-view').style.display = 'none';
+  document.getElementById('town-loading').style.display = 'block';
+  document.getElementById('job-list').innerHTML = '';
+  document.getElementById('town-list-title').textContent = 'Results for "' + q + '"';
+  document.getElementById('results-label').textContent = 'Loading...';
+  try {
+    const url = '/api/jobs?where=' + encodeURIComponent(where) + '&what=' + encodeURIComponent(q);
+    const res = await fetch(url);
+    const data = await res.json();
+    if (!data.results || data.results.length === 0) {
+      document.getElementById('town-loading').innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">No results found for "' + q + '" — try a different keyword.</p>';
+      return;
+    }
+    allJobs = data.results.sort((a,b) => new Date(b.created)-new Date(a.created)).map(j => ({
+      title: j.title,
+      company: j.company?.display_name || 'Employer',
+      emoji: getEmoji(j.category?.label),
+      type: getType(j.contract_time),
+      salary: getSalary(j.salary_min, j.salary_max),
+      location: j.location?.display_name || where,
+      description: j.description ? j.description.substring(0, 160) + '...' : '',
+      posted: getPostedTime(j.created),
+      isNew: (Date.now() - new Date(j.created)) < 86400000 * 2,
+      redirect: j.redirect_url
+    }));
+    renderTownJobs(allJobs, false);
+  } catch(e) {
+    document.getElementById('town-loading').innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">Search failed — try again.</p>';
+  }
 }
 
 

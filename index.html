@@ -34,7 +34,7 @@
     .cookie-btn { background:var(--accent); color:#fff; font-family:'Outfit',sans-serif; font-size:13px; font-weight:700; padding:8px 20px; border-radius:8px; border:none; cursor:pointer; white-space:nowrap; }
 
     /* HEADER */
-    header { background:var(--white); border-bottom:1px solid var(--border); height:58px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; position:sticky; top:0; z-index:100; }
+    header { background:var(--white); border-bottom:1px solid var(--border); height:58px; display:flex; align-items:center; justify-content:space-between; padding:0 max(24px, calc(50% - 450px)); position:sticky; top:0; z-index:100; }
     .logo { display:flex; align-items:center; gap:10px; cursor:pointer; }
     .logo-pill { background:var(--pill); color:#fff; font-size:0.88rem; font-weight:800; padding:5px 13px; border-radius:100px; letter-spacing:-0.2px; }
     .logo-rest { font-size:1rem; font-weight:700; color:var(--ink); }
@@ -53,7 +53,7 @@
     .town-tab.active { color:var(--accent); border-bottom-color:var(--accent); }
 
     /* HERO */
-    .hero { background:var(--white); border-bottom:1px solid var(--border); padding:36px 24px 28px; text-align:center; }
+    .hero { background:var(--white); border-bottom:1px solid var(--border); padding:36px 24px 28px; text-align:center; max-width:100%; }
     .hero h1 { font-size:clamp(1.6rem,5vw,2.6rem); font-weight:900; line-height:1.1; letter-spacing:-0.5px; margin-bottom:8px; }
     .hero h1 span { color:var(--accent); }
     .hero-sub { color:var(--muted); font-size:0.95rem; margin-bottom:22px; }
@@ -76,10 +76,9 @@
     .inline-ad-slot { height:70px; display:flex; align-items:center; justify-content:center; font-size:11px; color:#d1d5db; }
 
     /* LAYOUT */
-    .main { max-width:1040px; margin:0 auto; padding:20px 16px; display:grid; grid-template-columns:1fr 268px; gap:20px; align-items:start; }
+    .main { max-width:900px; margin:0 auto; padding:20px 16px; display:grid; grid-template-columns:1fr 260px; gap:20px; align-items:start; }
     @media(max-width:740px) { .main { grid-template-columns:1fr; } .sidebar { display:none; } }
-    @media(min-width:1280px) { .main { max-width:1240px; } .hero h1 { font-size:3rem; } }
-    @media(min-width:1600px) { .main { max-width:1400px; } .town-grid { grid-template-columns:repeat(5,1fr); } }
+    @media(min-width:1024px) { body { font-size:16px; } }
 
     /* BREADCRUMB */
     .breadcrumb { font-size:13px; color:var(--muted); margin-bottom:12px; }
@@ -101,7 +100,7 @@
     .loading-card p { font-size:13px; color:var(--muted); }
 
     /* TOWN GRID */
-    .town-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:8px; margin-bottom:20px; }
+    .town-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:8px; margin-bottom:20px; max-width:100%; }
     .town-card { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:16px 12px; cursor:pointer; transition:border-color 0.15s,box-shadow 0.15s; text-align:center; position:relative; }
     .town-card:hover { border-color:var(--accent); box-shadow:0 2px 10px rgba(37,99,235,0.08); }
     .town-card-emoji { font-size:1.4rem; margin-bottom:6px; }
@@ -155,7 +154,7 @@
 
     /* FOOTER */
     footer { background:var(--white); border-top:1px solid var(--border); padding:24px; margin-top:20px; }
-    .footer-inner { max-width:1040px; margin:0 auto; }
+    .footer-inner { max-width:900px; margin:0 auto; }
     .footer-logo { display:inline-flex; align-items:center; gap:8px; margin-bottom:12px; }
     .footer-towns { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px; }
     .footer-towns a { font-size:12px; color:var(--muted); cursor:pointer; }
@@ -204,7 +203,7 @@
 
 <!-- STATS -->
 <div class="stats">
-  <span><strong id="job-count">2,400+</strong> live jobs</span>
+  <span id="stats-jobs"><strong id="job-count">2,400+</strong> live jobs</span>
   <span id="stats-area">Across Essex</span>
   <span>Updated <strong>daily</strong></span>
 </div>
@@ -253,6 +252,9 @@
         </div>
         <div id="town-loading" class="loading-card"><div class="spinner"></div><p>Fetching local jobs...</p></div>
         <div class="job-list" id="job-list"></div>
+        <div id="load-more-wrap" style="display:none;text-align:center;padding:20px 0;">
+          <button id="load-more-btn" onclick="loadMoreJobs()" style="background:var(--white);border:2px solid var(--accent);color:var(--accent);font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;padding:12px 32px;border-radius:10px;cursor:pointer;">Load More Jobs</button>
+        </div>
       </div>
 
     </div>
@@ -376,7 +378,7 @@ const CATS = [
   {name:'Manufacturing',         icon:'⚙️', tag:'manufacturing-jobs'},
 ];
 
-let allJobs = [], currentTown = null;
+let allJobs = [], currentTown = null, currentPage = 1, currentTag = null, totalJobCount = 0;
 
 // Town nav
 const townNav = document.getElementById('town-nav');
@@ -479,10 +481,12 @@ function getPostedTime(created) {
 }
 
 function getSalary(min, max) {
-  if (!min && !max) return 'Salary not specified';
-  if (min && max) return '£' + Math.round(min/1000) + 'k - £' + Math.round(max/1000) + 'k';
-  if (min) return 'From £' + Math.round(min/1000) + 'k';
-  return 'Up to £' + Math.round(max/1000) + 'k';
+  if (!min && !max) return null;
+  if (min && max && min === 0 && max === 0) return null;
+  if (min && max && min > 0 && max > 0) return '£' + Math.round(min/1000) + 'k - £' + Math.round(max/1000) + 'k';
+  if (min && min > 0) return 'From £' + Math.round(min/1000) + 'k';
+  if (max && max > 0) return 'Up to £' + Math.round(max/1000) + 'k';
+  return null;
 }
 
 function getEmoji(category) {
@@ -505,17 +509,21 @@ function getType(contract) {
   return 'Full-time';
 }
 
-async function fetchTownJobs(town) {
+async function fetchTownJobs(town, page) {
+  page = page || 1;
+  currentPage = page;
+  currentTag = null;
   try {
-    const url = `/api/jobs?where=${encodeURIComponent(town.name + ' Essex')}`;
+    const url = `/api/jobs?where=${encodeURIComponent(town.name + ' Essex')}&page=${page}`;
     const res = await fetch(url);
     const data = await res.json();
     if (!data.results || data.results.length === 0) {
       document.getElementById('town-loading').innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">No jobs found for this area right now — try another location.</p>';
       return;
     }
+    totalJobCount = data.count;
     document.getElementById('job-count').textContent = data.count.toLocaleString() + '+';
-    allJobs = data.results.map((j, i) => ({
+    const newJobs = data.results.map((j, i) => ({
       title: j.title,
       company: j.company?.display_name || 'Employer',
       emoji: getEmoji(j.category?.label),
@@ -560,13 +568,25 @@ async function fetchHomeJobs() {
   }
 }
 
-function renderTownJobs(jobs) {
+function renderTownJobs(jobs, append) {
   document.getElementById('town-loading').style.display = 'none';
-  document.getElementById('results-label').textContent = jobs.length + ' jobs found';
-  document.getElementById('job-list').innerHTML = jobs.map((j,i) => {
-    const ad = i===4 ? `<div class="inline-ad"><div class="ad-label">Advertisement</div><div class="inline-ad-slot">Google AdSense</div></div>` : '';
+  document.getElementById('results-label').textContent = 'Showing ' + (append ? document.querySelectorAll('#job-list .job-card').length + jobs.length : jobs.length) + ' jobs';
+  const html = jobs.map((j,i) => {
+    const ad = i===4 && !append ? `<div class="inline-ad"><div class="ad-label">Advertisement</div><div class="inline-ad-slot">Google AdSense</div></div>` : '';
     return ad + jobCardHTML(j,i);
   }).join('');
+  if (append) {
+    document.getElementById('job-list').innerHTML += html;
+  } else {
+    document.getElementById('job-list').innerHTML = html;
+  }
+  // Show load more if there are likely more results
+  const loadMoreWrap = document.getElementById('load-more-wrap');
+  if (jobs.length >= 20) {
+    loadMoreWrap.style.display = 'block';
+  } else {
+    loadMoreWrap.style.display = 'none';
+  }
 }
 
 function jobCardHTML(j,i) {
@@ -578,7 +598,7 @@ function jobCardHTML(j,i) {
     </div>
     <p class="card-desc">${j.description}</p>
     <div class="card-tags">
-      <span class="tag tag-salary">${j.salary}</span>
+      ${j.salary ? `<span class="tag tag-salary">${j.salary}</span>` : ''}
       <span class="tag tag-type">${j.type}</span>
       <span class="tag tag-loc">📍 ${j.location}</span>
     </div>

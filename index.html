@@ -467,21 +467,66 @@ try { if(localStorage.getItem('cookie_ok')) document.getElementById('cookie-bann
 // const res = await fetch(`https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=YOUR_APP_ID&app_key=YOUR_APP_KEY&where=${encodeURIComponent(town.name + ' Essex')}&results_per_page=20&content-type=application/json`);
 // Sign up free at: developer.adzuna.com
 
+const ADZUNA_ID = 'cbacab63';
+const ADZUNA_KEY = '09f37d34dd983f1a8a7e00d3d40880de';
+
+function getPostedTime(created) {
+  const diff = Math.floor((Date.now() - new Date(created)) / 60000);
+  if (diff < 60) return diff + ' mins ago';
+  if (diff < 1440) return Math.floor(diff/60) + ' hours ago';
+  if (diff < 2880) return 'Yesterday';
+  return Math.floor(diff/1440) + ' days ago';
+}
+
+function getSalary(min, max) {
+  if (!min && !max) return 'Salary not specified';
+  if (min && max) return '£' + Math.round(min/1000) + 'k - £' + Math.round(max/1000) + 'k';
+  if (min) return 'From £' + Math.round(min/1000) + 'k';
+  return 'Up to £' + Math.round(max/1000) + 'k';
+}
+
+function getEmoji(category) {
+  const map = {
+    'IT Jobs':'💻', 'Healthcare & Nursing Jobs':'🏥', 'Logistics & Warehouse Jobs':'🚛',
+    'Retail Jobs':'🛍️', 'Teaching Jobs':'📚', 'Construction & Property Jobs':'🏗️',
+    'Hospitality & Catering Jobs':'🍽️', 'Accounting & Finance Jobs':'💼',
+    'Admin Jobs':'📋', 'Manufacturing Jobs':'⚙️', 'Engineering Jobs':'🔧',
+    'Sales Jobs':'📈', 'HR & Recruitment Jobs':'👥', 'Legal Jobs':'⚖️'
+  };
+  return map[category] || '💼';
+}
+
+function getType(contract) {
+  if (!contract) return 'Full-time';
+  const c = contract.toLowerCase();
+  if (c.includes('part')) return 'Part-time';
+  if (c.includes('contract')) return 'Contract';
+  if (c.includes('temp')) return 'Contract';
+  return 'Full-time';
+}
+
 async function fetchTownJobs(town) {
-  const prompt = `Generate realistic job listings for ${town.name}, Essex, UK.
-Respond ONLY in valid JSON. No markdown, no backticks.
-{"totalJobs":400,"jobs":[{"title":"","company":"","emoji":"emoji","type":"Full-time|Part-time|Contract|Remote","salary":"£XX,XXX - £XX,XXX","location":"${town.name}","sector":"sector","description":"2 sentences.","posted":"Xh ago|Today|Yesterday","isNew":true}]}
-8 jobs. Realistic local employers. UK 2026 salaries. Varied types.`;
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})
-    });
+    const url = `https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=${ADZUNA_ID}&app_key=${ADZUNA_KEY}&where=${encodeURIComponent(town.name + ' Essex')}&results_per_page=20&content-type=application/json`;
+    const res = await fetch(url);
     const data = await res.json();
-    const text = data.content.map(b=>b.text||'').join('');
-    const parsed = JSON.parse(text.replace(/```json|```/g,'').trim());
-    allJobs = parsed.jobs;
-    document.getElementById('job-count').textContent = (parsed.totalJobs*20).toLocaleString()+'+';
+    if (!data.results || data.results.length === 0) {
+      document.getElementById('town-loading').innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">No jobs found for this area right now — try another location.</p>';
+      return;
+    }
+    document.getElementById('job-count').textContent = data.count.toLocaleString() + '+';
+    allJobs = data.results.map((j, i) => ({
+      title: j.title,
+      company: j.company?.display_name || 'Employer',
+      emoji: getEmoji(j.category?.label),
+      type: getType(j.contract_time),
+      salary: getSalary(j.salary_min, j.salary_max),
+      location: j.location?.display_name || town.name,
+      description: j.description ? j.description.substring(0, 160) + '...' : '',
+      posted: getPostedTime(j.created),
+      isNew: (Date.now() - new Date(j.created)) < 86400000 * 2,
+      redirect: j.redirect_url
+    }));
     renderTownJobs(allJobs);
   } catch(e) {
     document.getElementById('town-loading').innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">Could not load jobs — refresh to try again.</p>';
@@ -489,20 +534,27 @@ Respond ONLY in valid JSON. No markdown, no backticks.
 }
 
 async function fetchHomeJobs() {
-  const prompt = `Generate job listings across Essex towns: Chelmsford, Colchester, Basildon, Southend, Harlow, Braintree, Grays, Brentwood.
-Respond ONLY in valid JSON. No markdown. {"jobs":[{"title":"","company":"","emoji":"emoji","type":"Full-time|Part-time|Contract|Remote","salary":"£XX,XXX - £XX,XXX","location":"Town, Essex","sector":"sector","description":"2 sentences.","posted":"time","isNew":true}]}
-6 jobs across different towns. UK 2026 salaries.`;
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:800,messages:[{role:'user',content:prompt}]})
-    });
+    const url = `https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=${ADZUNA_ID}&app_key=${ADZUNA_KEY}&where=Essex&results_per_page=6&content-type=application/json`;
+    const res = await fetch(url);
     const data = await res.json();
-    const text = data.content.map(b=>b.text||'').join('');
-    const parsed = JSON.parse(text.replace(/```json|```/g,'').trim());
-    document.getElementById('home-results-label').textContent = parsed.jobs.length + ' sample listings';
+    if (!data.results) return;
+    document.getElementById('job-count').textContent = data.count.toLocaleString() + '+';
+    document.getElementById('home-results-label').textContent = data.results.length + ' latest listings';
     document.getElementById('home-loading').style.display = 'none';
-    document.getElementById('job-list-home').innerHTML = parsed.jobs.map((j,i)=>jobCardHTML(j,i)).join('');
+    const jobs = data.results.map((j, i) => ({
+      title: j.title,
+      company: j.company?.display_name || 'Employer',
+      emoji: getEmoji(j.category?.label),
+      type: getType(j.contract_time),
+      salary: getSalary(j.salary_min, j.salary_max),
+      location: j.location?.display_name || 'Essex',
+      description: j.description ? j.description.substring(0, 160) + '...' : '',
+      posted: getPostedTime(j.created),
+      isNew: (Date.now() - new Date(j.created)) < 86400000 * 2,
+      redirect: j.redirect_url
+    }));
+    document.getElementById('job-list-home').innerHTML = jobs.map((j,i) => jobCardHTML(j,i)).join('');
   } catch(e) {
     document.getElementById('home-loading').innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">Could not load jobs.</p>';
   }
@@ -526,13 +578,13 @@ function jobCardHTML(j,i) {
     </div>
     <p class="card-desc">${j.description}</p>
     <div class="card-tags">
-      <span class="tag tag-salary">£ ${j.salary}</span>
+      <span class="tag tag-salary">${j.salary}</span>
       <span class="tag tag-type">${j.type}</span>
       <span class="tag tag-loc">📍 ${j.location}</span>
     </div>
     <div class="card-bottom">
       <span class="posted">Posted ${j.posted}</span>
-      <button class="apply-btn">Apply Now →</button>
+      <button class="apply-btn" onclick="window.open('${j.redirect||'#'}','_blank')">Apply Now →</button>
     </div>
   </div>`;
 }

@@ -1,6 +1,5 @@
-export default async function handler(req, res) {
-  // Allow requests from your domain only
-  res.setHeader('Access-Control-Allow-Origin', 'https://essexjobboard.co.uk');
+module.exports = async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET');
 
   const { where, category, page } = req.query;
@@ -22,6 +21,6 @@ export default async function handler(req, res) {
     const data = await response.json();
     res.status(200).json(data);
   } catch (e) {
-    res.status(500).json({ error: 'Failed to fetch jobs' });
+    res.status(500).json({ error: e.message });
   }
 }

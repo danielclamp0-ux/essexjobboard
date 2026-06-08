@@ -1,3 +1,4 @@
+Index · HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,13 +27,13 @@
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     body { background:var(--bg); color:var(--ink); font-family:'Outfit',sans-serif; font-size:15px; line-height:1.6; }
-
+ 
     /* COOKIE */
     #cookie-banner { position:fixed; bottom:0; left:0; right:0; background:#111; color:#fff; padding:14px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; z-index:999; flex-wrap:wrap; }
     #cookie-banner p { font-size:13px; color:#aaa; flex:1; }
     #cookie-banner a { color:var(--accent); cursor:pointer; }
     .cookie-btn { background:var(--accent); color:#fff; font-family:'Outfit',sans-serif; font-size:13px; font-weight:700; padding:8px 20px; border-radius:8px; border:none; cursor:pointer; white-space:nowrap; }
-
+ 
     /* HEADER */
     header { background:var(--white); border-bottom:1px solid var(--border); height:58px; display:flex; align-items:center; justify-content:space-between; padding:0 max(24px, calc(50% - 450px)); position:sticky; top:0; z-index:100; }
     .logo { display:flex; align-items:center; gap:10px; cursor:pointer; }
@@ -44,14 +45,14 @@
     .nav-link:hover { color:var(--ink); }
     .post-btn { background:var(--accent); color:#fff; font-family:'Outfit',sans-serif; font-size:13px; font-weight:700; padding:8px 16px; border-radius:8px; border:none; cursor:pointer; }
     @media(max-width:560px) { .nav-link { display:none; } }
-
+ 
     /* TOWN NAV */
     .town-nav { background:var(--white); border-bottom:1px solid var(--border); padding:0 16px; display:flex; overflow-x:auto; scrollbar-width:none; }
     .town-nav::-webkit-scrollbar { display:none; }
     .town-tab { flex-shrink:0; font-size:13px; font-weight:600; color:var(--muted); padding:11px 13px; cursor:pointer; border-bottom:2px solid transparent; transition:all 0.15s; white-space:nowrap; }
     .town-tab:hover { color:var(--ink); }
     .town-tab.active { color:var(--accent); border-bottom-color:var(--accent); }
-
+ 
     /* HERO */
     .hero { background:var(--white); border-bottom:1px solid var(--border); padding:36px 24px 28px; text-align:center; max-width:100%; }
     .hero h1 { font-size:clamp(1.6rem,5vw,2.6rem); font-weight:900; line-height:1.1; letter-spacing:-0.5px; margin-bottom:8px; }
@@ -62,11 +63,11 @@
     .search-wrap input { flex:1; border:none; background:transparent; outline:none; padding:12px 16px; font-family:'Outfit',sans-serif; font-size:15px; color:var(--ink); }
     .search-wrap input::placeholder { color:#9ca3af; }
     .search-wrap button { background:var(--accent); color:#fff; border:none; font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; padding:0 20px; cursor:pointer; }
-
+ 
     /* STATS */
     .stats { display:flex; justify-content:center; gap:24px; padding:10px 24px; background:var(--bg); border-bottom:1px solid var(--border); font-size:13px; color:var(--muted); flex-wrap:wrap; }
     .stats strong { color:var(--ink); }
-
+ 
     /* AD */
     .ad-bar { text-align:center; padding:8px 16px; background:var(--white); border-bottom:1px solid var(--border); }
     .ad-label { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:#d1d5db; margin-bottom:5px; }
@@ -74,31 +75,31 @@
     .ad-slot-sq { background:#f9fafb; border:1px dashed #e5e7eb; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:11px; color:#d1d5db; letter-spacing:1px; text-align:center; flex-direction:column; gap:4px; }
     .inline-ad { background:#fafafa; border:1px dashed #e5e7eb; border-radius:12px; padding:12px; text-align:center; }
     .inline-ad-slot { height:70px; display:flex; align-items:center; justify-content:center; font-size:11px; color:#d1d5db; }
-
+ 
     /* LAYOUT */
     .main { max-width:900px; margin:0 auto; padding:20px 16px; display:grid; grid-template-columns:1fr 260px; gap:20px; align-items:start; }
     @media(max-width:740px) { .main { grid-template-columns:1fr; } .sidebar { display:none; } }
     @media(min-width:1024px) { body { font-size:16px; } }
-
+ 
     /* BREADCRUMB */
     .breadcrumb { font-size:13px; color:var(--muted); margin-bottom:12px; }
     .breadcrumb a { color:var(--accent); cursor:pointer; }
-
+ 
     /* CHIPS */
     .filters { display:flex; gap:7px; margin-bottom:12px; flex-wrap:wrap; }
     .chip { background:var(--white); border:1px solid var(--border); color:var(--muted); font-family:'Outfit',sans-serif; font-size:13px; font-weight:500; padding:5px 13px; border-radius:20px; cursor:pointer; transition:all 0.15s; }
     .chip.active,.chip:hover { background:var(--accent-light); border-color:var(--accent); color:var(--accent); }
-
+ 
     .list-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
     .list-header h2 { font-size:1rem; font-weight:700; }
     .list-header span { font-size:13px; color:var(--muted); }
-
+ 
     /* SPINNER */
     .spinner { width:26px; height:26px; border:2px solid var(--border); border-top-color:var(--accent); border-radius:50%; animation:spin 0.7s linear infinite; margin:0 auto 10px; }
     @keyframes spin { to { transform:rotate(360deg); } }
     .loading-card { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:50px 20px; text-align:center; }
     .loading-card p { font-size:13px; color:var(--muted); }
-
+ 
     /* TOWN GRID */
     .town-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:8px; margin-bottom:20px; max-width:100%; }
     .town-card { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:16px 12px; cursor:pointer; transition:border-color 0.15s,box-shadow 0.15s; text-align:center; position:relative; }
@@ -107,7 +108,7 @@
     .town-card-name { font-weight:700; font-size:0.88rem; margin-bottom:3px; }
     .town-card-count { font-size:11px; color:var(--muted); }
     .town-hiring { position:absolute; top:7px; right:7px; background:var(--green-light); color:var(--green); font-size:10px; font-weight:700; padding:2px 6px; border-radius:8px; }
-
+ 
     /* JOB CARDS */
     .job-list { display:flex; flex-direction:column; gap:8px; }
     .job-card { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:16px 18px; cursor:pointer; transition:border-color 0.15s,box-shadow 0.15s; animation:fadeUp 0.3s ease both; }
@@ -129,7 +130,7 @@
     .posted { font-size:12px; color:#9ca3af; }
     .apply-btn { background:var(--accent); color:#fff; font-family:'Outfit',sans-serif; font-size:13px; font-weight:700; padding:7px 16px; border-radius:8px; border:none; cursor:pointer; }
     .apply-btn:hover { opacity:0.88; }
-
+ 
     /* SIDEBAR */
     .sidebar { display:flex; flex-direction:column; gap:14px; position:sticky; top:74px; }
     .widget { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:16px; }
@@ -137,13 +138,13 @@
     .cat-item { display:flex; justify-content:space-between; align-items:center; padding:6px 5px; border-radius:7px; cursor:pointer; font-size:13px; transition:background 0.15s; }
     .cat-item:hover { background:var(--bg); }
     .cat-count { font-size:11px; background:var(--bg); color:var(--muted); padding:2px 8px; border-radius:10px; font-weight:600; }
-
+ 
     /* STATIC PAGES */
     .page-content { max-width:680px; margin:0 auto; padding:40px 16px; }
     .page-content h2 { font-size:1.5rem; font-weight:800; margin-bottom:14px; }
     .page-content h3 { font-size:1rem; font-weight:700; margin:20px 0 8px; }
     .page-content p { font-size:14px; color:var(--muted); line-height:1.8; margin-bottom:10px; }
-
+ 
     /* POST PAGE */
     .price-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:12px; margin:16px 0; }
     .price-card { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:20px; text-align:center; }
@@ -151,7 +152,7 @@
     .price-amount { font-size:1.6rem; font-weight:900; margin-bottom:4px; }
     .price-name { font-weight:700; margin-bottom:6px; }
     .price-desc { font-size:12px; opacity:0.75; }
-
+ 
     /* FOOTER */
     footer { background:var(--white); border-top:1px solid var(--border); padding:24px; margin-top:20px; }
     .footer-inner { max-width:900px; margin:0 auto; }
@@ -166,13 +167,13 @@
   </style>
 </head>
 <body>
-
+ 
 <!-- COOKIE BANNER -->
 <div id="cookie-banner">
   <p>We use cookies for analytics and advertising. See our <a onclick="showPage('privacy')">Privacy Policy</a>.</p>
   <button class="cookie-btn" onclick="dismissCookie()">Got it</button>
 </div>
-
+ 
 <!-- HEADER -->
 <header>
   <div class="logo" onclick="showHome()">
@@ -185,12 +186,12 @@
     <button class="post-btn" onclick="showPage('post')">Post a Job</button>
   </div>
 </header>
-
+ 
 <!-- TOWN NAV -->
 <div class="town-nav" id="town-nav">
   <div class="town-tab active" onclick="showHome()">🗺️ All Essex</div>
 </div>
-
+ 
 <!-- HERO -->
 <div class="hero">
   <h1 id="hero-title">Local jobs across <span id="hero-city">Essex</span></h1>
@@ -200,25 +201,25 @@
     <button onclick="triggerSearch()">Search</button>
   </div>
 </div>
-
+ 
 <!-- STATS -->
 <div class="stats">
   <span id="stats-jobs"><strong id="job-count">2,400+</strong> live jobs</span>
   <span id="stats-area">Across Essex</span>
   <span>Updated <strong>daily</strong></span>
 </div>
-
+ 
 <!-- AD -->
 <div class="ad-bar">
   <div class="ad-label">Advertisement</div>
   <div class="ad-slot-lb">Google AdSense 728×90</div>
 </div>
-
+ 
 <!-- MAIN -->
 <div id="main-site">
   <div class="main">
     <div id="left-col">
-
+ 
       <!-- HOME -->
       <div id="home-view">
         <div class="list-header" style="margin-bottom:10px;">
@@ -235,7 +236,7 @@
           <div class="job-list" id="job-list-home"></div>
         </div>
       </div>
-
+ 
       <!-- TOWN -->
       <div id="town-view" style="display:none;">
         <div class="breadcrumb"><a onclick="showHome()">All Essex</a> › <span id="bc-town"></span></div>
@@ -256,9 +257,9 @@
           <button id="load-more-btn" onclick="loadMoreJobs()" style="background:var(--white);border:2px solid var(--accent);color:var(--accent);font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;padding:12px 32px;border-radius:10px;cursor:pointer;">Load More Jobs</button>
         </div>
       </div>
-
+ 
     </div>
-
+ 
     <!-- SIDEBAR -->
     <div class="sidebar">
       <div class="widget" style="padding:12px;">
@@ -276,10 +277,10 @@
     </div>
   </div>
 </div>
-
+ 
 <!-- STATIC PAGES -->
 <div id="static-pages" style="display:none;">
-
+ 
   <div id="page-about" class="page-content" style="display:none;">
     <h2>About Essex Job Board</h2>
     <p>Essex Job Board is an independent local job board covering 20 towns and cities across Essex. We pull live job listings daily so you can find local work without trawling through national sites.</p>
@@ -287,7 +288,7 @@
     <h3>Contact</h3>
     <p>hello@essexjobboard.co.uk</p>
   </div>
-
+ 
   <div id="page-privacy" class="page-content" style="display:none;">
     <h2>Privacy Policy</h2>
     <p>Last updated: June 2026</p>
@@ -300,7 +301,7 @@
     <h3>Contact</h3>
     <p>hello@essexjobboard.co.uk</p>
   </div>
-
+ 
   <div id="page-post" class="page-content" style="display:none;">
     <h2>Post a Job</h2>
     <p>Reach active Essex job seekers with a listing on Essex Job Board.</p>
@@ -318,9 +319,9 @@
     </div>
     <p>Email hello@essexjobboard.co.uk with your role details.</p>
   </div>
-
+ 
 </div>
-
+ 
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
@@ -340,7 +341,7 @@
     </div>
   </div>
 </footer>
-
+ 
 <script>
 const TOWNS = [
   {name:'Chelmsford',     emoji:'🏛️', pop:180000, hot:true },
@@ -364,7 +365,7 @@ const TOWNS = [
   {name:'Saffron Walden', emoji:'🌸', pop:16000,  hot:false},
   {name:'Rochford',       emoji:'✈️', pop:9000,   hot:false},
 ];
-
+ 
 const CATS = [
   {name:'Logistics & Warehouse', icon:'🚛', tag:'logistics-warehouse-jobs'},
   {name:'Healthcare & NHS',      icon:'🏥', tag:'healthcare-nursing-jobs'},
@@ -377,9 +378,9 @@ const CATS = [
   {name:'Finance & Legal',       icon:'💼', tag:'accounting-finance-jobs'},
   {name:'Manufacturing',         icon:'⚙️', tag:'manufacturing-jobs'},
 ];
-
+ 
 let allJobs = [], currentTown = null, currentPage = 1, currentTag = null, totalJobCount = 0;
-
+ 
 // Town nav
 const townNav = document.getElementById('town-nav');
 TOWNS.forEach(t => {
@@ -390,7 +391,7 @@ TOWNS.forEach(t => {
   tab.onclick = () => loadTown(t);
   townNav.appendChild(tab);
 });
-
+ 
 // Town grid
 const townGrid = document.getElementById('town-grid');
 TOWNS.forEach(t => {
@@ -400,7 +401,7 @@ TOWNS.forEach(t => {
   card.onclick = () => loadTown(t);
   townGrid.appendChild(card);
 });
-
+ 
 // Footer towns
 const footerLinks = document.getElementById('footer-town-links');
 TOWNS.forEach(t => {
@@ -409,12 +410,12 @@ TOWNS.forEach(t => {
   a.onclick = () => loadTown(t);
   footerLinks.appendChild(a);
 });
-
+ 
 // Category list — clickable, filters by sector via Adzuna
 document.getElementById('cat-list').innerHTML = CATS.map(c =>
   `<div class="cat-item" onclick="loadSector('${c.tag}','${c.name}','${c.icon}')"><span>${c.icon} ${c.name}</span><span class="cat-count">→</span></div>`
 ).join('');
-
+ 
 function showHome() {
   currentTown = null;
   document.getElementById('main-site').style.display = 'block';
@@ -428,7 +429,7 @@ function showHome() {
   document.querySelectorAll('.town-tab').forEach((t,i) => t.classList.toggle('active', i===0));
   window.scrollTo(0,0);
 }
-
+ 
 function loadTown(town) {
   currentTown = town;
   document.getElementById('main-site').style.display = 'block';
@@ -449,7 +450,7 @@ function loadTown(town) {
   window.scrollTo(0,0);
   fetchTownJobs(town);
 }
-
+ 
 function showPage(page) {
   document.getElementById('main-site').style.display = 'none';
   document.getElementById('static-pages').style.display = 'block';
@@ -458,20 +459,20 @@ function showPage(page) {
   });
   window.scrollTo(0,0);
 }
-
+ 
 function dismissCookie() {
   document.getElementById('cookie-banner').style.display = 'none';
   try { localStorage.setItem('cookie_ok','1'); } catch(e){}
 }
 try { if(localStorage.getItem('cookie_ok')) document.getElementById('cookie-banner').style.display = 'none'; } catch(e){}
-
+ 
 // ── ADZUNA API INTEGRATION (swap in tonight) ──
 // Replace fetchTownJobs with:
 // const res = await fetch(`https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=YOUR_APP_ID&app_key=YOUR_APP_KEY&where=${encodeURIComponent(town.name + ' Essex')}&results_per_page=20&content-type=application/json`);
 // Sign up free at: developer.adzuna.com
-
+ 
 // API calls routed through secure serverless function — keys stored in Vercel env vars
-
+ 
 function getPostedTime(created) {
   const diff = Math.floor((Date.now() - new Date(created)) / 60000);
   if (diff < 60) return diff + ' mins ago';
@@ -479,7 +480,7 @@ function getPostedTime(created) {
   if (diff < 2880) return 'Yesterday';
   return Math.floor(diff/1440) + ' days ago';
 }
-
+ 
 function getSalary(min, max) {
   if (!min && !max) return null;
   if (min && max && min === 0 && max === 0) return null;
@@ -488,7 +489,7 @@ function getSalary(min, max) {
   if (max && max > 0) return 'Up to £' + Math.round(max/1000) + 'k';
   return null;
 }
-
+ 
 function getEmoji(category) {
   const map = {
     'IT Jobs':'💻', 'Healthcare & Nursing Jobs':'🏥', 'Logistics & Warehouse Jobs':'🚛',
@@ -499,7 +500,7 @@ function getEmoji(category) {
   };
   return map[category] || '💼';
 }
-
+ 
 function getType(contract) {
   if (!contract) return 'Full-time';
   const c = contract.toLowerCase();
@@ -508,7 +509,7 @@ function getType(contract) {
   if (c.includes('temp')) return 'Contract';
   return 'Full-time';
 }
-
+ 
 async function fetchTownJobs(town, page) {
   page = page || 1;
   currentPage = page;
@@ -542,7 +543,7 @@ async function fetchTownJobs(town, page) {
     document.getElementById('town-loading').innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">Could not load jobs — refresh to try again.</p>';
   }
 }
-
+ 
 async function fetchHomeJobs() {
   try {
     const url = `/api/jobs?where=Essex`;
@@ -572,7 +573,7 @@ async function fetchHomeJobs() {
     document.getElementById('home-loading').innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">Could not load jobs.</p>';
   }
 }
-
+ 
 function makeJobCard(j, i, showAd) {
   const frag = document.createDocumentFragment();
   if (showAd) {
@@ -584,14 +585,14 @@ function makeJobCard(j, i, showAd) {
   const card = document.createElement('div');
   card.className = 'job-card';
   card.style.animationDelay = (i * 0.05).toFixed(2) + 's';
-
+ 
   const top = document.createElement('div');
   top.className = 'card-top';
-
+ 
   const icon = document.createElement('div');
   icon.className = 'job-icon';
   icon.textContent = j.emoji;
-
+ 
   const info = document.createElement('div');
   info.className = 'card-info';
   const title = document.createElement('div');
@@ -602,21 +603,21 @@ function makeJobCard(j, i, showAd) {
   company.textContent = j.company;
   info.appendChild(title);
   info.appendChild(company);
-
+ 
   top.appendChild(icon);
   top.appendChild(info);
-
+ 
   if (j.isNew) {
     const badge = document.createElement('span');
     badge.className = 'card-new';
     badge.textContent = 'NEW';
     top.appendChild(badge);
   }
-
+ 
   const desc = document.createElement('p');
   desc.className = 'card-desc';
   desc.textContent = j.description;
-
+ 
   const tags = document.createElement('div');
   tags.className = 'card-tags';
   if (j.salary) {
@@ -633,7 +634,7 @@ function makeJobCard(j, i, showAd) {
   loc.textContent = '📍 ' + j.location;
   tags.appendChild(type);
   tags.appendChild(loc);
-
+ 
   const bottom = document.createElement('div');
   bottom.className = 'card-bottom';
   const posted = document.createElement('span');
@@ -645,7 +646,7 @@ function makeJobCard(j, i, showAd) {
   applyBtn.setAttribute('data-url', j.redirect || '');
   bottom.appendChild(posted);
   bottom.appendChild(applyBtn);
-
+ 
   card.appendChild(top);
   card.appendChild(desc);
   card.appendChild(tags);
@@ -653,7 +654,7 @@ function makeJobCard(j, i, showAd) {
   frag.appendChild(card);
   return frag;
 }
-
+ 
 function renderTownJobs(jobs, append) {
   document.getElementById('town-loading').style.display = 'none';
   const existing = document.querySelectorAll('#job-list .job-card').length;
@@ -665,23 +666,23 @@ function renderTownJobs(jobs, append) {
   });
   document.getElementById('load-more-wrap').style.display = jobs.length >= 20 ? 'block' : 'none';
 }
-
-
-
+ 
+ 
+ 
 function setFilter(el, filter) {
   document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
   el.classList.add('active');
   if(filter==='All'){renderTownJobs(allJobs);return;}
   renderTownJobs(allJobs.filter(j=>j.type===filter));
 }
-
+ 
 function triggerSearch() {
   const q = document.getElementById('search-input').value.toLowerCase().trim();
   if(!q) return;
   if(currentTown) renderTownJobs(allJobs.filter(j=>j.title.toLowerCase().includes(q)||j.company.toLowerCase().includes(q)||j.description.toLowerCase().includes(q)));
 }
-
-
+ 
+ 
 async function loadSector(tag, name, icon) {
   currentTown = null;
   document.getElementById('main-site').style.display = 'block';
@@ -726,9 +727,9 @@ async function loadSector(tag, name, icon) {
     document.getElementById('town-loading').innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">Could not load jobs — refresh to try again.</p>';
   }
 }
-
+ 
 document.getElementById('search-input').addEventListener('keydown',e=>{if(e.key==='Enter')triggerSearch();});
-
+ 
 // Event delegation for apply buttons — avoids inline onclick and eval issues
 document.addEventListener('click', function(e) {
   if (e.target && e.target.classList.contains('apply-btn')) {

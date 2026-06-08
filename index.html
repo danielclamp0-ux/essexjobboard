@@ -564,55 +564,109 @@ async function fetchHomeJobs() {
       isNew: (Date.now() - new Date(j.created)) < 86400000 * 2,
       redirect: j.redirect_url
     }));
-    document.getElementById('job-list-home').innerHTML = jobs.map((j,i) => jobCardHTML(j,i)).join('');
+    const homeList = document.getElementById('job-list-home');
+    homeList.innerHTML = '';
+    jobs.forEach((j,i) => homeList.appendChild(makeJobCard(j,i,false)));
   } catch(e) {
     console.error('Home jobs error:', e);
     document.getElementById('home-loading').innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">Could not load jobs.</p>';
   }
 }
 
-function renderTownJobs(jobs, append) {
-  document.getElementById('town-loading').style.display = 'none';
-  document.getElementById('results-label').textContent = 'Showing ' + (append ? document.querySelectorAll('#job-list .job-card').length + jobs.length : jobs.length) + ' jobs';
-  const html = jobs.map((j,i) => {
-    const ad = i===4 && !append ? `<div class="inline-ad"><div class="ad-label">Advertisement</div><div class="inline-ad-slot">Google AdSense</div></div>` : '';
-    return ad + jobCardHTML(j,i);
-  }).join('');
-  if (append) {
-    document.getElementById('job-list').innerHTML += html;
-  } else {
-    document.getElementById('job-list').innerHTML = html;
+function makeJobCard(j, i, showAd) {
+  const frag = document.createDocumentFragment();
+  if (showAd) {
+    const ad = document.createElement('div');
+    ad.className = 'inline-ad';
+    ad.innerHTML = '<div class="ad-label">Advertisement</div><div class="inline-ad-slot">Google AdSense</div>';
+    frag.appendChild(ad);
   }
-  // Show load more if there are likely more results
-  const loadMoreWrap = document.getElementById('load-more-wrap');
-  if (jobs.length >= 20) {
-    loadMoreWrap.style.display = 'block';
-  } else {
-    loadMoreWrap.style.display = 'none';
+  const card = document.createElement('div');
+  card.className = 'job-card';
+  card.style.animationDelay = (i * 0.05).toFixed(2) + 's';
+
+  const top = document.createElement('div');
+  top.className = 'card-top';
+
+  const icon = document.createElement('div');
+  icon.className = 'job-icon';
+  icon.textContent = j.emoji;
+
+  const info = document.createElement('div');
+  info.className = 'card-info';
+  const title = document.createElement('div');
+  title.className = 'card-title';
+  title.textContent = j.title;
+  const company = document.createElement('div');
+  company.className = 'card-company';
+  company.textContent = j.company;
+  info.appendChild(title);
+  info.appendChild(company);
+
+  top.appendChild(icon);
+  top.appendChild(info);
+
+  if (j.isNew) {
+    const badge = document.createElement('span');
+    badge.className = 'card-new';
+    badge.textContent = 'NEW';
+    top.appendChild(badge);
   }
+
+  const desc = document.createElement('p');
+  desc.className = 'card-desc';
+  desc.textContent = j.description;
+
+  const tags = document.createElement('div');
+  tags.className = 'card-tags';
+  if (j.salary) {
+    const sal = document.createElement('span');
+    sal.className = 'tag tag-salary';
+    sal.textContent = j.salary;
+    tags.appendChild(sal);
+  }
+  const type = document.createElement('span');
+  type.className = 'tag tag-type';
+  type.textContent = j.type;
+  const loc = document.createElement('span');
+  loc.className = 'tag tag-loc';
+  loc.textContent = '📍 ' + j.location;
+  tags.appendChild(type);
+  tags.appendChild(loc);
+
+  const bottom = document.createElement('div');
+  bottom.className = 'card-bottom';
+  const posted = document.createElement('span');
+  posted.className = 'posted';
+  posted.textContent = 'Posted ' + j.posted;
+  const applyBtn = document.createElement('button');
+  applyBtn.className = 'apply-btn';
+  applyBtn.textContent = 'Apply Now →';
+  applyBtn.setAttribute('data-url', j.redirect || '');
+  bottom.appendChild(posted);
+  bottom.appendChild(applyBtn);
+
+  card.appendChild(top);
+  card.appendChild(desc);
+  card.appendChild(tags);
+  card.appendChild(bottom);
+  frag.appendChild(card);
+  return frag;
 }
 
-function jobCardHTML(j,i) {
-  const idx = allJobs.length - (allJobs.length - i);
-  const safeRedirect = (j.redirect || '').replace(/'/g, '');
-  return '<div class="job-card" style="animation-delay:' + (i*0.05).toFixed(2) + 's">' +
-    '<div class="card-top">' +
-      '<div class="job-icon">' + j.emoji + '</div>' +
-      '<div class="card-info"><div class="card-title">' + j.title + '</div><div class="card-company">' + j.company + '</div></div>' +
-      (j.isNew ? '<span class="card-new">NEW</span>' : '') +
-    '</div>' +
-    '<p class="card-desc">' + j.description + '</p>' +
-    '<div class="card-tags">' +
-      (j.salary ? '<span class="tag tag-salary">' + j.salary + '</span>' : '') +
-      '<span class="tag tag-type">' + j.type + '</span>' +
-      '<span class="tag tag-loc">📍 ' + j.location + '</span>' +
-    '</div>' +
-    '<div class="card-bottom">' +
-      '<span class="posted">Posted ' + j.posted + '</span>' +
-      '<button class="apply-btn" data-url="' + safeRedirect + '">Apply Now →</button>' +
-    '</div>' +
-  '</div>';
+function renderTownJobs(jobs, append) {
+  document.getElementById('town-loading').style.display = 'none';
+  const existing = document.querySelectorAll('#job-list .job-card').length;
+  document.getElementById('results-label').textContent = 'Showing ' + (append ? existing + jobs.length : jobs.length) + ' jobs';
+  const list = document.getElementById('job-list');
+  if (!append) list.innerHTML = '';
+  jobs.forEach((j, i) => {
+    list.appendChild(makeJobCard(j, i, i === 4 && !append));
+  });
+  document.getElementById('load-more-wrap').style.display = jobs.length >= 20 ? 'block' : 'none';
 }
+
+
 
 function setFilter(el, filter) {
   document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));

@@ -783,26 +783,21 @@ async function loadSector(tag, name, icon) {
       document.getElementById('town-loading').innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">No jobs found in this sector right now.</p>';
       return;
     }
-    // job count removed
-    allJobs = data.results.map(j => ({
-      title: j.title,
-      company: j.company?.display_name || 'Employer',
-      emoji: getEmoji(j.category?.label),
-      type: getType(j.contract_time),
-      salary: getSalary(j.salary_min, j.salary_max),
-      location: j.location?.display_name || 'Essex',
-      description: j.description ? j.description.substring(0, 160) + '...' : '',
-      posted: getPostedTime(j.created),
-      isNew: (Date.now() - new Date(j.created)) < 86400000 * 2,
-      redirect: j.redirect_url
-    }));
-    if (page > 1) {
-      allJobs = allJobs.concat(newJobs);
-      renderTownJobs(newJobs, true);
-    } else {
-      allJobs = newJobs;
-      renderTownJobs(allJobs, false);
-    }
+    allJobs = data.results
+      .sort((a, b) => new Date(b.created) - new Date(a.created))
+      .map(j => ({
+        title: j.title,
+        company: j.company?.display_name || 'Employer',
+        emoji: getEmoji(j.category?.label),
+        type: getType(j.contract_time),
+        salary: getSalary(j.salary_min, j.salary_max),
+        location: j.location?.display_name || 'Essex',
+        description: j.description ? j.description.substring(0, 160) + '...' : '',
+        posted: getPostedTime(j.created),
+        isNew: (Date.now() - new Date(j.created)) < 86400000 * 2,
+        redirect: j.redirect_url
+      }));
+    renderTownJobs(allJobs, false);
   } catch(e) {
     document.getElementById('town-loading').innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">Could not load jobs — refresh to try again.</p>';
   }

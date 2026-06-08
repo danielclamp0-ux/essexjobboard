@@ -78,6 +78,8 @@
     /* LAYOUT */
     .main { max-width:1040px; margin:0 auto; padding:20px 16px; display:grid; grid-template-columns:1fr 268px; gap:20px; align-items:start; }
     @media(max-width:740px) { .main { grid-template-columns:1fr; } .sidebar { display:none; } }
+    @media(min-width:1280px) { .main { max-width:1240px; } .hero h1 { font-size:3rem; } }
+    @media(min-width:1600px) { .main { max-width:1400px; } .town-grid { grid-template-columns:repeat(5,1fr); } }
 
     /* BREADCRUMB */
     .breadcrumb { font-size:13px; color:var(--muted); margin-bottom:12px; }
@@ -362,16 +364,16 @@ const TOWNS = [
 ];
 
 const CATS = [
-  {name:'Logistics & Warehouse', icon:'🚛', count:342},
-  {name:'Healthcare & NHS',      icon:'🏥', count:298},
-  {name:'Retail & Customer',     icon:'🛍️', count:276},
-  {name:'Office & Admin',        icon:'📋', count:241},
-  {name:'Construction & Trades', icon:'🏗️', count:198},
-  {name:'Education',             icon:'📚', count:167},
-  {name:'IT & Tech',             icon:'💻', count:143},
-  {name:'Hospitality & Food',    icon:'🍽️', count:138},
-  {name:'Finance & Legal',       icon:'💼', count:112},
-  {name:'Manufacturing',         icon:'⚙️', count:98},
+  {name:'Logistics & Warehouse', icon:'🚛', tag:'logistics-warehouse-jobs'},
+  {name:'Healthcare & NHS',      icon:'🏥', tag:'healthcare-nursing-jobs'},
+  {name:'Retail & Customer',     icon:'🛍️', tag:'retail-jobs'},
+  {name:'Office & Admin',        icon:'📋', tag:'admin-jobs'},
+  {name:'Construction & Trades', icon:'🏗️', tag:'construction-property-jobs'},
+  {name:'Education',             icon:'📚', tag:'teaching-jobs'},
+  {name:'IT & Tech',             icon:'💻', tag:'it-jobs'},
+  {name:'Hospitality & Food',    icon:'🍽️', tag:'hospitality-catering-jobs'},
+  {name:'Finance & Legal',       icon:'💼', tag:'accounting-finance-jobs'},
+  {name:'Manufacturing',         icon:'⚙️', tag:'manufacturing-jobs'},
 ];
 
 let allJobs = [], currentTown = null;
@@ -390,10 +392,9 @@ TOWNS.forEach(t => {
 // Town grid
 const townGrid = document.getElementById('town-grid');
 TOWNS.forEach(t => {
-  const approxJobs = Math.round(t.pop / 120);
   const card = document.createElement('div');
   card.className = 'town-card';
-  card.innerHTML = `${t.hot ? '<div class="town-hiring">Hiring</div>' : ''}<div class="town-card-emoji">${t.emoji}</div><div class="town-card-name">${t.name}</div><div class="town-card-count">${approxJobs}+ jobs</div>`;
+  card.innerHTML = `<div class="town-hiring">Hiring</div><div class="town-card-emoji">${t.emoji}</div><div class="town-card-name">${t.name}</div><div class="town-card-count">Browse jobs →</div>`;
   card.onclick = () => loadTown(t);
   townGrid.appendChild(card);
 });
@@ -407,9 +408,9 @@ TOWNS.forEach(t => {
   footerLinks.appendChild(a);
 });
 
-// Category list
+// Category list — clickable, filters by sector via Adzuna
 document.getElementById('cat-list').innerHTML = CATS.map(c =>
-  `<div class="cat-item"><span>${c.icon} ${c.name}</span><span class="cat-count">${c.count}</span></div>`
+  `<div class="cat-item" onclick="loadSector('${c.tag}','${c.name}','${c.icon}')"><span>${c.icon} ${c.name}</span><span class="cat-count">→</span></div>`
 ).join('');
 
 function showHome() {
@@ -467,8 +468,7 @@ try { if(localStorage.getItem('cookie_ok')) document.getElementById('cookie-bann
 // const res = await fetch(`https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=YOUR_APP_ID&app_key=YOUR_APP_KEY&where=${encodeURIComponent(town.name + ' Essex')}&results_per_page=20&content-type=application/json`);
 // Sign up free at: developer.adzuna.com
 
-const ADZUNA_ID = 'cbacab63';
-const ADZUNA_KEY = '09f37d34dd983f1a8a7e00d3d40880de';
+// API calls routed through secure serverless function — keys stored in Vercel env vars
 
 function getPostedTime(created) {
   const diff = Math.floor((Date.now() - new Date(created)) / 60000);
@@ -507,7 +507,7 @@ function getType(contract) {
 
 async function fetchTownJobs(town) {
   try {
-    const url = `https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=${ADZUNA_ID}&app_key=${ADZUNA_KEY}&where=${encodeURIComponent(town.name + ' Essex')}&results_per_page=20&content-type=application/json`;
+    const url = `/api/jobs?where=${encodeURIComponent(town.name + ' Essex')}`;
     const res = await fetch(url);
     const data = await res.json();
     if (!data.results || data.results.length === 0) {
@@ -535,7 +535,7 @@ async function fetchTownJobs(town) {
 
 async function fetchHomeJobs() {
   try {
-    const url = `https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=${ADZUNA_ID}&app_key=${ADZUNA_KEY}&where=Essex&results_per_page=6&content-type=application/json`;
+    const url = `/api/jobs?where=Essex`;
     const res = await fetch(url);
     const data = await res.json();
     if (!data.results) return;
@@ -600,6 +600,51 @@ function triggerSearch() {
   const q = document.getElementById('search-input').value.toLowerCase().trim();
   if(!q) return;
   if(currentTown) renderTownJobs(allJobs.filter(j=>j.title.toLowerCase().includes(q)||j.company.toLowerCase().includes(q)||j.description.toLowerCase().includes(q)));
+}
+
+
+async function loadSector(tag, name, icon) {
+  currentTown = null;
+  document.getElementById('main-site').style.display = 'block';
+  document.getElementById('static-pages').style.display = 'none';
+  document.getElementById('home-view').style.display = 'none';
+  document.getElementById('town-view').style.display = 'block';
+  document.getElementById('bc-town').textContent = name;
+  document.getElementById('hero-title').innerHTML = `${icon} <span style="color:var(--accent)">${name}</span> across Essex`;
+  document.getElementById('hero-sub').textContent = `Local ${name.toLowerCase()} updated daily. Apply direct.`;
+  document.getElementById('stats-area').textContent = name + ', Essex';
+  document.getElementById('town-list-title').textContent = name + ' in Essex';
+  document.title = `${name} in Essex — Essex Job Board`;
+  document.getElementById('job-list').innerHTML = '';
+  document.getElementById('town-loading').style.display = 'block';
+  document.getElementById('results-label').textContent = 'Loading...';
+  document.querySelectorAll('.town-tab').forEach(t => t.classList.remove('active'));
+  window.scrollTo(0,0);
+  try {
+    const url = `/api/jobs?where=Essex&category=${tag}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    if (!data.results || data.results.length === 0) {
+      document.getElementById('town-loading').innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">No jobs found in this sector right now.</p>';
+      return;
+    }
+    document.getElementById('job-count').textContent = data.count.toLocaleString() + '+';
+    allJobs = data.results.map(j => ({
+      title: j.title,
+      company: j.company?.display_name || 'Employer',
+      emoji: getEmoji(j.category?.label),
+      type: getType(j.contract_time),
+      salary: getSalary(j.salary_min, j.salary_max),
+      location: j.location?.display_name || 'Essex',
+      description: j.description ? j.description.substring(0, 160) + '...' : '',
+      posted: getPostedTime(j.created),
+      isNew: (Date.now() - new Date(j.created)) < 86400000 * 2,
+      redirect: j.redirect_url
+    }));
+    renderTownJobs(allJobs);
+  } catch(e) {
+    document.getElementById('town-loading').innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">Could not load jobs — refresh to try again.</p>';
+  }
 }
 
 document.getElementById('search-input').addEventListener('keydown',e=>{if(e.key==='Enter')triggerSearch();});

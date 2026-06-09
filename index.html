@@ -347,20 +347,94 @@
 
   <div id="page-post" class="page-content" style="display:none;">
     <h2>Post a Job</h2>
-    <p>Reach active Essex job seekers with a listing on Essex Job Board.</p>
+    <p>Reach active Essex job seekers with a listing on Essex Job Board. Choose your package below and we'll be in touch within 24 hours.</p>
     <div class="price-grid">
-      <div class="price-card">
+      <div class="price-card" onclick="selectPlan('standard')" id="plan-standard" style="cursor:pointer;">
         <div class="price-amount">£49</div>
         <div class="price-name">Standard</div>
-        <div class="price-desc">30 days · 1 town</div>
+        <div class="price-desc">30 days · 1 town · Job card listing</div>
       </div>
-      <div class="price-card featured">
+      <div class="price-card featured" onclick="selectPlan('featured')" id="plan-featured" style="cursor:pointer;opacity:0.8;">
         <div class="price-amount">£99</div>
         <div class="price-name">Featured ⭐</div>
         <div class="price-desc">30 days · All Essex · Top placement</div>
       </div>
     </div>
-    <p>Email hello@essexjobboard.co.uk with your role details.</p>
+    <div style="margin-top:20px;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:24px;">
+      <div style="margin-bottom:14px;">
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:5px;">Your name</label>
+        <input id="post-name" type="text" placeholder="Jane Smith" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;outline:none;">
+      </div>
+      <div style="margin-bottom:14px;">
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:5px;">Company name</label>
+        <input id="post-company" type="text" placeholder="Acme Ltd" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;outline:none;">
+      </div>
+      <div style="margin-bottom:14px;">
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:5px;">Email address</label>
+        <input id="post-email" type="email" placeholder="jane@acme.com" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;outline:none;">
+      </div>
+      <div style="margin-bottom:14px;">
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:5px;">Job title</label>
+        <input id="post-title" type="text" placeholder="e.g. Customer Service Manager" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;outline:none;">
+      </div>
+      <div style="margin-bottom:14px;">
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:5px;">Location</label>
+        <input id="post-location" type="text" placeholder="e.g. Chelmsford, Essex" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;outline:none;">
+      </div>
+      <div style="margin-bottom:20px;">
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:5px;">Job description</label>
+        <textarea id="post-desc" placeholder="Brief description of the role..." rows="4" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;outline:none;resize:vertical;"></textarea>
+      </div>
+      <input type="hidden" id="post-plan" value="standard">
+      <button onclick="submitJobPost()" style="background:var(--accent);color:#fff;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;padding:12px 32px;border-radius:10px;border:none;cursor:pointer;width:100%;">Submit Listing →</button>
+      <div id="post-feedback" style="margin-top:12px;font-size:13px;text-align:center;"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- BLOG ARTICLES (hidden, shown via showArticle) -->
+<div id="blog-pages" style="display:none;">
+
+  <div id="article-1" class="page-content" style="display:none;">
+    <h2>Jobs in Essex 2026: What's Hiring Right Now</h2>
+    <p style="font-size:12px;color:var(--muted);">Published June 2026 · Essex Job Board</p>
+    <p>Essex is one of the fastest-growing employment markets outside London, with over 20,000 live vacancies across the county at any given time. From logistics hubs in Basildon to tech firms in Chelmsford, the variety of roles available in 2026 is broader than ever.</p>
+    <h3>Logistics & Warehousing</h3>
+    <p>The expansion of distribution centres along the A12 and M25 corridors has driven consistent demand for warehouse operatives, HGV drivers, and logistics coordinators. Major employers include Amazon, Ocado, and DHL, all of whom maintain large operations across Grays, Basildon, and Harlow.</p>
+    <h3>Healthcare & NHS</h3>
+    <p>Mid and South Essex NHS Foundation Trust is one of the county's largest employers, with ongoing recruitment across Chelmsford, Southend, and Basildon. Nursing, allied health, and administrative roles are consistently available.</p>
+    <h3>IT & Tech</h3>
+    <p>Chelmsford has emerged as a regional tech hub, with a growing cluster of software, cybersecurity, and digital marketing firms. Colchester's proximity to the University of Essex also supports a vibrant graduate employment market.</p>
+    <p>Browse all current vacancies at <a onclick="showHome()" style="color:var(--accent);cursor:pointer;">Essex Job Board</a>.</p>
+  </div>
+
+  <div id="article-2" class="page-content" style="display:none;">
+    <h2>Best Towns to Find Work in Essex</h2>
+    <p style="font-size:12px;color:var(--muted);">Published June 2026 · Essex Job Board</p>
+    <p>Not all parts of Essex offer the same job opportunities. Here's a breakdown of the best towns for job seekers in 2026.</p>
+    <h3>Chelmsford</h3>
+    <p>As the county town and a city since 2012, Chelmsford offers the widest range of professional, office, and public sector roles. It's well-connected to London Liverpool Street (35 minutes) making it attractive to employers who want talent without London costs.</p>
+    <h3>Colchester</h3>
+    <p>Home to one of the UK's largest garrisons and a major university, Colchester has strong demand in healthcare, education, retail, and defence-adjacent industries. The town centre has seen significant regeneration in recent years.</p>
+    <h3>Basildon & Southend</h3>
+    <p>These two towns dominate South Essex employment. Basildon's industrial estates host major logistics and manufacturing operations, while Southend's seafront economy drives hospitality, retail, and tourism jobs year-round.</p>
+    <h3>Harlow</h3>
+    <p>A new town with deep roots in science and manufacturing, Harlow is home to several major pharmaceutical and medical device companies including GSK and Abbott. Science, engineering, and production roles are consistently strong here.</p>
+  </div>
+
+  <div id="article-3" class="page-content" style="display:none;">
+    <h2>How to Find a Job in Essex Without Going to London</h2>
+    <p style="font-size:12px;color:var(--muted);">Published June 2026 · Essex Job Board</p>
+    <p>For years, Essex workers have accepted long commutes into London as the price of a decent salary. But the post-pandemic shift toward hybrid and local working has changed that calculus significantly.</p>
+    <h3>Use local job boards</h3>
+    <p>National job boards like Indeed and Reed are dominated by London roles. Using a local Essex-specific board means every listing is genuinely reachable. Essex Job Board focuses exclusively on the 20 largest towns in the county, filtering out irrelevant results automatically.</p>
+    <h3>Target Essex-based employers directly</h3>
+    <p>Many of Essex's largest employers — NHS trusts, councils, logistics firms, manufacturers — recruit primarily through their own websites and local channels rather than national boards. Bookmark their careers pages directly.</p>
+    <h3>Consider the new towns</h3>
+    <p>Harlow and Basildon were purpose-built to provide employment outside London. Both have strong industrial and commercial bases that are often overlooked by job seekers who focus on Chelmsford or Southend.</p>
+    <h3>Use salary filters wisely</h3>
+    <p>Essex salaries are typically 15-25% lower than equivalent London roles, but so is the cost of living. A £35k role in Chelmsford often represents better quality of life than a £45k role in the City once commuting costs are factored in.</p>
   </div>
 
 </div>
@@ -377,6 +451,9 @@
       <a onclick="showPage('about')">About</a>
       <a onclick="showPage('post')">Post a Job</a>
       <a onclick="showPage('privacy')">Privacy Policy</a>
+      <a onclick="showArticle('article-1')">Jobs in Essex 2026</a>
+      <a onclick="showArticle('article-2')">Best Towns for Work</a>
+      <a onclick="showArticle('article-3')">Find Work Without London</a>
     </div>
     <div class="footer-legal">
       Jobs sourced via Adzuna API · © 2026 Essex Job Board · Not affiliated with Essex County Council<br>
@@ -494,6 +571,7 @@ function showHome() {
   currentTown = null;
   document.getElementById('main-site').style.display = 'block';
   document.getElementById('static-pages').style.display = 'none';
+  document.getElementById('blog-pages').style.display = 'none';
   document.getElementById('home-view').style.display = 'block';
   document.getElementById('town-view').style.display = 'none';
   document.getElementById('hero-title').innerHTML = 'Local jobs across <span id="hero-city">Essex</span>';
@@ -529,8 +607,19 @@ function loadTown(town) {
 function showPage(page) {
   document.getElementById('main-site').style.display = 'none';
   document.getElementById('static-pages').style.display = 'block';
+  document.getElementById('blog-pages').style.display = 'none';
   ['about','privacy','post'].forEach(p => {
     document.getElementById('page-'+p).style.display = p===page ? 'block' : 'none';
+  });
+  window.scrollTo(0,0);
+}
+
+function showArticle(id) {
+  document.getElementById('main-site').style.display = 'none';
+  document.getElementById('static-pages').style.display = 'none';
+  document.getElementById('blog-pages').style.display = 'block';
+  ['article-1','article-2','article-3'].forEach(a => {
+    document.getElementById(a).style.display = a===id ? 'block' : 'none';
   });
   window.scrollTo(0,0);
 }
@@ -900,6 +989,44 @@ document.addEventListener('click', function(e) {
     }
   }
 });
+function selectPlan(plan) {
+  document.getElementById('post-plan').value = plan;
+  document.getElementById('plan-standard').style.opacity = plan === 'standard' ? '1' : '0.6';
+  document.getElementById('plan-featured').style.opacity = plan === 'featured' ? '1' : '0.6';
+}
+
+function submitJobPost() {
+  const name = document.getElementById('post-name').value.trim();
+  const company = document.getElementById('post-company').value.trim();
+  const email = document.getElementById('post-email').value.trim();
+  const title = document.getElementById('post-title').value.trim();
+  const location = document.getElementById('post-location').value.trim();
+  const desc = document.getElementById('post-desc').value.trim();
+  const plan = document.getElementById('post-plan').value;
+  const fb = document.getElementById('post-feedback');
+
+  if (!name || !company || !email || !title || !location) {
+    fb.style.color = 'var(--red)';
+    fb.textContent = 'Please fill in all required fields.';
+    return;
+  }
+
+  const subject = encodeURIComponent(`Job Listing Request — ${plan === 'featured' ? 'Featured £99' : 'Standard £49'} — ${title}`);
+  const body = encodeURIComponent(`Name: ${name}
+Company: ${company}
+Email: ${email}
+Job Title: ${title}
+Location: ${location}
+Plan: ${plan === 'featured' ? 'Featured (£99)' : 'Standard (£49)'}
+
+Description:
+${desc}`);
+  window.location.href = `mailto:hello@essexjobboard.co.uk?subject=${subject}&body=${body}`;
+
+  fb.style.color = 'var(--green)';
+  fb.textContent = 'Opening your email client — we'll be in touch within 24 hours!';
+}
+
 fetchHomeJobs();
 </script>
 </body>

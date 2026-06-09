@@ -218,10 +218,7 @@
 </div>
 
 <!-- AD -->
-<div class="ad-bar">
-  <div class="ad-label">Advertisement</div>
-  <div class="ad-slot-lb">Google AdSense 728×90</div>
-</div>
+
 
 <!-- MAIN -->
 <div id="main-site">
@@ -255,6 +252,23 @@
           <div class="chip" onclick="setFilter(this,'Remote')">Remote</div>
           <div class="chip" onclick="setFilter(this,'Contract')">Contract</div>
         </div>
+        <div class="filters" style="margin-bottom:16px;">
+          <select id="salary-filter" onchange="setSalaryFilter()" style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;padding:5px 13px;border-radius:20px;border:1px solid var(--border);background:var(--white);color:var(--muted);cursor:pointer;">
+            <option value="0">Any salary</option>
+            <option value="20000">£20k+</option>
+            <option value="25000">£25k+</option>
+            <option value="30000">£30k+</option>
+            <option value="40000">£40k+</option>
+            <option value="50000">£50k+</option>
+            <option value="60000">£60k+</option>
+          </select>
+          <select id="date-filter" onchange="setDateFilter()" style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;padding:5px 13px;border-radius:20px;border:1px solid var(--border);background:var(--white);color:var(--muted);cursor:pointer;">
+            <option value="0">Any time</option>
+            <option value="1">Last 24 hours</option>
+            <option value="7">Last 7 days</option>
+            <option value="30">Last 30 days</option>
+          </select>
+        </div>
         <div class="list-header">
           <h2 id="town-list-title">Jobs</h2>
           <span id="results-label">Loading...</span>
@@ -270,18 +284,12 @@
 
     <!-- SIDEBAR -->
     <div class="sidebar">
-      <div class="widget" style="padding:12px;">
-        <div class="ad-label" style="margin-bottom:6px;">Advertisement</div>
-        <div class="ad-slot-sq" style="height:250px;">Google AdSense 300×250</div>
-      </div>
+
       <div class="widget">
         <div class="widget-title">Browse by Sector</div>
         <div id="cat-list"><div style="font-size:13px;color:var(--muted);">Loading...</div></div>
       </div>
-      <div class="widget" style="padding:12px;">
-        <div class="ad-label" style="margin-bottom:6px;">Advertisement</div>
-        <div class="ad-slot-sq" style="height:110px;">Adzuna Affiliate</div>
-      </div>
+
     </div>
   </div>
 </div>
@@ -352,26 +360,26 @@
 
 <script>
 const TOWNS = [
-  {name:'Chelmsford',     emoji:'🏛️', pop:180000, hot:true },
-  {name:'Colchester',     emoji:'🏰', pop:200000, hot:true },
-  {name:'Southend-on-Sea',emoji:'🎡', pop:175000, hot:true },
   {name:'Basildon',       emoji:'🏗️', pop:180000, hot:true },
-  {name:'Harlow',         emoji:'🔬', pop:82000,  hot:true },
-  {name:'Grays',          emoji:'⚓', pop:67000,  hot:false},
-  {name:'Brentwood',      emoji:'🌳', pop:52000,  hot:false},
-  {name:'Clacton-on-Sea', emoji:'🌊', pop:51000,  hot:false},
-  {name:'Braintree',      emoji:'🌾', pop:42000,  hot:false},
-  {name:'Rayleigh',       emoji:'🏘️', pop:38000,  hot:false},
-  {name:'Canvey Island',  emoji:'🏝️', pop:38000,  hot:false},
   {name:'Billericay',     emoji:'🏡', pop:34000,  hot:false},
-  {name:'Wickford',       emoji:'🚉', pop:33000,  hot:false},
-  {name:'Loughton',       emoji:'🌲', pop:31000,  hot:false},
-  {name:'Witham',         emoji:'🚂', pop:25000,  hot:false},
-  {name:'Maldon',         emoji:'⛵', pop:21000,  hot:false},
+  {name:'Braintree',      emoji:'🌾', pop:42000,  hot:false},
+  {name:'Brentwood',      emoji:'🌳', pop:52000,  hot:false},
+  {name:'Canvey Island',  emoji:'🏝️', pop:38000,  hot:false},
+  {name:'Chelmsford',     emoji:'🏛️', pop:180000, hot:true },
+  {name:'Clacton-on-Sea', emoji:'🌊', pop:51000,  hot:false},
+  {name:'Colchester',     emoji:'🏰', pop:200000, hot:true },
+  {name:'Grays',          emoji:'⚓', pop:67000,  hot:false},
+  {name:'Harlow',         emoji:'🔬', pop:82000,  hot:true },
   {name:'Harwich',        emoji:'🚢', pop:20000,  hot:false},
-  {name:'Waltham Abbey',  emoji:'⛪', pop:19000,  hot:false},
-  {name:'Saffron Walden', emoji:'🌸', pop:16000,  hot:false},
+  {name:'Loughton',       emoji:'🌲', pop:31000,  hot:false},
+  {name:'Maldon',         emoji:'⛵', pop:21000,  hot:false},
+  {name:'Rayleigh',       emoji:'🏘️', pop:38000,  hot:false},
   {name:'Rochford',       emoji:'✈️', pop:9000,   hot:false},
+  {name:'Saffron Walden', emoji:'🌸', pop:16000,  hot:false},
+  {name:'Southend-on-Sea',emoji:'🎡', pop:175000, hot:true },
+  {name:'Waltham Abbey',  emoji:'⛪', pop:19000,  hot:false},
+  {name:'Wickford',       emoji:'🚉', pop:33000,  hot:false},
+  {name:'Witham',         emoji:'🚂', pop:25000,  hot:false},
 ];
 
 const CATS = [
@@ -405,7 +413,7 @@ const townGrid = document.getElementById('town-grid');
 TOWNS.forEach(t => {
   const card = document.createElement('div');
   card.className = 'town-card';
-  card.innerHTML = `<div class="town-hiring">Hiring</div><div class="town-card-emoji">${t.emoji}</div><div class="town-card-name">${t.name}</div><div class="town-card-count">Browse jobs →</div>`;
+  card.innerHTML = `<div class="town-card-emoji">${t.emoji}</div><div class="town-card-name">${t.name}</div><div class="town-card-count">Browse jobs →</div>`;
   card.onclick = () => loadTown(t);
   townGrid.appendChild(card);
 });
@@ -585,6 +593,8 @@ async function fetchTownJobs(town, page) {
         emoji: getEmoji(j.category?.label),
         type: getType(j.contract_time),
         salary: getSalary(j.salary_min, j.salary_max),
+        salaryRaw: parseFloat(j.salary_min) || parseFloat(j.salary_max) || 0,
+        daysAgo: Math.floor((Date.now() - new Date(j.created)) / 86400000),
         location: j.location?.display_name || town.name,
         description: j.description ? j.description.substring(0, 160) + '...' : '',
         posted: getPostedTime(j.created),
@@ -729,12 +739,26 @@ function renderTownJobs(jobs, append) {
 
 
 
+function getFilteredJobs() {
+  const typeFilter = document.querySelector('.chip.active')?.textContent || 'All';
+  const salaryMin = parseInt(document.getElementById('salary-filter')?.value || 0);
+  const dateDays = parseInt(document.getElementById('date-filter')?.value || 0);
+  return allJobs.filter(j => {
+    if (typeFilter !== 'All' && j.type !== typeFilter) return false;
+    if (salaryMin > 0 && (!j.salaryRaw || j.salaryRaw < salaryMin)) return false;
+    if (dateDays > 0 && j.daysAgo > dateDays) return false;
+    return true;
+  });
+}
+
 function setFilter(el, filter) {
   document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
   el.classList.add('active');
-  if(filter==='All'){renderTownJobs(allJobs);return;}
-  renderTownJobs(allJobs.filter(j=>j.type===filter));
+  renderTownJobs(getFilteredJobs());
 }
+
+function setSalaryFilter() { renderTownJobs(getFilteredJobs()); }
+function setDateFilter() { renderTownJobs(getFilteredJobs()); }
 
 async function triggerSearch() {
   const q = document.getElementById('search-input').value.trim();

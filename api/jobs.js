@@ -15,9 +15,12 @@ module.exports = async function handler(req, res) {
     if (what) url += `&what=${encodeURIComponent(what)}`;
 
     const response = await fetch(url);
-    const data = await response.json();
-    res.status(200).json(data);
+    const text = await response.text();
+    
+    // Return raw text so we can see what Adzuna is actually sending back
+    res.setHeader('Content-Type', 'text/plain');
+    res.status(200).send(`Status: ${response.status}\nURL: ${url}\nBody: ${text.substring(0, 500)}`);
   } catch (e) {
-    res.status(500).json({ error: e.message });
+    res.status(500).json({ error: e.message, stack: e.stack });
   }
 }

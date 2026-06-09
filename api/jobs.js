@@ -15,6 +15,10 @@ module.exports = async function handler(req, res) {
     if (what) url += `&what=${encodeURIComponent(what)}`;
 
     const response = await fetch(url);
+if (!response.ok) {
+  const text = await response.text();
+  return res.status(500).json({ status: response.status, url: url, body: text.substring(0, 300) });
+}
     const data = await response.json();
     res.status(200).json(data);
   } catch (e) {

@@ -1,5 +1,6 @@
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET');
 
   const { where, category, page, what } = req.query;
 
@@ -8,14 +9,15 @@ module.exports = async function handler(req, res) {
 
   try {
     const pageNum = page || 1;
-    let url = `https://api.adzuna.com/v1/api/jobs/gb/search/${pageNum}?app_id=${ADZUNA_ID}&app_key=${ADZUNA_KEY}&results_per_page=5`;
+    let url = `https://api.adzuna.com/v1/api/jobs/gb/search/${pageNum}?app_id=${ADZUNA_ID}&app_key=${ADZUNA_KEY}&results_per_page=20&days_old=90&sort_by=date`;
     if (where) url += `&where=${encodeURIComponent(where)}`;
+    if (category) url += `&category=${encodeURIComponent(category)}`;
+    if (what) url += `&what=${encodeURIComponent(what)}`;
 
     const response = await fetch(url);
-    const text = await response.text();
-    res.setHeader('Content-Type', 'text/plain');
-    res.status(200).send(`Status: ${response.status}\nBody start: ${text.substring(0, 200)}`);
+    const data = await response.json();
+    res.status(200).json(data);
   } catch (e) {
-    res.status(500).send(`Error: ${e.message}`);
+    res.status(500).json({ error: e.message });
   }
 }

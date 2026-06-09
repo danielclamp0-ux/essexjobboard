@@ -571,7 +571,8 @@ function showHome() {
   currentTown = null;
   document.getElementById('main-site').style.display = 'block';
   document.getElementById('static-pages').style.display = 'none';
-  document.getElementById('blog-pages').style.display = 'none';
+  const bp = document.getElementById('blog-pages');
+  if (bp) bp.style.display = 'none';
   document.getElementById('home-view').style.display = 'block';
   document.getElementById('town-view').style.display = 'none';
   document.getElementById('hero-title').innerHTML = 'Local jobs across <span id="hero-city">Essex</span>';
@@ -607,7 +608,8 @@ function loadTown(town) {
 function showPage(page) {
   document.getElementById('main-site').style.display = 'none';
   document.getElementById('static-pages').style.display = 'block';
-  document.getElementById('blog-pages').style.display = 'none';
+  const bpages = document.getElementById('blog-pages');
+  if (bpages) bpages.style.display = 'none';
   ['about','privacy','post'].forEach(p => {
     document.getElementById('page-'+p).style.display = p===page ? 'block' : 'none';
   });

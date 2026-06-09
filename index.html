@@ -73,12 +73,7 @@
     .post-btn { background:var(--accent); color:#fff; font-family:'Outfit',sans-serif; font-size:13px; font-weight:700; padding:8px 16px; border-radius:8px; border:none; cursor:pointer; }
     @media(max-width:560px) { .nav-link { display:none; } }
 
-    /* TOWN NAV */
-    .town-nav { background:var(--white); border-bottom:1px solid var(--border); padding:0 16px; display:flex; overflow-x:auto; scrollbar-width:none; }
-    .town-nav::-webkit-scrollbar { display:none; }
-    .town-tab { flex-shrink:0; font-size:13px; font-weight:600; color:var(--muted); padding:11px 13px; cursor:pointer; border-bottom:2px solid transparent; transition:all 0.15s; white-space:nowrap; }
-    .town-tab:hover { color:var(--ink); }
-    .town-tab.active { color:var(--accent); border-bottom-color:var(--accent); }
+
 
     /* HERO */
     .hero { background:var(--white); border-bottom:1px solid var(--border); padding:32px 24px 28px; text-align:center; }
@@ -224,10 +219,7 @@
   </div>
 </header>
 
-<!-- TOWN NAV -->
-<div class="town-nav" id="town-nav">
-  <div class="town-tab active" onclick="showHome()">All Essex</div>
-</div>
+<div id="town-nav" style="display:none;"></div>
 
 <!-- HERO -->
 <div class="hero">

@@ -12,6 +12,14 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HVGTEZWEPN"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-HVGTEZWEPN');</script>
   <link rel="canonical" id="canonical-url" href="https://essexjobboard.co.uk"/>
+  <meta property="og:title" content="Essex Job Board — Local Jobs Across Essex"/>
+  <meta property="og:description" content="Find local jobs across Essex updated daily. Chelmsford, Colchester, Basildon, Southend and 16 more towns."/>
+  <meta property="og:url" content="https://essexjobboard.co.uk"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="Essex Job Board"/>
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:title" content="Essex Job Board — Local Jobs Across Essex"/>
+  <meta name="twitter:description" content="Find local jobs across Essex updated daily."/>
   <script type="application/ld+json" id="structured-data">
   {
     "@context": "https://schema.org",
@@ -226,6 +234,7 @@
 <div class="hero">
   <h1 id="hero-title">Local jobs across <span id="hero-city">Essex</span></h1>
   <p class="hero-sub" id="hero-sub">Updated daily. No London commute. No nonsense.</p>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:16px;"><span id="live-count" style="font-weight:700;color:var(--accent)">20,000+</span> live jobs across Essex right now</p>
   <div class="search-wrap">
     <input id="search-input" type="text" placeholder="Job title or keyword...">
     <button onclick="triggerSearch()">Search</button>
@@ -254,6 +263,16 @@
 
       <!-- HOME -->
       <div id="home-view">
+        <!-- HOW IT WORKS -->
+        <div style="background:var(--white);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:20px;">
+          <div style="font-size:0.85rem;font-weight:700;margin-bottom:14px;padding-bottom:9px;border-bottom:1px solid var(--border);">How it works</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;text-align:center;">
+            <div><div style="font-size:1.6rem;margin-bottom:6px;">📍</div><div style="font-size:13px;font-weight:700;margin-bottom:3px;">Pick your town</div><div style="font-size:12px;color:var(--muted);">Choose from 20 Essex locations</div></div>
+            <div><div style="font-size:1.6rem;margin-bottom:6px;">🔍</div><div style="font-size:13px;font-weight:700;margin-bottom:3px;">Browse jobs</div><div style="font-size:12px;color:var(--muted);">Filter by type, salary & date</div></div>
+            <div><div style="font-size:1.6rem;margin-bottom:6px;">✅</div><div style="font-size:13px;font-weight:700;margin-bottom:3px;">Apply direct</div><div style="font-size:12px;color:var(--muted);">No registration required</div></div>
+          </div>
+        </div>
+
         <div class="list-header" style="margin-bottom:10px;">
           <h2>📍 Find jobs near you</h2>
           <span>20 locations</span>
@@ -440,6 +459,8 @@
 </div>
 
 <!-- FOOTER -->
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="display:none;position:fixed;bottom:80px;right:20px;background:var(--accent);color:#fff;border:none;border-radius:50%;width:40px;height:40px;font-size:18px;cursor:pointer;z-index:98;box-shadow:0 2px 8px rgba(0,0,0,0.2);">↑</button>
+
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">
@@ -748,6 +769,7 @@ async function fetchHomeJobs() {
     if (!data.results) return;
     // job count removed
     document.getElementById('home-results-label').textContent = data.results.length + ' latest listings';
+    if (data.count) updateLiveCount(data.count);
     document.getElementById('home-loading').style.display = 'none';
     const jobs = data.results
       .sort((a, b) => new Date(b.created) - new Date(a.created))
@@ -1027,6 +1049,21 @@ ${desc}`);
 
   fb.style.color = 'var(--green)';
   fb.textContent = "Opening your email client — we'll be in touch within 24 hours!";
+}
+
+// Back to top button
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('back-to-top');
+  if (btn) btn.style.display = window.scrollY > 400 ? 'block' : 'none';
+});
+
+// Update live count from API response
+function updateLiveCount(count) {
+  const el = document.getElementById('live-count');
+  if (el && count) {
+    const formatted = count > 1000 ? Math.round(count/1000) + ',000+' : count + '+';
+    el.textContent = formatted;
+  }
 }
 
 fetchHomeJobs();

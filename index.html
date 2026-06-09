@@ -12,6 +12,20 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HVGTEZWEPN"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-HVGTEZWEPN');</script>
   <link rel="canonical" id="canonical-url" href="https://essexjobboard.co.uk"/>
+  <script type="application/ld+json" id="structured-data">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Essex Job Board",
+    "url": "https://essexjobboard.co.uk",
+    "description": "Find local jobs across Essex updated daily. Chelmsford, Colchester, Basildon, Southend and more.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://essexjobboard.co.uk/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -172,6 +186,14 @@
     .footer-links a { font-size:13px; color:var(--muted); cursor:pointer; }
     .footer-links a:hover { color:var(--ink); }
     .footer-legal { font-size:11px; color:#9ca3af; line-height:1.7; }
+
+    /* MOBILE SECTOR BAR */
+    .mobile-sectors { display:none; background:var(--white); border-bottom:1px solid var(--border); padding:8px 16px; overflow-x:auto; scrollbar-width:none; }
+    .mobile-sectors::-webkit-scrollbar { display:none; }
+    .mobile-sectors-inner { display:flex; gap:8px; }
+    .sector-pill { flex-shrink:0; font-size:12px; font-weight:600; padding:6px 12px; border-radius:20px; border:1px solid var(--border); background:var(--white); color:var(--muted); cursor:pointer; white-space:nowrap; }
+    .sector-pill:hover { background:var(--accent-light); border-color:var(--accent); color:var(--accent); }
+    @media(max-width:740px) { .mobile-sectors { display:block; } .sidebar { display:none !important; } }
   </style>
 </head>
 <body>
@@ -219,6 +241,11 @@
 
 <!-- AD -->
 
+
+<!-- MOBILE SECTOR BAR -->
+<div class="mobile-sectors">
+  <div class="mobile-sectors-inner" id="mobile-cat-list"></div>
+</div>
 
 <!-- MAIN -->
 <div id="main-site">
@@ -442,6 +469,16 @@ CATS.forEach((c, idx) => {
   item.appendChild(left);
   item.appendChild(right);
   catList.appendChild(item);
+});
+
+// Mobile sector bar
+const mobileCatList = document.getElementById('mobile-cat-list');
+CATS.forEach((c, idx) => {
+  const pill = document.createElement('div');
+  pill.className = 'sector-pill';
+  pill.textContent = c.icon + ' ' + c.name;
+  pill.onclick = () => loadSector(c.tag, c.name, c.icon);
+  mobileCatList.appendChild(pill);
 });
 
 // Event delegation for category clicks

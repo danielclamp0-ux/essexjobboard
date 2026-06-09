@@ -501,7 +501,24 @@ try { if(localStorage.getItem('cookie_ok')) document.getElementById('cookie-bann
 // const res = await fetch(`https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=YOUR_APP_ID&app_key=YOUR_APP_KEY&where=${encodeURIComponent(town.name + ' Essex')}&results_per_page=20&content-type=application/json`);
 // Sign up free at: developer.adzuna.com
 
-// API routed through secure proxy
+const ADZUNA_ID = 'cbacab63';
+const ADZUNA_KEY = '3dbd4fc1588d887046be997587945964';
+
+function fetchJSONP(url) {
+  return new Promise((resolve, reject) => {
+    const cb = 'adzuna_cb_' + Date.now();
+    window[cb] = (data) => {
+      resolve(data);
+      delete window[cb];
+      document.head.removeChild(script);
+    };
+    const script = document.createElement('script');
+    script.src = url + '&callback=' + cb;
+    script.onerror = reject;
+    document.head.appendChild(script);
+    setTimeout(() => reject(new Error('timeout')), 10000);
+  });
+}
 
 function getPostedTime(created) {
   const diff = Math.floor((Date.now() - new Date(created)) / 60000);
@@ -551,10 +568,8 @@ async function fetchTownJobs(town, page) {
   currentPage = page;
   currentTag = null;
   try {
-    const url = `/api/jobs?where=${encodeURIComponent(town.name + ' Essex')}&page=${page}`;
-    console.log('Fetching:', url);
-    const res = await fetch(url);
-    const data = await res.json();
+    const url = `https://api.adzuna.com/v1/api/jobs/gb/search/${page}?app_id=${ADZUNA_ID}&app_key=${ADZUNA_KEY}&results_per_page=20&days_old=90&sort_by=date&where=${encodeURIComponent(town.name + ' Essex')}`;
+    const data = await fetchJSONP(url);
     console.log('API response:', data);
     if (!data.results || data.results.length === 0) {
       document.getElementById('town-loading').innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">No jobs found for this area right now — try another location.</p>';
@@ -590,9 +605,8 @@ async function fetchTownJobs(town, page) {
 
 async function fetchHomeJobs() {
   try {
-    const url = `/api/jobs?where=Essex`;
-    const res = await fetch(url);
-    const data = await res.json();
+    const url = `https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=${ADZUNA_ID}&app_key=${ADZUNA_KEY}&results_per_page=20&days_old=90&sort_by=date&where=Essex`;
+    const data = await fetchJSONP(url);
     if (!data.results) return;
     // job count removed
     document.getElementById('home-results-label').textContent = data.results.length + ' latest listings';
@@ -733,9 +747,8 @@ async function triggerSearch() {
   document.getElementById('town-list-title').textContent = 'Results for "' + q + '"';
   document.getElementById('results-label').textContent = 'Loading...';
   try {
-    const url = `/api/jobs?where=${encodeURIComponent(where)}&what=${encodeURIComponent(q)}`;
-    const res = await fetch(url);
-    const data = await res.json();
+    const url = `https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=${ADZUNA_ID}&app_key=${ADZUNA_KEY}&results_per_page=20&days_old=90&sort_by=date&where=${encodeURIComponent(where)}&what=${encodeURIComponent(q)}`;
+    const data = await fetchJSONP(url);
     if (!data.results || data.results.length === 0) {
       document.getElementById('town-loading').innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">No results found for "' + q + '" — try a different keyword.</p>';
       return;
@@ -777,9 +790,8 @@ async function loadSector(tag, name, icon) {
   document.querySelectorAll('.town-tab').forEach(t => t.classList.remove('active'));
   window.scrollTo(0,0);
   try {
-    const url = `/api/jobs?where=Essex&category=${tag}`;
-    const res = await fetch(url);
-    const data = await res.json();
+    const url = `https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=${ADZUNA_ID}&app_key=${ADZUNA_KEY}&results_per_page=20&days_old=90&sort_by=date&where=Essex&category=${tag}`;
+    const data = await fetchJSONP(url);
     console.log('API response:', data);
     if (!data.results || data.results.length === 0) {
       document.getElementById('town-loading').innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">No jobs found in this sector right now.</p>';

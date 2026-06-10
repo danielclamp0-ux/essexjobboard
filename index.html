@@ -835,8 +835,10 @@ function updateMeta(title, description, url) {
   document.querySelector('meta[name="twitter:title"]').content = title;
   document.querySelector('meta[name="twitter:description"]').content = description;
   // Push to browser history so Google sees unique URLs
-  if (window.location.href !== url) {
-    window.history.pushState({}, title, url.replace('https://essexjobboard.co.uk', ''));
+  if (window.location.href.split('?')[0].replace(/\/$/, '') !== url.replace(/\/$/, '')) {
+    let path = url.replace('https://essexjobboard.co.uk', '');
+    if (path === '') path = '/';
+    window.history.pushState({}, title, path);
   }
 }
 

@@ -216,6 +216,7 @@
   <div class="header-right">
     <span class="nav-link" onclick="showHome()">All Locations</span>
     <span class="nav-link" onclick="showPage('about')">About</span>
+    <span class="nav-link" onclick="showPage('saved')" style="position:relative;">Saved <span id="saved-count" style="display:none;background:var(--accent);color:#fff;font-size:10px;font-weight:700;border-radius:10px;min-width:16px;height:16px;align-items:center;justify-content:center;padding:0 4px;margin-left:4px;">0</span></span>
     <button class="post-btn" onclick="showPage('post')">Post a Job</button>
   </div>
 </header>
@@ -267,6 +268,15 @@
               <div><div style="font-size:13px;font-weight:700;margin-bottom:2px;">Apply direct</div><div style="font-size:12px;color:var(--muted);line-height:1.5;">No registration required</div></div>
             </div>
           </div>
+        </div>
+
+        <div onclick="showPage('checker')" style="background:#0f172a;border-radius:12px;padding:20px 24px;margin-bottom:20px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;">
+          <div>
+            <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#60a5fa;margin-bottom:6px;">New tool</div>
+            <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:2px;">Salary Reality Checker</div>
+            <div style="font-size:12px;color:#94a3b8;">See what an Essex job really pays vs an equivalent London role, once commute costs are factored in.</div>
+          </div>
+          <div style="font-size:1.4rem;color:#60a5fa;flex-shrink:0;">→</div>
         </div>
 
         <div class="list-header" style="margin-bottom:10px;">
@@ -449,6 +459,43 @@
     </script>
   </div>
 
+  <div id="page-saved" class="page-content" style="display:none;max-width:680px;">
+    <h2>Saved Jobs</h2>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">Jobs you've saved are stored in your browser only — no account needed. They'll stay here until you remove them or clear your browser data.</p>
+    <div id="saved-jobs-empty" style="display:none;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:40px 20px;text-align:center;">
+      <div style="font-size:2rem;margin-bottom:10px;">☆</div>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:0;">No saved jobs yet. Tap the star on any job card to save it here.</p>
+    </div>
+    <div class="job-list" id="saved-jobs-list"></div>
+  </div>
+
+  <div id="page-checker" class="page-content" style="display:none;max-width:680px;">
+    <h2>Salary Reality Checker</h2>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:24px;">Compare a local Essex salary against an equivalent London role once commuting costs are factored in. See what you'd actually keep.</p>
+
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:12px;padding:24px;display:grid;gap:16px;margin-bottom:24px;">
+      <div>
+        <label style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);display:block;margin-bottom:6px;">Your Essex town</label>
+        <select id="checker-town" style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;outline:none;background:var(--white);"></select>
+      </div>
+      <div>
+        <label style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);display:block;margin-bottom:6px;">Local Essex salary (£/year)</label>
+        <input id="checker-local-salary" type="number" placeholder="e.g. 32000" style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;outline:none;">
+      </div>
+      <div>
+        <label style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);display:block;margin-bottom:6px;">Comparable London salary (£/year)</label>
+        <input id="checker-london-salary" type="number" placeholder="e.g. 40000" style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;outline:none;">
+      </div>
+      <button onclick="runSalaryCheck()" style="background:#0f172a;color:#fff;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;padding:14px;border-radius:10px;border:none;cursor:pointer;width:100%;">Compare →</button>
+    </div>
+
+    <div id="checker-result" style="display:none;"></div>
+
+    <div style="background:var(--accent-light);border-radius:12px;padding:16px 20px;margin-top:20px;">
+      <p style="font-size:12px;color:var(--accent);line-height:1.7;margin-bottom:0;">Commute costs are based on average annual season ticket prices and typical journey times for each town. Figures are estimates for comparison purposes — your actual costs may vary depending on your exact route and ticket type.</p>
+    </div>
+  </div>
+
   <div id="page-post" style="display:none;max-width:680px;margin:0 auto;padding:40px 16px;">
     <h2 style="font-size:1.6rem;font-weight:900;margin-bottom:6px;">Post a Job</h2>
     <p style="font-size:14px;color:var(--muted);margin-bottom:28px;">Reach active Essex job seekers. We'll be in touch within 24 hours.</p>
@@ -607,6 +654,7 @@
     <div class="footer-links">
       <a onclick="showPage('about')">About</a>
       <a onclick="showPage('faq')">FAQ</a>
+      <a onclick="showPage('checker')">Salary Reality Checker</a>
       <a onclick="showPage('post')">Post a Job</a>
       <a onclick="showPage('privacy')">Privacy Policy</a>
       <a onclick="showArticle('article-1')">Jobs in Essex 2026</a>
@@ -674,7 +722,183 @@ const CATS = [
   {name:'Manufacturing',         icon:'⚙️', tag:'manufacturing-jobs'},
 ];
 
+// Approximate annual season ticket cost to London + typical one-way commute time (mins)
+const COMMUTE_DATA = {
+  'Basildon':        { season: 3200, mins: 50 },
+  'Benfleet':        { season: 3000, mins: 45 },
+  'Billericay':      { season: 3100, mins: 45 },
+  'Braintree':       { season: 3600, mins: 65 },
+  'Brentwood':       { season: 2700, mins: 35 },
+  'Chelmsford':      { season: 3400, mins: 38 },
+  'Clacton-on-Sea':  { season: 4400, mins: 90 },
+  'Colchester':      { season: 4000, mins: 50 },
+  'Stansted':        { season: 3500, mins: 50 },
+  'Grays':           { season: 2900, mins: 35 },
+  'Harlow':          { season: 2600, mins: 35 },
+  'Harwich':         { season: 4600, mins: 95 },
+  'Leigh-on-Sea':    { season: 3300, mins: 55 },
+  'Loughton':        { season: 1800, mins: 30 },
+  'Maldon':          { season: 3700, mins: 70 },
+  'Rayleigh':        { season: 3300, mins: 55 },
+  'Southend-on-Sea': { season: 3400, mins: 55 },
+  'Thurrock':        { season: 2900, mins: 35 },
+  'Wickford':        { season: 3200, mins: 48 },
+  'Witham':          { season: 3500, mins: 50 }
+};
+
 let allJobs = [], currentTown = null, currentPage = 1, currentTag = null, totalJobCount = 0;
+
+// ── SAVED JOBS (localStorage) ──
+const SAVED_JOBS_KEY = 'essex_saved_jobs';
+
+function getSavedJobs() {
+  try {
+    const raw = localStorage.getItem(SAVED_JOBS_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch(e) { return []; }
+}
+
+function isJobSaved(id) {
+  return getSavedJobs().some(j => j.id === id);
+}
+
+function toggleSavedJob(job) {
+  let saved = getSavedJobs();
+  if (saved.some(j => j.id === job.id)) {
+    saved = saved.filter(j => j.id !== job.id);
+  } else {
+    saved.unshift({
+      id: job.id, title: job.title, company: job.company, location: job.location,
+      salary: job.salary, type: job.type, redirect: job.redirect, savedAt: Date.now()
+    });
+    if (saved.length > 50) saved = saved.slice(0, 50);
+  }
+  try { localStorage.setItem(SAVED_JOBS_KEY, JSON.stringify(saved)); } catch(e) {}
+  updateSavedCount();
+}
+
+function updateSavedCount() {
+  const count = getSavedJobs().length;
+  const badge = document.getElementById('saved-count');
+  if (badge) {
+    badge.textContent = count;
+    badge.style.display = count > 0 ? 'inline-flex' : 'none';
+  }
+}
+
+function renderSavedJobs() {
+  const saved = getSavedJobs();
+  const container = document.getElementById('saved-jobs-list');
+  const empty = document.getElementById('saved-jobs-empty');
+  container.innerHTML = '';
+  if (saved.length === 0) {
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+  saved.forEach(j => {
+    const card = document.createElement('div');
+    card.className = 'job-card';
+    card.innerHTML = `
+      <div class="card-top">
+        <div class="job-icon">💼</div>
+        <div class="card-info">
+          <div class="card-title">${j.title}</div>
+          <div class="card-company">${j.company}</div>
+        </div>
+      </div>
+      <div class="card-tags">
+        ${j.salary ? `<span class="tag tag-salary">${j.salary}</span>` : ''}
+        <span class="tag tag-type">${j.type}</span>
+        <span class="tag tag-loc">📍 ${j.location}</span>
+      </div>
+      <div class="card-bottom">
+        <span class="posted">Saved ${new Date(j.savedAt).toLocaleDateString('en-GB')}</span>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <button onclick="removeSavedJob('${j.id.replace(/'/g,"\\'")}')" style="background:none;border:1px solid var(--border);border-radius:8px;width:36px;height:36px;font-size:18px;cursor:pointer;color:#dc2626;">✕</button>
+          <button class="apply-btn" data-url="${j.redirect}">Apply Now →</button>
+        </div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function removeSavedJob(id) {
+  let saved = getSavedJobs().filter(j => j.id !== id);
+  try { localStorage.setItem(SAVED_JOBS_KEY, JSON.stringify(saved)); } catch(e) {}
+  updateSavedCount();
+  renderSavedJobs();
+}
+
+// ── SALARY REALITY CHECKER ──
+function populateCheckerTowns() {
+  const select = document.getElementById('checker-town');
+  if (select.options.length > 0) return; // already populated
+  Object.keys(COMMUTE_DATA).forEach(name => {
+    const opt = document.createElement('option');
+    opt.value = name;
+    opt.textContent = name;
+    select.appendChild(opt);
+  });
+}
+
+function runSalaryCheck() {
+  const town = document.getElementById('checker-town').value;
+  const localSalary = parseFloat(document.getElementById('checker-local-salary').value);
+  const londonSalary = parseFloat(document.getElementById('checker-london-salary').value);
+  const result = document.getElementById('checker-result');
+
+  if (!town || !localSalary || !londonSalary || localSalary <= 0 || londonSalary <= 0) {
+    result.style.display = 'block';
+    result.innerHTML = '<div style="background:var(--red-light);border-radius:12px;padding:16px 20px;"><p style="font-size:14px;color:var(--red);margin-bottom:0;">Please fill in all fields with valid numbers to compare.</p></div>';
+    return;
+  }
+
+  const commute = COMMUTE_DATA[town];
+  const seasonTicket = commute.season;
+  const dailyMins = commute.mins * 2;
+  const annualHours = Math.round((dailyMins * 230) / 60); // ~230 working days/year
+
+  // Rough estimate: London weekly food/lunch premium
+  const londonLunchPremium = 230 * 3; // ~£3/day extra for lunch in London
+
+  const londonNet = londonSalary - seasonTicket - londonLunchPremium;
+  const localNet = localSalary;
+  const diff = localNet - londonNet;
+
+  result.style.display = 'block';
+  result.innerHTML = `
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:12px;padding:24px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+        <div style="text-align:center;padding:16px;background:var(--accent-light);border-radius:10px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--accent);margin-bottom:6px;">${town}</div>
+          <div style="font-size:1.6rem;font-weight:900;">£${localSalary.toLocaleString()}</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px;">Take-home before tax</div>
+        </div>
+        <div style="text-align:center;padding:16px;background:var(--bg);border-radius:10px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">London (after costs)</div>
+          <div style="font-size:1.6rem;font-weight:900;">£${Math.round(londonNet).toLocaleString()}</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px;">£${londonSalary.toLocaleString()} minus commute &amp; lunch</div>
+        </div>
+      </div>
+
+      <div style="background:${diff > 0 ? 'var(--green-light)' : 'var(--red-light)'};border-radius:10px;padding:16px 20px;margin-bottom:16px;">
+        <p style="font-size:15px;font-weight:700;color:${diff > 0 ? 'var(--green)' : 'var(--red)'};margin-bottom:4px;">
+          ${diff > 0 ? `The ${town} role leaves you £${Math.abs(Math.round(diff)).toLocaleString()} better off per year` : `The London role still leaves you £${Math.abs(Math.round(diff)).toLocaleString()} better off per year`}
+        </p>
+        <p style="font-size:13px;color:${diff > 0 ? 'var(--green)' : 'var(--red)'};margin-bottom:0;opacity:0.85;">
+          That's after factoring in a £${seasonTicket.toLocaleString()} annual season ticket and London lunch costs.
+        </p>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--muted);padding-top:12px;border-top:1px solid var(--border);">
+        <span>Commute time saved by working locally</span>
+        <span style="font-weight:700;color:var(--ink);">~${annualHours} hours/year</span>
+      </div>
+    </div>
+  `;
+}
 
 // Town nav (hidden)
 const townNav = document.getElementById('town-nav');
@@ -767,8 +991,18 @@ function getSalary(min, max) {
   const mn = parseFloat(min) || 0;
   const mx = parseFloat(max) || 0;
   if (mn <= 0 && mx <= 0) return null;
-  if (mn > 0 && mn < 500) return '£' + mn.toFixed(2) + '/hr';
-  if (mx > 0 && mx < 500) return '£' + mx.toFixed(2) + '/hr';
+  const val = mn > 0 ? mn : mx;
+  // Hourly: realistic UK hourly rates are roughly £8-£70
+  if (val > 0 && val <= 70) {
+    if (mn > 0 && mx > 0 && mn !== mx) return '£' + mn.toFixed(2) + ' - £' + mx.toFixed(2) + '/hr';
+    return '£' + val.toFixed(2) + '/hr';
+  }
+  // Day rate: roughly £71-£999
+  if (val > 70 && val < 1000) {
+    if (mn > 0 && mx > 0 && mn !== mx) return '£' + Math.round(mn) + ' - £' + Math.round(mx) + '/day';
+    return '£' + Math.round(val) + '/day';
+  }
+  // Annual salary
   if (mn > 0 && mx > 0 && mn !== mx) return '£' + Math.round(mn/1000) + 'k - £' + Math.round(mx/1000) + 'k';
   if (mn > 0 && mx > 0 && mn === mx) return '£' + Math.round(mn/1000) + 'k';
   if (mn > 0) return 'From £' + Math.round(mn/1000) + 'k';
@@ -824,6 +1058,7 @@ function cleanLocation(loc, fallback) {
 
 function mapJob(j, fallbackLocation) {
   return {
+    id:          j.id || j.redirect_url || (j.title + '|' + j.company?.display_name),
     title:       decodeHtml(j.title) || 'Job',
     company:     decodeHtml(j.company?.display_name) || 'Employer',
     emoji:       getEmoji(j.category?.label),
@@ -1019,9 +1254,11 @@ function showPage(page) {
   document.getElementById('static-pages').style.display = 'block';
   const bpages = document.getElementById('blog-pages');
   if (bpages) bpages.style.display = 'none';
-  ['about','privacy','post','faq'].forEach(p => {
+  ['about','privacy','post','faq','saved','checker'].forEach(p => {
     document.getElementById('page-'+p).style.display = p===page ? 'block' : 'none';
   });
+  if (page === 'saved') renderSavedJobs();
+  if (page === 'checker') populateCheckerTowns();
   window.scrollTo(0,0);
 }
 
@@ -1110,12 +1347,31 @@ function makeJobCard(j, i, showAd) {
   const posted = document.createElement('span');
   posted.className = 'posted';
   posted.textContent = 'Posted ' + j.posted;
+  const btnGroup = document.createElement('div');
+  btnGroup.style.display = 'flex';
+  btnGroup.style.gap = '8px';
+  btnGroup.style.alignItems = 'center';
+  const saveBtn = document.createElement('button');
+  saveBtn.className = 'save-btn';
+  saveBtn.setAttribute('data-job-id', j.id);
+  saveBtn.title = 'Save job';
+  saveBtn.innerHTML = isJobSaved(j.id) ? '★' : '☆';
+  saveBtn.style.cssText = 'background:none;border:1px solid var(--border);border-radius:8px;width:36px;height:36px;font-size:18px;cursor:pointer;color:' + (isJobSaved(j.id) ? '#d97706' : '#9ca3af') + ';flex-shrink:0;';
+  saveBtn.onclick = function(e) {
+    e.stopPropagation();
+    toggleSavedJob(j);
+    const saved = isJobSaved(j.id);
+    saveBtn.innerHTML = saved ? '★' : '☆';
+    saveBtn.style.color = saved ? '#d97706' : '#9ca3af';
+  };
   const applyBtn = document.createElement('button');
   applyBtn.className = 'apply-btn';
   applyBtn.textContent = 'Apply Now →';
   applyBtn.setAttribute('data-url', j.redirect || '');
+  btnGroup.appendChild(saveBtn);
+  btnGroup.appendChild(applyBtn);
   bottom.appendChild(posted);
-  bottom.appendChild(applyBtn);
+  bottom.appendChild(btnGroup);
 
   card.appendChild(top);
   card.appendChild(desc);
@@ -1153,7 +1409,7 @@ function makeJobCard(j, i, showAd) {
       "value": {
         "@type": "QuantitativeValue",
         "value": j.salaryRaw,
-        "unitText": j.salaryRaw < 500 ? "HOUR" : "YEAR"
+        "unitText": j.salaryRaw <= 70 ? "HOUR" : j.salaryRaw < 1000 ? "DAY" : "YEAR"
       }
     } : undefined
   });
@@ -1274,6 +1530,7 @@ window.addEventListener('scroll', () => {
 });
 
 // Boot
+updateSavedCount();
 fetchHomeJobs();
 </script>
 </body>

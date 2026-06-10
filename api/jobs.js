@@ -43,7 +43,7 @@ module.exports = async function handler(req, res) {
         salary_min: job.minimumSalary,
         salary_max: job.maximumSalary,
         redirect_url: job.jobUrl,
-        created: job.date,
+        created: job.date ? new Date(job.date).toISOString() : null,
         contract_time: job.jobType,
         category: { label: '' }
       })),

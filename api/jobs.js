@@ -34,19 +34,28 @@ module.exports = async function handler(req, res) {
     const data = await response.json();
 
     const remapped = {
-      results: (data.results || []).map(job => ({
-        id: job.jobId,
-        title: job.jobTitle,
-        company: { display_name: job.employerName },
-        location: { display_name: job.locationName },
-        description: job.jobDescription,
-        salary_min: job.minimumSalary,
-        salary_max: job.maximumSalary,
-        redirect_url: job.jobUrl,
-        created: job.date ? new Date(job.date).toISOString() : null,
-        contract_time: job.jobType,
-        category: { label: '' }
-      })),
+      results: (data.results || []).map(job => {
+        let created = null;
+        if (job.date) {
+          try {
+            const d = new Date(job.date);
+            if (!isNaN(d.getTime())) created = d.toISOString();
+          } catch(e) {}
+        }
+        return {
+          id: job.jobId,
+          title: job.jobTitle,
+          company: { display_name: job.employerName },
+          location: { display_name: job.locationName },
+          description: job.jobDescription,
+          salary_min: job.minimumSalary,
+          salary_max: job.maximumSalary,
+          redirect_url: job.jobUrl,
+          created: created,
+          contract_time: job.jobType,
+          category: { label: '' }
+        };
+      }),
       count: data.totalResults || 0
     };
 

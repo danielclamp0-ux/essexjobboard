@@ -294,14 +294,12 @@
       <!-- TOWN -->
       <div id="town-view" style="display:none;">
         <div class="breadcrumb"><a onclick="showHome()">All Essex</a> › <span id="bc-town"></span></div>
-        <div class="filters">
+        <div class="filters" style="margin-bottom:16px;">
           <div class="chip active" onclick="setFilter(this,'All')">All</div>
           <div class="chip" onclick="setFilter(this,'Full-time')">Full-time</div>
           <div class="chip" onclick="setFilter(this,'Part-time')">Part-time</div>
           <div class="chip" onclick="setFilter(this,'Remote')">Remote</div>
           <div class="chip" onclick="setFilter(this,'Contract')">Contract</div>
-        </div>
-        <div class="filters" style="margin-bottom:16px;">
           <select id="salary-filter" onchange="setSalaryFilter()" style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;padding:5px 13px;border-radius:20px;border:1px solid var(--border);background:var(--white);color:var(--muted);cursor:pointer;">
             <option value="0">Any salary</option>
             <option value="20000">£20k+</option>

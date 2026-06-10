@@ -74,7 +74,12 @@
     .nav-link { font-size:13px; color:#94a3b8; font-weight:500; cursor:pointer; }
     .nav-link:hover { color:#fff; }
     .post-btn { background:var(--accent); color:#fff; font-family:'Outfit',sans-serif; font-size:13px; font-weight:700; padding:8px 16px; border-radius:8px; border:none; cursor:pointer; }
-    @media(max-width:560px) { .nav-link { display:none; } }
+    @media(max-width:560px) {
+      .nav-link { display:none; }
+      .saved-nav-link { display:inline-flex !important; align-items:center; gap:2px; }
+      .saved-nav-link .saved-text { display:none; }
+      .saved-nav-link .saved-icon { display:inline-block !important; }
+    }
 
     /* HERO */
     .hero { background:var(--white); border-bottom:1px solid var(--border); padding:28px 24px 24px; text-align:center; }
@@ -127,6 +132,7 @@
     /* TOWN GRID */
     .town-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:20px; }
     @media(max-width:600px) { .town-grid { grid-template-columns:repeat(2,1fr); } }
+    @media(max-width:600px) { .post-grid, .checker-result-grid { grid-template-columns:1fr !important; } }
     .town-card { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:16px 12px; cursor:pointer; transition:border-color 0.15s,box-shadow 0.15s; text-align:center; position:relative; }
     .town-card:hover { border-color:var(--accent); box-shadow:0 2px 10px rgba(37,99,235,0.08); }
     .town-card-emoji { font-size:1.4rem; margin-bottom:6px; }
@@ -216,7 +222,10 @@
   <div class="header-right">
     <span class="nav-link" onclick="showHome()">All Locations</span>
     <span class="nav-link" onclick="showPage('about')">About</span>
-    <span class="nav-link" onclick="showPage('saved')" style="position:relative;">Saved <span id="saved-count" style="display:none;background:var(--accent);color:#fff;font-size:10px;font-weight:700;border-radius:10px;min-width:16px;height:16px;align-items:center;justify-content:center;padding:0 4px;margin-left:4px;">0</span></span>
+    <span class="nav-link saved-nav-link" onclick="showPage('saved')" style="position:relative;cursor:pointer;color:#94a3b8;font-weight:500;">
+      <span class="saved-text">Saved</span><span class="saved-icon" style="display:none;font-size:16px;">☆</span>
+      <span id="saved-count" style="display:none;background:var(--accent);color:#fff;font-size:10px;font-weight:700;border-radius:10px;min-width:16px;height:16px;align-items:center;justify-content:center;padding:0 4px;margin-left:4px;">0</span>
+    </span>
     <button class="post-btn" onclick="showPage('post')">Post a Job</button>
   </div>
 </header>
@@ -789,6 +798,11 @@ function updateSavedCount() {
     badge.textContent = count;
     badge.style.display = count > 0 ? 'inline-flex' : 'none';
   }
+  const icon = document.querySelector('.saved-nav-link .saved-icon');
+  if (icon) {
+    icon.textContent = count > 0 ? '★' : '☆';
+    icon.style.color = count > 0 ? '#fbbf24' : 'inherit';
+  }
 }
 
 function renderSavedJobs() {
@@ -905,7 +919,7 @@ function runSalaryCheck() {
   result.style.display = 'block';
   result.innerHTML = `
     <div style="background:var(--white);border:1px solid var(--border);border-radius:12px;padding:24px;">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+      <div class="checker-result-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
         <div style="text-align:center;padding:16px;background:var(--accent-light);border-radius:10px;">
           <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--accent);margin-bottom:6px;">${town}</div>
           <div style="font-size:1.6rem;font-weight:900;">£${localSalary.toLocaleString()}</div>

@@ -605,6 +605,16 @@ function getPostedTime(created) {
   return Math.floor(diff/1440) + ' days ago';
 }
 
+function getFreshness(created) {
+  if (!created) return null;
+  const days = (Date.now() - new Date(created)) / 86400000;
+  if (days < 0) return null;
+  if (days < 1) return { label: 'Today', color: 'var(--green)', bg: 'var(--green-light)' };
+  if (days < 2) return { label: 'Yesterday', color: 'var(--accent)', bg: 'var(--accent-light)' };
+  if (days < 7) return { label: 'This week', color: 'var(--amber)', bg: 'var(--amber-light)' };
+  return null;
+}
+
 function getSalary(min, max) {
   const mn = parseFloat(min) || 0;
   const mx = parseFloat(max) || 0;
@@ -676,7 +686,7 @@ function mapJob(j, fallbackLocation) {
     location:    cleanLocation(j.location?.display_name, fallbackLocation),
     description: cleanDescription(j.description),
     posted:      getPostedTime(j.created),
-    isNew:       j.created ? (Date.now() - new Date(j.created)) < 86400000 * 2 : false,
+    freshness:   getFreshness(j.created),
     redirect:    j.redirect_url || ''
   };
 }
@@ -887,10 +897,12 @@ function makeJobCard(j, i, showAd) {
   top.appendChild(icon);
   top.appendChild(info);
 
-  if (j.isNew) {
+  if (j.freshness) {
     const badge = document.createElement('span');
     badge.className = 'card-new';
-    badge.textContent = 'NEW';
+    badge.style.background = j.freshness.bg;
+    badge.style.color = j.freshness.color;
+    badge.textContent = j.freshness.label;
     top.appendChild(badge);
   }
 

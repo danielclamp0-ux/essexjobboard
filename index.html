@@ -358,6 +358,97 @@
     <p>hello@essexjobboard.co.uk</p>
   </div>
 
+  <div id="page-faq" class="page-content" style="display:none;">
+    <h2>Frequently Asked Questions</h2>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:20px;">Common questions about finding work in Essex</p>
+
+    <h3>How do I find jobs in Essex without going to London?</h3>
+    <p>Essex Job Board focuses exclusively on roles based within Essex's 20 largest towns and cities, filtering out London-only positions automatically. You can also use the search and location filters to narrow results to your specific area, and apply the salary filter to compare local pay against your current commute costs.</p>
+
+    <h3>What is the average salary in Essex?</h3>
+    <p>This varies significantly by role and location. Entry-level retail and hospitality roles typically pay between £11 and £14 per hour. Office and administrative roles generally start from £22,000 to £26,000. Skilled trades, healthcare, and professional roles often range from £30,000 to £50,000 depending on experience and location, with Chelmsford and Brentwood typically offering the highest salaries due to proximity to London.</p>
+
+    <h3>Which Essex towns have the most jobs?</h3>
+    <p>Basildon, Chelmsford, Colchester, and Southend-on-Sea consistently have the highest number of vacancies due to their size and industrial bases. Basildon is particularly strong for logistics and warehousing, Chelmsford for office and professional roles, Colchester for healthcare and education, and Southend for retail and hospitality.</p>
+
+    <h3>Do I need to register to apply for jobs?</h3>
+    <p>No. Essex Job Board does not require any registration. Every listing links directly to the employer's application page or the original job posting, so you can apply immediately.</p>
+
+    <h3>How often are new jobs added?</h3>
+    <p>Listings are pulled and updated daily from live job board data, so new vacancies typically appear within 24 hours of being posted by employers.</p>
+
+    <h3>Can I post a job on Essex Job Board?</h3>
+    <p>Yes. Visit the <a onclick="showPage('post')" style="color:var(--accent);cursor:pointer;">Post a Job</a> page to see our current listing options for employers and recruiters.</p>
+
+    <h3>Are remote jobs included?</h3>
+    <p>Yes, where available. You can use the Remote filter on any location page to see remote-eligible roles alongside local listings.</p>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I find jobs in Essex without going to London?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Essex Job Board focuses exclusively on roles based within Essex's 20 largest towns and cities, filtering out London-only positions automatically. You can also use the search and location filters to narrow results to your specific area, and apply the salary filter to compare local pay against your current commute costs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the average salary in Essex?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "This varies significantly by role and location. Entry-level retail and hospitality roles typically pay between £11 and £14 per hour. Office and administrative roles generally start from £22,000 to £26,000. Skilled trades, healthcare, and professional roles often range from £30,000 to £50,000 depending on experience and location."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which Essex towns have the most jobs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Basildon, Chelmsford, Colchester, and Southend-on-Sea consistently have the highest number of vacancies due to their size and industrial bases."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to register to apply for jobs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Essex Job Board does not require any registration. Every listing links directly to the employer's application page or the original job posting, so you can apply immediately."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How often are new jobs added?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Listings are pulled and updated daily from live job board data, so new vacancies typically appear within 24 hours of being posted by employers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I post a job on Essex Job Board?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Visit the Post a Job page to see current listing options for employers and recruiters."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are remote jobs included?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, where available. You can use the Remote filter on any location page to see remote-eligible roles alongside local listings."
+          }
+        }
+      ]
+    }
+    </script>
+  </div>
+
   <div id="page-post" style="display:none;max-width:680px;margin:0 auto;padding:40px 16px;">
     <h2 style="font-size:1.6rem;font-weight:900;margin-bottom:6px;">Post a Job</h2>
     <p style="font-size:14px;color:var(--muted);margin-bottom:28px;">Reach active Essex job seekers. We'll be in touch within 24 hours.</p>
@@ -515,6 +606,7 @@
     <div class="footer-towns" id="footer-town-links"></div>
     <div class="footer-links">
       <a onclick="showPage('about')">About</a>
+      <a onclick="showPage('faq')">FAQ</a>
       <a onclick="showPage('post')">Post a Job</a>
       <a onclick="showPage('privacy')">Privacy Policy</a>
       <a onclick="showArticle('article-1')">Jobs in Essex 2026</a>
@@ -927,7 +1019,7 @@ function showPage(page) {
   document.getElementById('static-pages').style.display = 'block';
   const bpages = document.getElementById('blog-pages');
   if (bpages) bpages.style.display = 'none';
-  ['about','privacy','post'].forEach(p => {
+  ['about','privacy','post','faq'].forEach(p => {
     document.getElementById('page-'+p).style.display = p===page ? 'block' : 'none';
   });
   window.scrollTo(0,0);

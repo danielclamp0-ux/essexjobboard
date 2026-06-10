@@ -7,13 +7,11 @@ module.exports = async function handler(req, res) {
 
   function parseReedDate(dateStr) {
     if (!dateStr) return null;
-    // Handle Microsoft .NET JSON date format: /Date(1234567890000)/
     const msMatch = String(dateStr).match(/\/Date\((-?\d+)\)\//);
     if (msMatch) {
       const d = new Date(parseInt(msMatch[1]));
       return isNaN(d.getTime()) ? null : d.toISOString();
     }
-    // Handle normal date strings
     try {
       const d = new Date(dateStr);
       return isNaN(d.getTime()) ? null : d.toISOString();
@@ -25,7 +23,7 @@ module.exports = async function handler(req, res) {
   try {
     const resultsToSkip = page ? (parseInt(page) - 1) * 20 : 0;
 
-    let url = `https://www.reed.co.uk/api/1.0/search?resultsToTake=20&resultsToSkip=${resultsToSkip}&locationName=${encodeURIComponent(where || 'Essex')}&distanceFromLocation=15`;
+    let url = `https://www.reed.co.uk/api/1.0/search?resultsToTake=100&resultsToSkip=${resultsToSkip}&locationName=${encodeURIComponent(where || 'Essex')}&distanceFromLocation=15`;
 
     if (what) url += `&keywords=${encodeURIComponent(what)}`;
     if (category) url += `&keywords=${encodeURIComponent(category)}`;
@@ -47,9 +45,18 @@ module.exports = async function handler(req, res) {
     }
 
     const data = await response.json();
+    const thirtyDaysAgo = Date.now() - (30 * 24 * 60 * 60 * 1000);
+
+    const filtered = (data.results || []).filter(job => {
+      if (!job.date) return true; // keep jobs with no date rather than hiding them
+      const d = new Date(job.date);
+      if (isNaN(d.getTime())) return true;
+      if (d.getTime() > Date.now()) return true; // future date = recently posted
+      return d.getTime() >= thirtyDaysAgo;
+    });
 
     const remapped = {
-      results: (data.results || []).map(job => ({
+      results: filtered.slice(0, 20).map(job => ({
         id: job.jobId,
         title: job.jobTitle,
         company: { display_name: job.employerName },

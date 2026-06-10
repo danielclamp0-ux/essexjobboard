@@ -478,7 +478,7 @@
 
     <div style="background:var(--white);border:1px solid var(--border);border-radius:12px;padding:24px;display:grid;gap:16px;margin-bottom:24px;">
       <div>
-        <label style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);display:block;margin-bottom:6px;">Your Essex town</label>
+        <label style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);display:block;margin-bottom:6px;">Your Essex location</label>
         <select id="checker-town" style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;outline:none;background:var(--white);"></select>
       </div>
       <div>
@@ -927,9 +927,9 @@ function runSalaryCheck() {
         </p>
       </div>
 
-      <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--muted);padding-top:12px;border-top:1px solid var(--border);">
-        <span>Commute time saved by working locally</span>
-        <span style="font-weight:700;color:var(--ink);">~${annualHours} hours/year</span>
+      <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted);padding-top:12px;border-top:1px solid var(--border);">
+        <span>Hours you'd get back per year by not commuting to London</span>
+        <span style="font-weight:700;color:var(--green);white-space:nowrap;margin-left:12px;">+${annualHours} hrs</span>
       </div>
     </div>
   `;

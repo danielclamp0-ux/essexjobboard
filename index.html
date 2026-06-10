@@ -803,23 +803,29 @@ function renderSavedJobs() {
       <div class="card-top">
         <div class="job-icon">💼</div>
         <div class="card-info">
-          <div class="card-title">${j.title}</div>
-          <div class="card-company">${j.company}</div>
+          <div class="card-title"></div>
+          <div class="card-company"></div>
         </div>
       </div>
       <div class="card-tags">
-        ${j.salary ? `<span class="tag tag-salary">${j.salary}</span>` : ''}
-        <span class="tag tag-type">${j.type}</span>
-        <span class="tag tag-loc">📍 ${j.location}</span>
+        ${j.salary ? `<span class="tag tag-salary"></span>` : ''}
+        <span class="tag tag-type"></span>
+        <span class="tag tag-loc"></span>
       </div>
       <div class="card-bottom">
         <span class="posted">Saved ${new Date(j.savedAt).toLocaleDateString('en-GB')}</span>
         <div style="display:flex;gap:8px;align-items:center;">
-          <button onclick="removeSavedJob('${String(j.id).replace(/'/g,"\\\\'")}')" style="background:none;border:1px solid var(--border);border-radius:8px;width:36px;height:36px;font-size:18px;cursor:pointer;color:#dc2626;">✕</button>
+          <button class="remove-saved-btn" data-job-id="${j.id.replace(/"/g,'&quot;')}" style="background:none;border:1px solid var(--border);border-radius:8px;width:36px;height:36px;font-size:18px;cursor:pointer;color:#dc2626;">✕</button>
           <button class="apply-btn" data-url="${j.redirect}">Apply Now →</button>
         </div>
       </div>
     `;
+    // Set text content safely (avoids issues with special characters)
+    card.querySelector('.card-title').textContent = j.title;
+    card.querySelector('.card-company').textContent = j.company;
+    if (j.salary) card.querySelector('.tag-salary').textContent = j.salary;
+    card.querySelector('.tag-type').textContent = j.type;
+    card.querySelector('.tag-loc').textContent = '📍 ' + j.location;
     container.appendChild(card);
   });
 }
@@ -830,6 +836,14 @@ function removeSavedJob(id) {
   updateSavedCount();
   renderSavedJobs();
 }
+
+// Event delegation for remove buttons on saved jobs page
+document.addEventListener('click', function(e) {
+  if (e.target && e.target.classList.contains('remove-saved-btn')) {
+    const id = e.target.getAttribute('data-job-id');
+    removeSavedJob(id);
+  }
+});
 
 // ── SALARY REALITY CHECKER ──
 function populateCheckerTowns() {

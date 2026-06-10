@@ -460,7 +460,10 @@
   </div>
 
   <div id="page-saved" class="page-content" style="display:none;max-width:680px;">
-    <h2>Saved Jobs</h2>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <h2 style="margin-bottom:0;">Saved Jobs</h2>
+      <button onclick="clearAllSavedJobs()" style="background:none;border:1px solid var(--border);border-radius:8px;padding:6px 14px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;">Clear all</button>
+    </div>
     <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">Jobs you've saved are stored in your browser only — no account needed. They'll stay here until you remove them or clear your browser data.</p>
     <div id="saved-jobs-empty" style="display:none;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:40px 20px;text-align:center;">
       <div style="font-size:2rem;margin-bottom:10px;">☆</div>
@@ -833,6 +836,12 @@ function renderSavedJobs() {
 function removeSavedJob(id) {
   let saved = getSavedJobs().filter(j => j.id !== id);
   try { localStorage.setItem(SAVED_JOBS_KEY, JSON.stringify(saved)); } catch(e) {}
+  updateSavedCount();
+  renderSavedJobs();
+}
+
+function clearAllSavedJobs() {
+  try { localStorage.removeItem(SAVED_JOBS_KEY); } catch(e) {}
   updateSavedCount();
   renderSavedJobs();
 }

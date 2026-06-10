@@ -808,6 +808,11 @@ async function loadSector(tag, name, icon) {
 
 function showHome() {
   currentTown = null;
+  updateMeta(
+    'Essex Job Board — Local Jobs Across Essex',
+    'Find local jobs across Essex updated daily. Chelmsford, Colchester, Basildon, Southend and 16 more locations.',
+    'https://essexjobboard.co.uk'
+  );
   document.getElementById('main-site').style.display = 'block';
   document.getElementById('static-pages').style.display = 'none';
   const bp = document.getElementById('blog-pages');
@@ -817,12 +822,33 @@ function showHome() {
   document.getElementById('hero-title').innerHTML = 'Local jobs across <span id="hero-city">Essex</span>';
   document.getElementById('hero-sub').textContent = 'Updated daily. No London commute. No nonsense.';
   document.getElementById('stats-area').textContent = 'Across Essex';
-  document.title = 'Essex Job Board — Local Jobs Across Essex';
   window.scrollTo(0,0);
+}
+
+function updateMeta(title, description, url) {
+  document.title = title;
+  document.getElementById('canonical-url').href = url;
+  document.querySelector('#meta-desc').content = description;
+  document.querySelector('meta[property="og:title"]').content = title;
+  document.querySelector('meta[property="og:description"]').content = description;
+  document.querySelector('meta[property="og:url"]').content = url;
+  document.querySelector('meta[name="twitter:title"]').content = title;
+  document.querySelector('meta[name="twitter:description"]').content = description;
+  // Push to browser history so Google sees unique URLs
+  if (window.location.href !== url) {
+    window.history.pushState({}, title, url.replace('https://essexjobboard.co.uk', ''));
+  }
 }
 
 function loadTown(town) {
   currentTown = town;
+  const slug = town.name.toLowerCase().replace(/ /g, '-');
+  const url = 'https://essexjobboard.co.uk/jobs/' + slug;
+  const title = 'Jobs in ' + town.name + ', Essex — Essex Job Board';
+  const description = 'Find local jobs in ' + town.name + ', Essex. Browse ' + town.name + ' vacancies updated daily. Apply direct, no registration required.';
+
+  updateMeta(title, description, url);
+
   document.getElementById('main-site').style.display = 'block';
   document.getElementById('static-pages').style.display = 'none';
   document.getElementById('home-view').style.display = 'none';
@@ -831,9 +857,6 @@ function loadTown(town) {
   document.getElementById('hero-sub').textContent = 'Local ' + town.name + ' jobs updated daily. Apply direct.';
   document.getElementById('stats-area').textContent = town.name + ', Essex';
   document.getElementById('town-list-title').textContent = 'Jobs in ' + town.name;
-  document.title = 'Jobs in ' + town.name + ' — Essex Job Board';
-  document.getElementById('canonical-url').href = 'https://essexjobboard.co.uk/' + town.name.toLowerCase().replace(/ /g,'-');
-  document.querySelector('#meta-desc').content = 'Find local jobs in ' + town.name + ', Essex. Updated daily.';
   document.getElementById('job-list').innerHTML = '';
   document.getElementById('town-loading').style.display = 'block';
   document.getElementById('results-label').textContent = 'Loading...';

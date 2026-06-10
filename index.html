@@ -358,49 +358,57 @@
     <p>hello@essexjobboard.co.uk</p>
   </div>
 
-  <div id="page-post" class="page-content" style="display:none;">
-    <h2>Post a Job</h2>
-    <p>Reach active Essex job seekers with a listing on Essex Job Board. Choose your package below and we'll be in touch within 24 hours.</p>
-    <div class="price-grid">
-      <div class="price-card" onclick="selectPlan('standard')" id="plan-standard" style="cursor:pointer;">
-        <div class="price-amount">£49</div>
-        <div class="price-name">Standard</div>
-        <div class="price-desc">30 days · 1 location · Job card listing</div>
+  <div id="page-post" style="display:none;max-width:680px;margin:0 auto;padding:40px 16px;">
+    <h2 style="font-size:1.6rem;font-weight:900;margin-bottom:6px;">Post a Job</h2>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:28px;">Reach active Essex job seekers. We'll be in touch within 24 hours.</p>
+
+    <!-- Plan selector -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px;">
+      <div id="plan-standard" onclick="selectPlan('standard')" style="border:2px solid var(--accent);border-radius:12px;padding:20px;cursor:pointer;background:var(--accent-light);">
+        <div style="font-size:11px;font-weight:700;letter-spacing:1px;color:var(--accent);margin-bottom:8px;">STANDARD</div>
+        <div style="font-size:2rem;font-weight:900;color:var(--ink);margin-bottom:4px;">£49</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.6;">30 days listing<br>1 location<br>Job card placement</div>
       </div>
-      <div class="price-card featured" onclick="selectPlan('featured')" id="plan-featured" style="cursor:pointer;opacity:0.8;">
-        <div class="price-amount">£99</div>
-        <div class="price-name">Featured ⭐</div>
-        <div class="price-desc">30 days · All Essex · Top placement</div>
+      <div id="plan-featured" onclick="selectPlan('featured')" style="border:2px solid var(--border);border-radius:12px;padding:20px;cursor:pointer;background:var(--white);">
+        <div style="font-size:11px;font-weight:700;letter-spacing:1px;color:var(--muted);margin-bottom:8px;">FEATURED</div>
+        <div style="font-size:2rem;font-weight:900;color:var(--ink);margin-bottom:4px;">£99</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.6;">30 days listing<br>All Essex locations<br>Top of results</div>
       </div>
     </div>
-    <div style="margin-top:20px;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:24px;">
-      <div style="margin-bottom:14px;">
-        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:5px;">Your name</label>
-        <input id="post-name" type="text" placeholder="Jane Smith" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;outline:none;">
+
+    <!-- Form -->
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:12px;padding:24px;display:grid;gap:16px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div>
+          <label style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);display:block;margin-bottom:6px;">Your name</label>
+          <input id="post-name" type="text" placeholder="Jane Smith" style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;outline:none;transition:border-color 0.15s;" onfocus="this.style.borderColor='#2563eb'" onblur="this.style.borderColor='var(--border)'">
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);display:block;margin-bottom:6px;">Company</label>
+          <input id="post-company" type="text" placeholder="Acme Ltd" style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;outline:none;transition:border-color 0.15s;" onfocus="this.style.borderColor='#2563eb'" onblur="this.style.borderColor='var(--border)'">
+        </div>
       </div>
-      <div style="margin-bottom:14px;">
-        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:5px;">Company name</label>
-        <input id="post-company" type="text" placeholder="Acme Ltd" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;outline:none;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div>
+          <label style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);display:block;margin-bottom:6px;">Email</label>
+          <input id="post-email" type="email" placeholder="jane@acme.com" style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;outline:none;transition:border-color 0.15s;" onfocus="this.style.borderColor='#2563eb'" onblur="this.style.borderColor='var(--border)'">
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);display:block;margin-bottom:6px;">Location</label>
+          <input id="post-location" type="text" placeholder="e.g. Chelmsford" style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;outline:none;transition:border-color 0.15s;" onfocus="this.style.borderColor='#2563eb'" onblur="this.style.borderColor='var(--border)'">
+        </div>
       </div>
-      <div style="margin-bottom:14px;">
-        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:5px;">Email address</label>
-        <input id="post-email" type="email" placeholder="jane@acme.com" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;outline:none;">
+      <div>
+        <label style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);display:block;margin-bottom:6px;">Job title</label>
+        <input id="post-title" type="text" placeholder="e.g. Customer Service Manager" style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;outline:none;transition:border-color 0.15s;" onfocus="this.style.borderColor='#2563eb'" onblur="this.style.borderColor='var(--border)'">
       </div>
-      <div style="margin-bottom:14px;">
-        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:5px;">Job title</label>
-        <input id="post-title" type="text" placeholder="e.g. Customer Service Manager" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;outline:none;">
-      </div>
-      <div style="margin-bottom:14px;">
-        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:5px;">Location</label>
-        <input id="post-location" type="text" placeholder="e.g. Chelmsford, Essex" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;outline:none;">
-      </div>
-      <div style="margin-bottom:20px;">
-        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:5px;">Job description</label>
-        <textarea id="post-desc" placeholder="Brief description of the role..." rows="4" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;outline:none;resize:vertical;"></textarea>
+      <div>
+        <label style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);display:block;margin-bottom:6px;">Job description</label>
+        <textarea id="post-desc" placeholder="Brief description of the role..." rows="4" style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;outline:none;resize:vertical;transition:border-color 0.15s;" onfocus="this.style.borderColor='#2563eb'" onblur="this.style.borderColor='var(--border)'"></textarea>
       </div>
       <input type="hidden" id="post-plan" value="standard">
-      <button onclick="submitJobPost()" style="background:var(--accent);color:#fff;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;padding:12px 32px;border-radius:10px;border:none;cursor:pointer;width:100%;">Submit Listing →</button>
-      <div id="post-feedback" style="margin-top:12px;font-size:13px;text-align:center;"></div>
+      <button onclick="submitJobPost()" style="background:#0f172a;color:#fff;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;padding:14px;border-radius:10px;border:none;cursor:pointer;width:100%;letter-spacing:0.3px;">Submit listing →</button>
+      <div id="post-feedback" style="font-size:13px;text-align:center;"></div>
     </div>
   </div>
 
@@ -1008,8 +1016,23 @@ document.addEventListener('click', function(e) {
 });
 function selectPlan(plan) {
   document.getElementById('post-plan').value = plan;
-  document.getElementById('plan-standard').style.opacity = plan === 'standard' ? '1' : '0.6';
-  document.getElementById('plan-featured').style.opacity = plan === 'featured' ? '1' : '0.6';
+  const std = document.getElementById('plan-standard');
+  const feat = document.getElementById('plan-featured');
+  if (plan === 'standard') {
+    std.style.border = '2px solid var(--accent)';
+    std.style.background = 'var(--accent-light)';
+    std.querySelector('div').style.color = 'var(--accent)';
+    feat.style.border = '2px solid var(--border)';
+    feat.style.background = 'var(--white)';
+    feat.querySelector('div').style.color = 'var(--muted)';
+  } else {
+    feat.style.border = '2px solid var(--accent)';
+    feat.style.background = 'var(--accent-light)';
+    feat.querySelector('div').style.color = 'var(--accent)';
+    std.style.border = '2px solid var(--border)';
+    std.style.background = 'var(--white)';
+    std.querySelector('div').style.color = 'var(--muted)';
+  }
 }
 
 function submitJobPost() {

@@ -62,8 +62,9 @@
     .cookie-btn { background:var(--accent); color:#fff; font-family:'Outfit',sans-serif; font-size:13px; font-weight:700; padding:8px 20px; border-radius:8px; border:none; cursor:pointer; white-space:nowrap; }
 
     /* HEADER */
-    header { background:#0f172a; border-bottom:1px solid #1e293b; height:58px; display:flex; align-items:center; justify-content:space-between; padding:0 max(24px, calc(50% - 480px)); position:sticky; top:0; z-index:100; }
+    header { background:#0f172a; border-bottom:1px solid #1e293b; height:58px; display:flex; align-items:center; justify-content:space-between; padding:0 max(24px, calc(50% - 480px)); position:sticky; top:0; z-index:100; transition:height 0.2s ease, box-shadow 0.2s ease; }
     .logo { display:flex; align-items:center; gap:10px; cursor:pointer; }
+    header.scrolled { height:48px; box-shadow:0 2px 16px rgba(0,0,0,0.3); }
     .logo-pill { background:var(--pill); color:#fff; font-size:0.88rem; font-weight:800; padding:5px 13px; border-radius:100px; letter-spacing:-0.2px; }
     .logo-rest { font-size:1rem; font-weight:700; color:var(--ink); }
     .logo-rest .city { color:var(--accent); }
@@ -1040,6 +1041,12 @@ ${desc}`);
   fb.style.color = 'var(--green)';
   fb.textContent = "Opening your email client — we'll be in touch within 24 hours!";
 }
+
+// Scroll-aware header
+window.addEventListener('scroll', () => {
+  const header = document.querySelector('header');
+  if (header) header.classList.toggle('scrolled', window.scrollY > 60);
+});
 
 // Back to top button
 window.addEventListener('scroll', () => {

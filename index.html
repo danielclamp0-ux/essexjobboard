@@ -598,6 +598,7 @@ document.getElementById('cat-list').addEventListener('click', function(e) {
 function getPostedTime(created) {
   if (!created) return 'Recently';
   const diff = Math.floor((Date.now() - new Date(created)) / 60000);
+  if (diff < 0) return 'Recently';
   if (diff < 60) return diff + ' mins ago';
   if (diff < 1440) return Math.floor(diff/60) + ' hours ago';
   if (diff < 2880) return 'Yesterday';

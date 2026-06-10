@@ -638,17 +638,43 @@ function getType(contract) {
   return 'Full-time';
 }
 
+function decodeHtml(str) {
+  if (!str) return '';
+  return str
+    .replace(/&amp;/g, '&')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
+}
+
+function cleanDescription(str) {
+  if (!str) return '';
+  let s = decodeHtml(str);
+  s = s.replace(/<[^>]*>/g, ' ');
+  s = s.replace(/\s+/g, ' ').trim();
+  if (s.length <= 160) return s;
+  return s.substring(0, 157).replace(/\s+\S*$/, '') + '...';
+}
+
+function cleanLocation(loc, fallback) {
+  if (!loc) return fallback || 'Essex';
+  if (/^[A-Z]{1,2}\d{1,2}[A-Z]?\s?\d[A-Z]{2}$/i.test(loc.trim())) return fallback || 'Essex';
+  return loc;
+}
+
 function mapJob(j, fallbackLocation) {
   return {
-    title:       j.title       || 'Job',
-    company:     j.company?.display_name || 'Employer',
+    title:       decodeHtml(j.title) || 'Job',
+    company:     decodeHtml(j.company?.display_name) || 'Employer',
     emoji:       getEmoji(j.category?.label),
     type:        getType(j.contract_time),
     salary:      getSalary(j.salary_min, j.salary_max),
     salaryRaw:   parseFloat(j.salary_min) || parseFloat(j.salary_max) || 0,
     daysAgo:     j.created ? Math.floor((Date.now() - new Date(j.created)) / 86400000) : 999,
-    location:    j.location?.display_name || fallbackLocation || 'Essex',
-    description: j.description ? j.description.substring(0, 160) + '...' : '',
+    location:    cleanLocation(j.location?.display_name, fallbackLocation),
+    description: cleanDescription(j.description),
     posted:      getPostedTime(j.created),
     isNew:       j.created ? (Date.now() - new Date(j.created)) < 86400000 * 2 : false,
     redirect:    j.redirect_url || ''

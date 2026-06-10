@@ -483,11 +483,13 @@
       </div>
       <div>
         <label style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);display:block;margin-bottom:6px;">Local Essex salary (£/year)</label>
-        <input id="checker-local-salary" type="number" placeholder="e.g. 32000" style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;outline:none;">
+        <input id="checker-local-salary" type="number" placeholder="e.g. 32000" oninput="formatCheckerPreview('checker-local-salary','checker-local-preview')" style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;outline:none;">
+        <div id="checker-local-preview" style="font-size:12px;color:var(--muted);margin-top:4px;min-height:16px;"></div>
       </div>
       <div>
         <label style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);display:block;margin-bottom:6px;">Comparable London salary (£/year)</label>
-        <input id="checker-london-salary" type="number" placeholder="e.g. 40000" style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;outline:none;">
+        <input id="checker-london-salary" type="number" placeholder="e.g. 40000" oninput="formatCheckerPreview('checker-london-salary','checker-london-preview')" style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;outline:none;">
+        <div id="checker-london-preview" style="font-size:12px;color:var(--muted);margin-top:4px;min-height:16px;"></div>
       </div>
       <button onclick="runSalaryCheck()" style="background:#0f172a;color:#fff;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;padding:14px;border-radius:10px;border:none;cursor:pointer;width:100%;">Compare →</button>
     </div>
@@ -855,6 +857,16 @@ document.addEventListener('click', function(e) {
 });
 
 // ── SALARY REALITY CHECKER ──
+function formatCheckerPreview(inputId, previewId) {
+  const val = document.getElementById(inputId).value;
+  const preview = document.getElementById(previewId);
+  if (!val || isNaN(val)) {
+    preview.textContent = '';
+    return;
+  }
+  preview.textContent = '£' + Number(val).toLocaleString('en-GB');
+}
+
 function populateCheckerTowns() {
   const select = document.getElementById('checker-town');
   if (select.options.length > 0) return; // already populated

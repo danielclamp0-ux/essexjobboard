@@ -966,6 +966,44 @@ function makeJobCard(j, i, showAd) {
   card.appendChild(desc);
   card.appendChild(tags);
   card.appendChild(bottom);
+
+  // JobPosting schema for Google Jobs
+  const schema = document.createElement('script');
+  schema.type = 'application/ld+json';
+  schema.textContent = JSON.stringify({
+    "@context": "https://schema.org/",
+    "@type": "JobPosting",
+    "title": j.title,
+    "description": j.description,
+    "hiringOrganization": {
+      "@type": "Organization",
+      "name": j.company
+    },
+    "jobLocation": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": j.location,
+        "addressRegion": "Essex",
+        "addressCountry": "GB"
+      }
+    },
+    "employmentType": j.type === 'Part-time' ? 'PART_TIME' : j.type === 'Contract' ? 'CONTRACTOR' : 'FULL_TIME',
+    "datePosted": j.created || new Date().toISOString().split('T')[0],
+    "validThrough": new Date(Date.now() + 30 * 86400000).toISOString().split('T')[0],
+    "url": j.redirect || 'https://essexjobboard.co.uk',
+    "baseSalary": j.salaryRaw > 0 ? {
+      "@type": "MonetaryAmount",
+      "currency": "GBP",
+      "value": {
+        "@type": "QuantitativeValue",
+        "value": j.salaryRaw,
+        "unitText": j.salaryRaw < 500 ? "HOUR" : "YEAR"
+      }
+    } : undefined
+  });
+  card.appendChild(schema);
+
   frag.appendChild(card);
   return frag;
 }

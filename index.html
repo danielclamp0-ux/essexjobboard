@@ -293,7 +293,9 @@
 
       <!-- TOWN -->
       <div id="town-view" style="display:none;">
-        <div class="breadcrumb"><a onclick="showHome()">All Essex</a> › <span id="bc-town"></span></div>
+        <div style="margin-bottom:12px;">
+          <button onclick="showHome()" style="background:var(--white);border:1px solid var(--border);border-radius:8px;padding:6px 14px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;display:inline-flex;align-items:center;gap:6px;">← All locations</button>
+        </div>
         <div class="filters" style="margin-bottom:16px;">
           <div class="chip active" onclick="setFilter(this,'All')">All</div>
           <div class="chip" onclick="setFilter(this,'Full-time')">Full-time</div>

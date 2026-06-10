@@ -235,7 +235,7 @@
 <!-- STATS -->
 <div class="stats">
   <span id="stats-area">Across Essex</span>
-  <span><strong id="live-count">20,000+</strong> jobs listed</span>
+  
   <span>20 locations covered</span>
 </div>
 
@@ -698,7 +698,7 @@ async function fetchHomeJobs() {
       return;
     }
     document.getElementById('home-results-label').textContent = data.results.length + ' latest listings';
-    if (data.count) updateLiveCount(data.count);
+    
     document.getElementById('home-loading').style.display = 'none';
     const jobs = data.results.map(j => mapJob(j, 'Essex'));
     const homeList = document.getElementById('job-list-home');

@@ -815,7 +815,7 @@ function renderSavedJobs() {
       <div class="card-bottom">
         <span class="posted">Saved ${new Date(j.savedAt).toLocaleDateString('en-GB')}</span>
         <div style="display:flex;gap:8px;align-items:center;">
-          <button onclick="removeSavedJob('${j.id.replace(/'/g,"\\'")}')" style="background:none;border:1px solid var(--border);border-radius:8px;width:36px;height:36px;font-size:18px;cursor:pointer;color:#dc2626;">✕</button>
+          <button onclick="removeSavedJob('${String(j.id).replace(/'/g,"\\\\'")}')" style="background:none;border:1px solid var(--border);border-radius:8px;width:36px;height:36px;font-size:18px;cursor:pointer;color:#dc2626;">✕</button>
           <button class="apply-btn" data-url="${j.redirect}">Apply Now →</button>
         </div>
       </div>
@@ -1058,7 +1058,7 @@ function cleanLocation(loc, fallback) {
 
 function mapJob(j, fallbackLocation) {
   return {
-    id:          j.id || j.redirect_url || (j.title + '|' + j.company?.display_name),
+    id:          String(j.id || j.redirect_url || (j.title + '|' + j.company?.display_name)),
     title:       decodeHtml(j.title) || 'Job',
     company:     decodeHtml(j.company?.display_name) || 'Employer',
     emoji:       getEmoji(j.category?.label),

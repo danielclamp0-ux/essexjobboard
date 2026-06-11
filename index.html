@@ -151,7 +151,6 @@
     .card-info { flex:1; }
     .card-title { font-size:0.93rem; font-weight:700; color:var(--ink); margin-bottom:2px; line-height:1.3; }
     .card-company { font-size:13px; color:var(--muted); }
-    .card-new { background:var(--red-light); color:var(--red); font-size:11px; font-weight:700; padding:2px 8px; border-radius:6px; flex-shrink:0; }
     .card-desc { font-size:13px; color:var(--muted); line-height:1.55; margin-bottom:11px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
     .card-tags { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:11px; }
     .tag { font-size:12px; font-weight:600; padding:3px 9px; border-radius:6px; }
@@ -1026,16 +1025,6 @@ function getPostedTime(created) {
   return Math.floor(diff/1440) + ' days ago';
 }
 
-function getFreshness(created) {
-  if (!created) return null;
-  const days = (Date.now() - new Date(created)) / 86400000;
-  if (days < 0) return null;
-  if (days < 1) return { label: 'Today', color: 'var(--green)', bg: 'var(--green-light)' };
-  if (days < 2) return { label: 'Yesterday', color: 'var(--accent)', bg: 'var(--accent-light)' };
-  if (days < 7) return { label: 'This week', color: 'var(--amber)', bg: 'var(--amber-light)' };
-  return null;
-}
-
 function getSalary(min, max) {
   const mn = parseFloat(min) || 0;
   const mx = parseFloat(max) || 0;
@@ -1118,7 +1107,6 @@ function mapJob(j, fallbackLocation) {
     location:    cleanLocation(j.location?.display_name, fallbackLocation),
     description: cleanDescription(j.description),
     posted:      getPostedTime(j.created),
-    freshness:   getFreshness(j.created),
     redirect:    j.redirect_url || ''
   };
 }
@@ -1360,15 +1348,6 @@ function makeJobCard(j, i, showAd) {
 
   top.appendChild(icon);
   top.appendChild(info);
-
-  if (j.freshness) {
-    const badge = document.createElement('span');
-    badge.className = 'card-new';
-    badge.style.background = j.freshness.bg;
-    badge.style.color = j.freshness.color;
-    badge.textContent = j.freshness.label;
-    top.appendChild(badge);
-  }
 
   const desc = document.createElement('p');
   desc.className = 'card-desc';

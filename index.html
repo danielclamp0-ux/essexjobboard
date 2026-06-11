@@ -1016,9 +1016,9 @@ document.getElementById('cat-list').addEventListener('click', function(e) {
 // ── HELPERS ──
 
 function getPostedTime(created) {
-  if (!created) return 'Recently';
+  if (!created) return null;
   const diff = Math.floor((Date.now() - new Date(created)) / 60000);
-  if (diff < 0) return 'Recently';
+  if (diff < 0) return null;
   if (diff < 60) return diff + ' mins ago';
   if (diff < 1440) return Math.floor(diff/60) + ' hours ago';
   if (diff < 2880) return 'Yesterday';
@@ -1374,7 +1374,7 @@ function makeJobCard(j, i, showAd) {
   bottom.className = 'card-bottom';
   const posted = document.createElement('span');
   posted.className = 'posted';
-  posted.textContent = 'Posted ' + j.posted;
+  posted.textContent = j.posted ? ('Posted ' + j.posted) : 'Apply direct';
   const btnGroup = document.createElement('div');
   btnGroup.style.display = 'flex';
   btnGroup.style.gap = '8px';
